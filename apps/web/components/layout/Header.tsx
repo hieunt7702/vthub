@@ -50,7 +50,7 @@ export function Header() {
             <img 
               src="/logo_white.webp" 
               alt="VT Rewards Hub" 
-              className="h-8 w-auto object-contain shrink-0"
+              className="h-6 w-auto object-contain shrink-0"
             />
           </Link>
         </div>
