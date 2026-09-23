@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  name     String?
+  password String
+  role     Role    @default(USER)
+
+  // Relationships
+  reviews    Review[]
+  ibRequests IBRequest[]
+  posts      Post[]
+  passviews  Passview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// -------------------------------------
+// 1. MODULE BROKERS (SÀN GIAO DỊCH)
+// -------------------------------------
+
+model Broker {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  logo         String?
+  description  String?  @db.Text
+  rating       Float    @default(0)
+  foundedYear  Int?
+  headquarters String?
+  regulations  String[] // Các giấy phép (FCA, CySEC...)
+
+  // Thông tin giao dịch cơ bản
+  minDeposit  Float?
+  maxLeverage Int?
+  spreadType  String? // Fixed, Variable
+  platforms   String[] // MT4, MT5, cTrader
+
+  // Quan hệ
+  offers        Offer[]
+  ibCommissions IBCommission[]
+  ibRequests    IBRequest[]
+  reviews       Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id      String @id @default(cuid())
+  rating  Int
+  content String @db.Text
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  brokerId String
+  broker   Broker @relation(fields: [brokerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------------------------
+// 2. MODULE OFFERS & BONUS
+// -------------------------------------
+
+model Offer {
+  id          String  @id @default(cuid())
+  title       String
+  description String? @db.Text
+  type        String // WELCOME_BONUS, DEPOSIT_BONUS, NO_DEPOSIT...
+  amount      Float?
+  isHot       Boolean @default(false)
+
+  brokerId String
+  broker   Broker @relation(fields: [brokerId], references: [id])
+
+  validUntil DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+// -------------------------------------
+// 3. MODULE IB COMMISSION & REQUESTS
+// -------------------------------------
+
+model IBCommission {
+  id         String  @id @default(cuid())
+  tierName   String // Ví dụ: Standard, VIP
+  lotRebate  Float // Tiền hoàn trên mỗi Lot
+  conditions String? @db.Text
+
+  brokerId String
+  broker   Broker @relation(fields: [brokerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model IBRequest {
+  id      String        @id @default(cuid())
+  message String?       @db.Text
+  status  RequestStatus @default(PENDING)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  brokerId String?
+  broker   Broker? @relation(fields: [brokerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// -------------------------------------
+// 4. MODULE INDICATORS (CHỈ BÁO)
+// -------------------------------------
+
+model Indicator {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String? @db.Text
+  thumbnail   String?
+  downloadUrl String?
+  platform    String // MT4, MT5, TradingView
+  price       Float   @default(0) // 0 = Free
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------------------------
+// 5. MODULE COURSES (KHÓA HỌC)
+// -------------------------------------
+
+model Course {
+  id          String  @id @default(cuid())
+  title       String
+  slug        String  @unique
+  description String? @db.Text
+  thumbnail   String?
+  instructor  String?
+
+  lessons Lesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id         String  @id @default(cuid())
+  title      String
+  videoUrl   String?
+  content    String? @db.Text
+  orderIndex Int     @default(0)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------------------------
+// 6. MODULE CMS & TIN TỨC
+// -------------------------------------
+
+model Category {
+  id    String @id @default(cuid())
+  name  String
+  slug  String @unique
+  posts Post[]
+}
+
+model Post {
+  id        String  @id @default(cuid())
+  title     String
+  slug      String  @unique
+  content   String  @db.Text
+  thumbnail String?
+  published Boolean @default(false)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -------------------------------------
+// 7. MODULE PASSVIEW
+// -------------------------------------
+
+model Passview {
+  id         String  @id @default(cuid())
+  title      String?
+  brokerName String
+  serverName String
+  accountId  String
+  password   String
+  status     String  @default("ACTIVE")
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
