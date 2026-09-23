@@ -68,7 +68,7 @@ export function Header() {
           <Link 
             href="/rewards" 
             className={`relative inline-flex items-center gap-1.5 transition whitespace-nowrap px-2.5 py-1 rounded-full border border-teal-400/30 font-bold ${
-              isActive("/rewards") ? "bg-teal-500/20 text-teal-300 shadow-[0_0_15px_rgba(251,191,36,0.3)]" : "text-zinc-400 hover:text-teal-300 bg-teal-500/10 shadow-[0_0_10px_rgba(251,191,36,0.15)] hover:shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+              isActive("/rewards") ? "bg-teal-500/20 text-teal-300 shadow-[0_0_15px_rgba(13,89,98,0.3)]" : "text-zinc-400 hover:text-teal-300 bg-teal-500/10 shadow-[0_0_10px_rgba(13,89,98,0.15)] hover:shadow-[0_0_15px_rgba(13,89,98,0.3)]"
             }`}
           >
             <svg className="w-3.5 h-3.5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

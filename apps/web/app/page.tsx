@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <main id="main-content" className="flex-grow">
         {/* 1. Hero Section */}
-        <section className="relative overflow-hidden border-b border-white/5 bg-zinc-950 pb-20 pt-28 lg:pt-36">
+        <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-[#051317] to-[#030a0d] pb-20 pt-28 lg:pt-36">
           {/* Background Elements */}
           <div className="absolute inset-0 bg-[url('https://hieunthub.co/uploads/branding/grid-bg.svg')] bg-center opacity-[0.05] mix-blend-screen"></div>
           <div className="absolute top-0 inset-x-0 h-[600px] bg-gradient-to-b from-teal-500/20 via-teal-900/5 to-transparent"></div>
@@ -117,7 +117,7 @@ export default function Home() {
           </div>
 \n          <ScrollReveal animation="fade-up" duration={0.8} className="relative z-10 max-w-[1400px] mx-auto px-4 lg:px-8 text-center flex flex-col items-center">
             {/* Top Pill */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-teal-500/30 bg-gradient-to-r from-teal-500/10 to-teal-500/10 backdrop-blur-md px-5 py-2 text-sm md:text-base font-semibold text-teal-300 mb-10 shadow-[0_0_30px_rgba(249,115,22,0.15)] ring-1 ring-teal-500/20 group hover:border-teal-500/50 transition-colors duration-300">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-teal-500/30 bg-gradient-to-r from-teal-500/10 to-teal-500/10 backdrop-blur-md px-5 py-2 text-sm md:text-base font-semibold text-teal-300 mb-10 shadow-[0_0_30px_rgba(13,89,98,0.15)] ring-1 ring-teal-500/20 group hover:border-teal-500/50 transition-colors duration-300">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
@@ -133,7 +133,7 @@ export default function Home() {
               <span className="bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent pb-2 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 VT Rewards Hub
               </span>
-              <span className="mt-4 block text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-teal-400 to-teal-500 text-3xl md:text-5xl lg:text-[48px] font-extrabold leading-tight drop-shadow-[0_0_30px_rgba(249,115,22,0.15)] max-w-[900px] uppercase">
+              <span className="mt-4 block text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-teal-400 to-teal-500 text-3xl md:text-5xl lg:text-[48px] font-extrabold leading-tight drop-shadow-[0_0_30px_rgba(13,89,98,0.15)] max-w-[900px] uppercase">
                 Trung tâm đối tác & Quyền lợi giao dịch
               </span>
             </h1>
@@ -145,14 +145,14 @@ export default function Home() {
 
             {/* CTAs */}
             <div className="mt-12 flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
-              <Link href="/rewards" className="group relative inline-flex items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-teal-500 via-teal-500 to-teal-500 bg-[size:200%_auto] hover:bg-[right_center] px-8 py-4 font-bold text-zinc-950 transition-all duration-500 shadow-[0_0_30px_rgba(249,115,22,0.25)] hover:shadow-[0_0_50px_rgba(249,115,22,0.4)] hover:-translate-y-1 text-base md:text-lg overflow-hidden ring-1 ring-teal-400/20">
+              <Link href="/rewards" className="group relative inline-flex items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-teal-400 to-teal-600 hover:from-teal-300 hover:to-teal-500 px-8 py-4 font-bold text-zinc-950 transition-all duration-500 shadow-[0_0_30px_rgba(13,89,98,0.4)] hover:shadow-[0_0_50px_rgba(13,89,98,0.6)] hover:-translate-y-1 text-base md:text-lg overflow-hidden ring-1 ring-teal-300/30">
                 <span className="absolute top-0 -left-[100%] w-[50%] h-full -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-1000 group-hover:left-[150%] ease-out"></span>
                 <span className="relative whitespace-nowrap">Xem quyền lợi khách hàng</span>
                 <svg className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Link>
-              <Link href="/ib-commission-overview" className="group inline-flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm px-8 py-4 font-bold text-white hover:bg-white/[0.08] hover:border-teal-500/30 transition-all duration-300 shadow-lg hover:-translate-y-1 text-base md:text-lg">
+              <Link href="/ib-commission-overview" className="group inline-flex items-center justify-center gap-3 rounded-lg border border-teal-500/30 bg-teal-500/10 backdrop-blur-sm px-8 py-4 font-bold text-teal-50 hover:bg-teal-500/20 hover:border-teal-400/50 transition-all duration-300 shadow-[0_0_20px_rgba(13,89,98,0.2)] hover:shadow-[0_0_30px_rgba(13,89,98,0.4)] hover:-translate-y-1 text-base md:text-lg">
                 <span className="relative whitespace-nowrap">Khám phá cơ chế đối tác</span>
                 <svg className="w-5 h-5 text-zinc-400 group-hover:text-teal-400 group-hover:translate-x-1 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -191,7 +191,7 @@ export default function Home() {
         </section>
 
         {/* 2. Vấn đề thị trường */}
-        <section className="py-20 lg:py-28 bg-zinc-950 relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-gradient-to-b from-[#051317] to-[#030a0d] relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <ScrollReveal animation="fade-right">
@@ -248,7 +248,7 @@ export default function Home() {
         </section>
 
         {/* 3. Tính năng nổi bật */}
-        <section className="py-20 lg:py-28 border-t border-white/5 bg-gradient-to-b from-zinc-950 to-zinc-900/50">
+        <section className="py-20 lg:py-28 border-t border-white/5 bg-gradient-to-b from-[#030a0d] to-[#071b20]">
           <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <ScrollReveal animation="fade-up" className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-white">Tính năng <span className="text-teal-400">nổi bật</span></h2>
@@ -306,7 +306,7 @@ export default function Home() {
         </section>
 
         {/* Khách hàng nhận được gì */}
-        <section className="py-20 lg:py-28 border-t border-white/5 relative overflow-hidden bg-zinc-950">
+        <section className="py-20 lg:py-28 border-t border-white/5 relative overflow-hidden bg-gradient-to-b from-[#051317] to-[#030a0d]">
           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 blur-[150px] rounded-full pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -353,7 +353,7 @@ export default function Home() {
         </section>
 
         {/* IB và đối tác có thêm công cụ */}
-        <section className="py-20 lg:py-28 border-t border-white/5 bg-gradient-to-b from-zinc-900/50 to-zinc-950 relative overflow-hidden">
+        <section className="py-20 lg:py-28 border-t border-white/5 bg-gradient-to-b from-[#071b20] to-[#051317] relative overflow-hidden">
           <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 blur-[150px] rounded-full pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -437,7 +437,7 @@ export default function Home() {
         </section>
 
         {/* 5. USP & Social Proof */}
-        <section className="py-20 lg:py-28 border-t border-white/5 bg-zinc-950 relative overflow-hidden">
+        <section className="py-20 lg:py-28 border-t border-white/5 bg-gradient-to-b from-[#051317] to-[#030a0d] relative overflow-hidden">
           <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/10 blur-[150px] rounded-full pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
