@@ -355,8 +355,8 @@ export default function GoldPricesPage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-25"></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-orange-500/5"></div>
-          <div className="absolute -top-40 right-0 w-[600px] h-[400px] bg-amber-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/5"></div>
+          <div className="absolute -top-40 right-0 w-[600px] h-[400px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-14">
             <div className="grid lg:grid-cols-2 gap-10 items-start">
@@ -364,10 +364,10 @@ export default function GoldPricesPage() {
               {/* Left Column: Live Gold Data Display */}
               <div>
                 <div className="flex items-center gap-3 mb-4 flex-wrap">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-300">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-teal-400/40 bg-teal-500/10 px-3 py-1 text-xs font-bold text-teal-300">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
                     </span>
                     LIVE
                   </div>
@@ -376,7 +376,7 @@ export default function GoldPricesPage() {
                   <button
                     type="button"
                     onClick={handleRefresh}
-                    className={`ml-auto rounded border border-white/10 bg-white/5 p-2 text-zinc-400 hover:border-amber-400/40 hover:text-amber-300 transition ${isRefreshing ? "animate-spin text-amber-400" : ""}`}
+                    className={`ml-auto rounded border border-white/10 bg-white/5 p-2 text-zinc-400 hover:border-cyan-400/40 hover:text-cyan-300 transition ${isRefreshing ? "animate-spin text-cyan-400" : ""}`}
                     aria-label="Làm mới"
                   >
                     <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,14 +385,14 @@ export default function GoldPricesPage() {
                   </button>
                 </div>
 
-                <div className="text-xs uppercase tracking-[0.15em] text-amber-300/70 mb-2">Bảng giá trực tuyến</div>
+                <div className="text-xs uppercase tracking-[0.15em] text-cyan-300/70 mb-2">Bảng giá trực tuyến</div>
                 <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">{selectedItem.name}</h1>
 
                 <div className="mt-6 flex items-baseline gap-3 flex-wrap">
-                  <div className="text-5xl md:text-7xl font-extrabold leading-none bg-gradient-to-r from-amber-200 via-amber-300 to-orange-400 bg-clip-text text-transparent tabular-nums">
+                  <div className="text-5xl md:text-7xl font-extrabold leading-none bg-gradient-to-r from-cyan-200 via-cyan-300 to-blue-400 bg-clip-text text-transparent tabular-nums">
                     {selectedItem.buy_label}
                   </div>
-                  <div className={`rounded-full px-3 py-1 text-sm font-bold inline-flex items-center gap-1.5 border border-white/10 ${selectedItem.trend_direction === 1 ? "bg-emerald-500/10 text-emerald-300" : "bg-white/5 text-zinc-300"}`}>
+                  <div className={`rounded-full px-3 py-1 text-sm font-bold inline-flex items-center gap-1.5 border border-white/10 ${selectedItem.trend_direction === 1 ? "bg-teal-500/10 text-teal-300" : "bg-white/5 text-zinc-300"}`}>
                     <span>{selectedItem.trend_summary}</span>
                   </div>
                 </div>
@@ -413,7 +413,7 @@ export default function GoldPricesPage() {
               <div className="rounded border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-transparent p-5 lg:p-6 backdrop-blur">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <div className="text-[10px] uppercase tracking-wider text-amber-300/80 font-bold mb-1">📈 Lịch sử gần đây</div>
+                    <div className="text-[10px] uppercase tracking-wider text-cyan-300/80 font-bold mb-1">📈 Lịch sử gần đây</div>
                     <div className="text-sm text-zinc-400">{selectedItem.name}</div>
                   </div>
                   <div className="flex gap-1" role="tablist">
@@ -423,7 +423,7 @@ export default function GoldPricesPage() {
                         type="button"
                         role="tab"
                         onClick={() => setTimePeriod(days)}
-                        className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${timePeriod === days ? "bg-amber-500 text-zinc-950" : "text-zinc-400 hover:text-amber-300"
+                        className={`rounded px-2.5 py-1 text-[11px] font-bold transition ${timePeriod === days ? "bg-cyan-500 text-zinc-950" : "text-zinc-400 hover:text-cyan-300"
                           }`}
                       >
                         {days}D
@@ -433,7 +433,7 @@ export default function GoldPricesPage() {
                 </div>
 
                 <div className="flex gap-4 text-xs mb-2">
-                  <span className="text-orange-400 font-bold">● Mua</span>
+                  <span className="text-blue-400 font-bold">● Mua</span>
                   {selectedItem.has_sell_quote && (
                     <span className="text-slate-400 font-bold">-- Bán</span>
                   )}
@@ -500,24 +500,24 @@ export default function GoldPricesPage() {
           <section>
             <h2 className="text-xs uppercase tracking-[0.15em] text-zinc-500 font-bold mb-4">📊 Tổng quan thị trường</h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              <div className="rounded border border-emerald-400/20 bg-gradient-to-br from-emerald-500/10 to-emerald-500/[0.02] p-5">
+              <div className="rounded border border-teal-400/20 bg-gradient-to-br from-teal-500/10 to-teal-500/[0.02] p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <svg className="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
-                  <span className="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Cao nhất</span>
+                  <span className="text-[10px] uppercase tracking-wider text-teal-300 font-bold">Cao nhất</span>
                 </div>
-                <div className="text-xl md:text-2xl font-extrabold text-emerald-200 tabular-nums">{stats.highLabel}</div>
+                <div className="text-xl md:text-2xl font-extrabold text-teal-200 tabular-nums">{stats.highLabel}</div>
               </div>
 
-              <div className="rounded border border-rose-400/20 bg-gradient-to-br from-rose-500/10 to-rose-500/[0.02] p-5">
+              <div className="rounded border border-indigo-400/20 bg-gradient-to-br from-indigo-500/10 to-indigo-500/[0.02] p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <svg className="h-4 w-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" />
                   </svg>
-                  <span className="text-[10px] uppercase tracking-wider text-rose-300 font-bold">Thấp nhất</span>
+                  <span className="text-[10px] uppercase tracking-wider text-indigo-300 font-bold">Thấp nhất</span>
                 </div>
-                <div className="text-xl md:text-2xl font-extrabold text-rose-200 tabular-nums">{stats.lowLabel}</div>
+                <div className="text-xl md:text-2xl font-extrabold text-indigo-200 tabular-nums">{stats.lowLabel}</div>
               </div>
 
               <div className="rounded border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-5">
@@ -530,14 +530,14 @@ export default function GoldPricesPage() {
                 <div className="text-xl md:text-2xl font-extrabold text-white tabular-nums">{stats.volatility}</div>
               </div>
 
-              <div className={`rounded border p-5 ${stats.changeDirection >= 0 ? "border-emerald-400/20 bg-gradient-to-br from-emerald-500/10 to-emerald-500/[0.02]" : "border-rose-400/20 bg-gradient-to-br from-rose-500/10 to-rose-500/[0.02]"}`}>
+              <div className={`rounded border p-5 ${stats.changeDirection >= 0 ? "border-teal-400/20 bg-gradient-to-br from-teal-500/10 to-teal-500/[0.02]" : "border-indigo-400/20 bg-gradient-to-br from-indigo-500/10 to-indigo-500/[0.02]"}`}>
                 <div className="flex items-center gap-2 mb-2">
-                  <svg className="h-4 w-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
-                  <span className={`text-[10px] uppercase tracking-wider font-bold ${stats.changeDirection >= 0 ? "text-emerald-300" : "text-rose-300"}`}>Δ giai đoạn</span>
+                  <span className={`text-[10px] uppercase tracking-wider font-bold ${stats.changeDirection >= 0 ? "text-teal-300" : "text-indigo-300"}`}>Δ giai đoạn</span>
                 </div>
-                <div className={`text-xl md:text-2xl font-extrabold tabular-nums ${stats.changeDirection >= 0 ? "text-emerald-200" : "text-rose-200"}`}>{stats.changePct}</div>
+                <div className={`text-xl md:text-2xl font-extrabold tabular-nums ${stats.changeDirection >= 0 ? "text-teal-200" : "text-indigo-200"}`}>{stats.changePct}</div>
               </div>
             </div>
           </section>
@@ -546,7 +546,7 @@ export default function GoldPricesPage() {
           <section>
             <div className="flex items-end justify-between flex-wrap gap-4 mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-bold text-amber-300 mb-2">
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-300 mb-2">
                   🏷️ Bảng giá đang theo dõi
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-white">Bảng giá tất cả loại vàng</h2>
@@ -562,27 +562,27 @@ export default function GoldPricesPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedType(gold.type)}
-                    className={`group cursor-pointer rounded border p-5 relative overflow-hidden transition-all duration-200 hover:border-amber-400/40 hover:shadow-xl hover:shadow-orange-500/10 ${isActive
-                        ? "border-amber-400/50 bg-gradient-to-br from-amber-500/15 via-amber-500/5 to-transparent shadow-lg shadow-amber-500/20"
+                    className={`group cursor-pointer rounded border p-5 relative overflow-hidden transition-all duration-200 hover:border-cyan-400/40 hover:shadow-xl hover:shadow-blue-500/10 ${isActive
+                        ? "border-cyan-400/50 bg-gradient-to-br from-cyan-500/15 via-cyan-500/5 to-transparent shadow-lg shadow-cyan-500/20"
                         : "border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01]"
                       }`}
                   >
                     <span className={`absolute top-3 left-3 inline-flex items-center justify-center h-7 w-7 rounded-full text-xs font-bold ${gold.trend_direction === 1
-                        ? "bg-emerald-500/15 text-emerald-300 border border-emerald-400/30"
+                        ? "bg-teal-500/15 text-teal-300 border border-teal-400/30"
                         : "bg-white/5 text-zinc-500 border border-white/10"
                       }`}>
                       {gold.trend_direction === 1 ? "▲" : "─"}
                     </span>
 
                     <div className="mb-4 pl-11">
-                      <div className={`font-extrabold text-base transition truncate ${isActive ? "text-amber-200" : "text-white"}`}>
+                      <div className={`font-extrabold text-base transition truncate ${isActive ? "text-cyan-200" : "text-white"}`}>
                         {gold.name}
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex items-baseline justify-between text-sm">
-                        <span className="text-[10px] uppercase tracking-wider text-amber-300/70 font-bold">Mua</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cyan-300/70 font-bold">Mua</span>
                         <span className="font-extrabold tabular-nums text-white">{gold.buy_label}</span>
                       </div>
                       <div className="flex items-baseline justify-between text-sm pt-2 border-t border-white/5">
@@ -600,7 +600,7 @@ export default function GoldPricesPage() {
           <details className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] group overflow-hidden">
             <summary className="flex items-center justify-between gap-3 cursor-pointer list-none px-6 py-5 hover:bg-white/[0.03] transition select-none">
               <div className="flex items-center gap-3">
-                <span className="h-10 w-10 rounded bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-lg">📅</span>
+                <span className="h-10 w-10 rounded bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-lg">📅</span>
                 <div>
                   <div className="font-semibold text-white">Bảng lịch sử</div>
                   <div className="text-xs text-zinc-500">Mở để xem dữ liệu lịch sử chi tiết</div>
@@ -634,12 +634,12 @@ export default function GoldPricesPage() {
           <section className="pt-6">
             <div className="flex items-end justify-between flex-wrap gap-4 mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-3">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-3">
                   🥇 TOP BROKER GIAO DỊCH VÀNG
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-white">
                   Giao dịch{" "}
-                  <span className="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">XAU/USD</span>{" "}
+                  <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">XAU/USD</span>{" "}
                   với spread tốt nhất
                 </h2>
                 <p className="text-sm text-zinc-400 mt-2 max-w-xl">Broker có spread XAU/USD tốt nhất đang được HieuNTHUB đàm phán rebate.</p>
@@ -648,13 +648,13 @@ export default function GoldPricesPage() {
 
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {/* VT Markets Card */}
-              <article className="group relative overflow-hidden rounded border border-orange-400/30 bg-gradient-to-b from-orange-500/10 to-amber-500/[0.02] hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/20 p-6 transition">
-                <div className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2.5 py-1 text-[10px] font-bold">TOP</div>
+              <article className="group relative overflow-hidden rounded border border-blue-400/30 bg-gradient-to-b from-blue-500/10 to-cyan-500/[0.02] hover:border-blue-400/60 hover:shadow-2xl hover:shadow-blue-500/20 p-6 transition">
+                <div className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2.5 py-1 text-[10px] font-bold">TOP</div>
                 <div className="flex items-center gap-4 mb-4">
                   <img src="https://hieunthub.co/uploads/brokers/logos/vt-markets-logo-v3.png" alt="VT Markets" className="h-14 w-14 rounded object-cover" loading="lazy" decoding="async" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-extrabold text-lg text-white group-hover:text-orange-300 transition truncate">VT Markets</h3>
-                    <div className="text-xs text-amber-400 mt-0.5">★ 4.8/5</div>
+                    <h3 className="font-extrabold text-lg text-white group-hover:text-blue-300 transition truncate">VT Markets</h3>
+                    <div className="text-xs text-cyan-400 mt-0.5">★ 4.8/5</div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs mb-5">
@@ -662,25 +662,25 @@ export default function GoldPricesPage() {
                     <div className="text-[10px] uppercase tracking-wider text-zinc-500 mb-0.5">Spread XAU/USD</div>
                     <div className="font-bold text-white tabular-nums">15-20</div>
                   </div>
-                  <div className="rounded bg-emerald-500/10 border border-emerald-400/20 px-3 py-2.5">
-                    <div className="text-[10px] uppercase tracking-wider text-emerald-300 mb-0.5">Rebate</div>
-                    <div className="font-bold text-emerald-200 tabular-nums">12</div>
+                  <div className="rounded bg-teal-500/10 border border-teal-400/20 px-3 py-2.5">
+                    <div className="text-[10px] uppercase tracking-wider text-teal-300 mb-0.5">Rebate</div>
+                    <div className="font-bold text-teal-200 tabular-nums">12</div>
                   </div>
                 </div>
-                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-orange-400 to-amber-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-lg shadow-orange-500/20" href="/brokers/danh-gia-vt-markets">
+                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-lg shadow-blue-500/20" href="/brokers/danh-gia-vt-markets">
                   Xem chi tiết
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </Link>
               </article>
 
               {/* ETO Markets Card */}
-              <article className="group relative overflow-hidden rounded border border-orange-400/30 bg-gradient-to-b from-orange-500/10 to-amber-500/[0.02] hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/20 p-6 transition">
-                <div className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2.5 py-1 text-[10px] font-bold">TOP</div>
+              <article className="group relative overflow-hidden rounded border border-blue-400/30 bg-gradient-to-b from-blue-500/10 to-cyan-500/[0.02] hover:border-blue-400/60 hover:shadow-2xl hover:shadow-blue-500/20 p-6 transition">
+                <div className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2.5 py-1 text-[10px] font-bold">TOP</div>
                 <div className="flex items-center gap-4 mb-4">
                   <img src="https://hieunthub.co/uploads/brokers/logos/01KJ4T0M44H5R139ZV71CV1W24.webp" alt="ETO Markets" className="h-14 w-14 rounded object-cover" loading="lazy" decoding="async" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-extrabold text-lg text-white group-hover:text-orange-300 transition truncate">ETO Markets</h3>
-                    <div className="text-xs text-amber-400 mt-0.5">★ 4.2/5</div>
+                    <h3 className="font-extrabold text-lg text-white group-hover:text-blue-300 transition truncate">ETO Markets</h3>
+                    <div className="text-xs text-cyan-400 mt-0.5">★ 4.2/5</div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs mb-5">
@@ -688,24 +688,24 @@ export default function GoldPricesPage() {
                     <div className="text-[10px] uppercase tracking-wider text-zinc-500 mb-0.5">Spread XAU/USD</div>
                     <div className="font-bold text-white tabular-nums">27-52</div>
                   </div>
-                  <div className="rounded bg-emerald-500/10 border border-emerald-400/20 px-3 py-2.5">
-                    <div className="text-[10px] uppercase tracking-wider text-emerald-300 mb-0.5">Rebate</div>
-                    <div className="font-bold text-emerald-200 tabular-nums">$13-$37</div>
+                  <div className="rounded bg-teal-500/10 border border-teal-400/20 px-3 py-2.5">
+                    <div className="text-[10px] uppercase tracking-wider text-teal-300 mb-0.5">Rebate</div>
+                    <div className="font-bold text-teal-200 tabular-nums">$13-$37</div>
                   </div>
                 </div>
-                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-orange-400 to-amber-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-lg shadow-orange-500/20" href="/brokers/danh-gia-eto-markets">
+                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-lg shadow-blue-500/20" href="/brokers/danh-gia-eto-markets">
                   Xem chi tiết
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </Link>
               </article>
 
               {/* XM Card */}
-              <article className="group relative overflow-hidden rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] hover:border-orange-400/40 hover:shadow-lg hover:shadow-orange-500/10 p-6 transition">
+              <article className="group relative overflow-hidden rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10 p-6 transition">
                 <div className="flex items-center gap-4 mb-4">
                   <img src="https://hieunthub.co/uploads/brokers/logos/01KJ48JWVDN98XB13Z5EW066SX.webp" alt="XM" className="h-14 w-14 rounded object-cover" loading="lazy" decoding="async" />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-extrabold text-lg text-white group-hover:text-orange-300 transition truncate">XM</h3>
-                    <div className="text-xs text-amber-400 mt-0.5">★ 4.7/5</div>
+                    <h3 className="font-extrabold text-lg text-white group-hover:text-blue-300 transition truncate">XM</h3>
+                    <div className="text-xs text-cyan-400 mt-0.5">★ 4.7/5</div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs mb-5">
@@ -713,12 +713,12 @@ export default function GoldPricesPage() {
                     <div className="text-[10px] uppercase tracking-wider text-zinc-500 mb-0.5">Spread XAU/USD</div>
                     <div className="font-bold text-white tabular-nums">40-45</div>
                   </div>
-                  <div className="rounded bg-emerald-500/10 border border-emerald-400/20 px-3 py-2.5">
-                    <div className="text-[10px] uppercase tracking-wider text-emerald-300 mb-0.5">Rebate</div>
-                    <div className="font-bold text-emerald-200 tabular-nums">$17</div>
+                  <div className="rounded bg-teal-500/10 border border-teal-400/20 px-3 py-2.5">
+                    <div className="text-[10px] uppercase tracking-wider text-teal-300 mb-0.5">Rebate</div>
+                    <div className="font-bold text-teal-200 tabular-nums">$17</div>
                   </div>
                 </div>
-                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-orange-400 to-amber-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-lg shadow-orange-500/20" href="/brokers/danh-gia-xm">
+                <Link className="flex items-center justify-center gap-2 w-full rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-4 py-3 text-sm font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-lg shadow-blue-500/20" href="/brokers/danh-gia-xm">
                   Xem chi tiết
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </Link>

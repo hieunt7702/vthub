@@ -211,7 +211,7 @@ export default function AdminIndicatorsPage() {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-lg shadow-orange-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
           Thêm Chỉ Báo Mới
@@ -246,25 +246,25 @@ export default function AdminIndicatorsPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setPlatformFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả nền tảng
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setPlatformFilter('MT4'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT4' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT4' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     MetaTrader 4 (MT4)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setPlatformFilter('MT5'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT5' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT5' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     MetaTrader 5 (MT5)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setPlatformFilter('TradingView'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'TradingView' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'TradingView' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     TradingView
                   </button>
@@ -286,19 +286,19 @@ export default function AdminIndicatorsPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setPriceFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả mức giá
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setPriceFilter('free'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'free' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'free' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Miễn phí (Free)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setPriceFilter('paid'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'paid' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'paid' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Có phí (Paid)
                   </button>
@@ -363,11 +363,11 @@ export default function AdminIndicatorsPage() {
                     </td>
                     <td className="px-6 py-4">
                       {ind.price === 0 ? (
-                        <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold">
+                        <span className="px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-bold">
                           Miễn phí
                         </span>
                       ) : (
-                        <span className="text-xs font-extrabold text-amber-300 tabular-nums">
+                        <span className="text-xs font-extrabold text-cyan-300 tabular-nums">
                           ${ind.price}
                         </span>
                       )}
@@ -390,7 +390,7 @@ export default function AdminIndicatorsPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(ind.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2"
+                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
                             >
                               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                               Xóa
@@ -467,7 +467,7 @@ export default function AdminIndicatorsPage() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-emerald-500/50"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50"
                   placeholder="VD: RSI Divergence Hunter"
                 />
               </div>
@@ -477,7 +477,7 @@ export default function AdminIndicatorsPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-emerald-500/50 min-h-[80px]"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50 min-h-[80px]"
                   placeholder="Giải thích cơ chế hoạt động..."
                 />
               </div>
@@ -495,21 +495,21 @@ export default function AdminIndicatorsPage() {
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'MT4' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT4' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT4' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           MetaTrader 4 (MT4)
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'MT5' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT5' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT5' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           MetaTrader 5 (MT5)
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'TradingView' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'TradingView' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'TradingView' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           TradingView
                         </button>
@@ -535,7 +535,7 @@ export default function AdminIndicatorsPage() {
                   type="text"
                   value={formData.downloadUrl}
                   onChange={(e) => setFormData({ ...formData, downloadUrl: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-emerald-500/50"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50"
                   placeholder="https://hieunthub.co/downloads/your-indicator.ex4"
                 />
               </div>
@@ -551,7 +551,7 @@ export default function AdminIndicatorsPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold transition shadow-lg shadow-orange-500/20 text-sm"
+                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
                 >
                   Lưu
                 </button>

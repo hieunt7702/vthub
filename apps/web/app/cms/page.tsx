@@ -54,17 +54,17 @@ export default function CMSNewsPage() {
         {/* Header Hero */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-orange-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none"></div>
 
           <div className="relative max-w-5xl mx-auto px-4 lg:px-8 py-12 lg:py-16 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-4">
-              <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-4">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
               📰 TIN TỨC &amp; PHÂN TÍCH
             </div>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
               Tin tức &amp;{" "}
-              <span className="bg-gradient-to-r from-orange-300 to-amber-500 bg-clip-text text-transparent">phân tích</span>
+              <span className="bg-gradient-to-r from-blue-300 to-cyan-500 bg-clip-text text-transparent">phân tích</span>
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-zinc-400 text-lg">
               Cập nhật xu hướng forex, đánh giá sàn, hướng dẫn IB từ team HieuNTHUB.
@@ -81,8 +81,8 @@ export default function CMSNewsPage() {
                     setCurrentPage(1);
                   }}
                   className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${selectedCategory === cat.slug
-                      ? "bg-orange-500 text-zinc-950 shadow-lg shadow-orange-500/30 font-bold"
-                      : "border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300"
+                      ? "bg-blue-500 text-zinc-950 shadow-lg shadow-blue-500/30 font-bold"
+                      : "border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300"
                     }`}
                 >
                   {cat.label}
@@ -107,7 +107,7 @@ export default function CMSNewsPage() {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+              className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
             />
           </div>
         </section>
@@ -116,18 +116,18 @@ export default function CMSNewsPage() {
         {featuredArticle && (
           <section className="border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-12">
-              <Link href={`/cms/${featuredArticle.slug}`} className="group grid lg:grid-cols-2 gap-0 rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] overflow-hidden hover:border-orange-400/40 hover:shadow-2xl hover:shadow-orange-500/10 transition">
+              <Link href={`/cms/${featuredArticle.slug}`} className="group grid lg:grid-cols-2 gap-0 rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] overflow-hidden hover:border-blue-400/40 hover:shadow-2xl hover:shadow-blue-500/10 transition">
 
                 <div className="relative aspect-video lg:aspect-auto lg:min-h-[320px] overflow-hidden bg-gradient-to-br from-blue-500/25 to-indigo-500/5">
                   <img src={featuredArticle.cover} alt={featuredArticle.title} className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" />
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-orange-500 text-zinc-950 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider shadow-lg">
+                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-blue-500 text-zinc-950 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider shadow-lg">
                     ⭐ Nổi bật
                   </div>
                 </div>
 
                 <div className="p-6 lg:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 text-xs text-zinc-500 mb-4 flex-wrap">
-                    <span className="rounded-full bg-orange-500/15 border border-orange-400/30 text-orange-300 px-2.5 py-0.5 font-semibold">{featuredArticle.categoryLabel}</span>
+                    <span className="rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 px-2.5 py-0.5 font-semibold">{featuredArticle.categoryLabel}</span>
                     <span className="flex items-center gap-1">
                       <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                       {featuredArticle.date}
@@ -137,11 +137,11 @@ export default function CMSNewsPage() {
                       {featuredArticle.readTime}
                     </span>
                   </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white group-hover:text-orange-300 transition leading-tight">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white group-hover:text-blue-300 transition leading-tight">
                     {featuredArticle.title}
                   </h2>
                   <p className="mt-4 text-zinc-400 line-clamp-3 text-base leading-relaxed">{featuredArticle.snippet}</p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-orange-300 font-semibold group-hover:gap-3 transition-all">
+                  <div className="mt-6 inline-flex items-center gap-2 text-blue-300 font-semibold group-hover:gap-3 transition-all">
                     Đọc bài đầy đủ
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </div>
@@ -170,18 +170,18 @@ export default function CMSNewsPage() {
                   <Link
                     key={art.slug}
                     href={`/cms/${art.slug}`}
-                    className="group flex flex-col rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] overflow-hidden hover:border-orange-400/40 hover:shadow-lg hover:shadow-orange-500/10 transition h-full"
+                    className="group flex flex-col rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] overflow-hidden hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10 transition h-full"
                   >
                     <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-blue-500/25 to-indigo-500/5 border-b border-white/5 shrink-0">
                       <img src={art.cover} alt={art.title} className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" />
-                      <span className="absolute top-3 left-3 rounded-full bg-zinc-900/80 backdrop-blur-md border border-white/10 text-orange-300 px-2.5 py-0.5 text-[10px] font-semibold">
+                      <span className="absolute top-3 left-3 rounded-full bg-zinc-900/80 backdrop-blur-md border border-white/10 text-blue-300 px-2.5 py-0.5 text-[10px] font-semibold">
                         {art.categoryLabel}
                       </span>
                     </div>
 
                     <div className="p-5 flex flex-col flex-1 justify-between">
                       <div>
-                        <h3 className="font-extrabold text-white text-base group-hover:text-orange-300 transition line-clamp-2 leading-tight">
+                        <h3 className="font-extrabold text-white text-base group-hover:text-blue-300 transition line-clamp-2 leading-tight">
                           {art.title}
                         </h3>
                         <p className="mt-2 text-sm text-zinc-400 line-clamp-3 leading-relaxed">{art.snippet}</p>
@@ -197,7 +197,7 @@ export default function CMSNewsPage() {
                           <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                           {art.readTime}
                         </span>
-                        <span className="ml-auto text-orange-300 group-hover:translate-x-0.5 transition font-bold text-xs">→</span>
+                        <span className="ml-auto text-blue-300 group-hover:translate-x-0.5 transition font-bold text-xs">→</span>
                       </div>
                     </div>
                   </Link>
@@ -218,7 +218,7 @@ export default function CMSNewsPage() {
                         disabled={currentPage === 1}
                         className={`inline-flex items-center justify-center min-w-9 h-9 px-3 rounded text-sm font-bold transition ${currentPage === 1
                             ? "text-zinc-600 cursor-not-allowed"
-                            : "text-zinc-300 hover:bg-orange-500/10 hover:text-orange-300"
+                            : "text-zinc-300 hover:bg-blue-500/10 hover:text-blue-300"
                           }`}
                       >
                         ‹
@@ -234,8 +234,8 @@ export default function CMSNewsPage() {
                             type="button"
                             onClick={() => setCurrentPage(pageNum)}
                             className={`inline-flex items-center justify-center min-w-9 h-9 px-3 rounded text-sm font-bold transition tabular-nums ${isActive
-                                ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 shadow-md shadow-orange-500/25"
-                                : "text-zinc-300 hover:bg-orange-500/10 hover:text-orange-300"
+                                ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 shadow-md shadow-blue-500/25"
+                                : "text-zinc-300 hover:bg-blue-500/10 hover:text-blue-300"
                               }`}
                           >
                             {pageNum}
@@ -251,7 +251,7 @@ export default function CMSNewsPage() {
                         disabled={currentPage === totalPages}
                         className={`inline-flex items-center justify-center min-w-9 h-9 px-3 rounded text-sm font-bold transition ${currentPage === totalPages
                             ? "text-zinc-600 cursor-not-allowed"
-                            : "text-zinc-300 hover:bg-orange-500/10 hover:text-orange-300"
+                            : "text-zinc-300 hover:bg-blue-500/10 hover:text-blue-300"
                           }`}
                       >
                         ›
@@ -269,16 +269,16 @@ export default function CMSNewsPage() {
         {/* Action conversion CTA panel */}
         <section>
           <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/15 via-amber-500/5 to-transparent p-8 md:p-10 text-center relative overflow-hidden">
-              <div className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-orange-500/20 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="rounded border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-cyan-500/5 to-transparent p-8 md:p-10 text-center relative overflow-hidden">
+              <div className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
               <div className="relative">
                 <h3 className="text-2xl md:text-3xl font-extrabold text-white">
                   Đọc xong rồi?{" "}
-                  <span className="bg-gradient-to-r from-orange-300 to-amber-500 bg-clip-text text-transparent">Tìm broker phù hợp</span>
+                  <span className="bg-gradient-to-r from-blue-300 to-cyan-500 bg-clip-text text-transparent">Tìm broker phù hợp</span>
                 </h3>
                 <p className="mt-2 text-zinc-400 max-w-xl mx-auto">Áp dụng kiến thức vừa đọc — so sánh sàn forex và chọn broker với cơ chế IB tốt nhất.</p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <Link href="/brokers" className="rounded bg-gradient-to-r from-orange-400 to-amber-600 px-6 py-3 font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-xl shadow-orange-500/30">
+                  <Link href="/brokers" className="rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-6 py-3 font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-xl shadow-blue-500/30">
                     Xem tất cả broker
                   </Link>
                   <Link href="/brokers/so-sanh" className="rounded border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white hover:border-white/20 transition">

@@ -178,7 +178,7 @@ export default function AdminCoursesPage() {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-lg shadow-orange-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
           Thêm Khóa Học Mới
@@ -264,7 +264,7 @@ export default function AdminCoursesPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(c.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2"
+                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
                             >
                               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                               Xóa
@@ -341,7 +341,7 @@ export default function AdminCoursesPage() {
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   />
                 </div>
 
@@ -353,7 +353,7 @@ export default function AdminCoursesPage() {
                       required
                       value={formData.instructor}
                       onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     />
                   </div>
                   <div>
@@ -362,7 +362,7 @@ export default function AdminCoursesPage() {
                       type="text"
                       value={formData.slug}
                       onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                       placeholder="VD: khoa-hoc-price-action"
                     />
                   </div>
@@ -373,7 +373,7 @@ export default function AdminCoursesPage() {
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50 min-h-[80px]"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50 min-h-[80px]"
                   />
                 </div>
 
@@ -383,7 +383,7 @@ export default function AdminCoursesPage() {
                     type="text"
                     value={formData.thumbnail}
                     onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   />
                 </div>
               </div>
@@ -398,7 +398,7 @@ export default function AdminCoursesPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold transition shadow-lg shadow-orange-500/20 text-sm"
+                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
                 >
                   Lưu
                 </button>

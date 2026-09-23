@@ -3,16 +3,18 @@ import { cn } from "../utils";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   glow?: boolean;
+  liquid?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, glow = false, ...props }, ref) => {
+  ({ className, glow = false, liquid = false, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(
           "bg-surface-card border border-surface-variant rounded p-4",
           glow && "card-glow backdrop-blur-sm",
+          liquid && "glass-liquid",
           className
         )}
         {...props}

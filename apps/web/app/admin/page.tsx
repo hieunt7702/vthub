@@ -54,11 +54,11 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Welcome Hero */}
-      <div className="relative overflow-hidden rounded border border-orange-500/20 bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-zinc-950 p-6 md:p-8">
-        <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-orange-500/20 blur-3xl"></div>
+      <div className="relative overflow-hidden rounded border border-blue-500/20 bg-gradient-to-r from-blue-500/10 via-cyan-500/5 to-zinc-950 p-6 md:p-8">
+        <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl"></div>
         <div className="relative z-10 max-w-2xl">
           <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            Chào mừng trở lại, <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">Quản trị viên!</span>
+            Chào mừng trở lại, <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Quản trị viên!</span>
           </h1>
           <p className="mt-2 text-zinc-400 text-sm md:text-base leading-relaxed">
             Hệ thống quản lý nội dung của HieuNTHUB đã sẵn sàng. Bạn có thể kiểm tra hiệu năng, thay đổi cấu hình sàn giao dịch, đăng tải khuyến mãi mới hoặc cập nhật chỉ báo kỹ thuật một cách dễ dàng.
@@ -73,10 +73,10 @@ export default function AdminDashboardPage() {
             name: 'Tổng số Sàn',
             value: stats.brokers,
             link: '/admin/brokers',
-            color: 'from-orange-500/20 to-orange-500/5 border-orange-500/30',
-            textColor: 'text-orange-400',
+            color: 'from-blue-500/20 to-blue-500/5 border-blue-500/30',
+            textColor: 'text-blue-400',
             icon: (
-              <svg className="h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
             ),
@@ -85,10 +85,10 @@ export default function AdminDashboardPage() {
             name: 'Khuyến mãi đang chạy',
             value: stats.offers,
             link: '/admin/offers',
-            color: 'from-amber-500/20 to-amber-500/5 border-amber-500/30',
-            textColor: 'text-amber-400',
+            color: 'from-cyan-500/20 to-cyan-500/5 border-cyan-500/30',
+            textColor: 'text-cyan-400',
             icon: (
-              <svg className="h-6 w-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5a2 2 0 10-2 2h2zm0 0H4m8 0h8m-8 0a2 2 0 102 2h-2zm0 0a2 2 0 11-2 2h2zm0 0h4m-4 0H4m-2 5h16" />
               </svg>
             ),
@@ -97,10 +97,10 @@ export default function AdminDashboardPage() {
             name: 'Số lượng Chỉ báo',
             value: stats.indicators,
             link: '/admin/indicators',
-            color: 'from-emerald-500/20 to-emerald-500/5 border-emerald-500/30',
-            textColor: 'text-emerald-400',
+            color: 'from-teal-500/20 to-teal-500/5 border-teal-500/30',
+            textColor: 'text-teal-400',
             icon: (
-              <svg className="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2zm9 0v-9a2 2 0 00-2-2h-2a2 2 0 00-2 2v9a2 2 0 002 2h2a2 2 0 002-2z" />
               </svg>
             ),
@@ -152,7 +152,7 @@ export default function AdminDashboardPage() {
         <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded p-6 shadow-xl space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="h-2.5 w-2.5 rounded-full bg-teal-500 animate-pulse"></span>
               Nhật ký hệ thống &amp; Hoạt động gần đây
             </h2>
             <span className="text-xs text-zinc-500 font-mono">Live</span>
@@ -164,19 +164,19 @@ export default function AdminDashboardPage() {
                 time: 'Vừa xong',
                 type: 'CREATE',
                 desc: 'Đã thêm mới Broker Exness vào cơ sở dữ liệu',
-                color: 'bg-orange-500/15 border-orange-500/30 text-orange-400',
+                color: 'bg-blue-500/15 border-blue-500/30 text-blue-400',
               },
               {
                 time: '15 phút trước',
                 type: 'UPDATE',
                 desc: 'Cập nhật điều kiện XM Welcome Bonus hoạt động',
-                color: 'bg-amber-500/15 border-amber-500/30 text-amber-400',
+                color: 'bg-cyan-500/15 border-cyan-500/30 text-cyan-400',
               },
               {
                 time: '2 giờ trước',
                 type: 'SYSTEM',
                 desc: 'Khởi động cổng NestJS API thành công trên port 3005',
-                color: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400',
+                color: 'bg-teal-500/15 border-teal-500/30 text-teal-400',
               },
               {
                 time: ' Hôm qua',
@@ -208,19 +208,19 @@ export default function AdminDashboardPage() {
             <div className="space-y-2">
               <Link
                 href="/admin/brokers"
-                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-orange-500/30 hover:bg-orange-500/[0.03] transition group text-sm font-semibold"
+                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-blue-500/30 hover:bg-blue-500/[0.03] transition group text-sm font-semibold"
               >
                 <span>➕ Thêm sàn giao dịch mới</span>
               </Link>
               <Link
                 href="/admin/offers"
-                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-amber-500/30 hover:bg-amber-500/[0.03] transition group text-sm font-semibold"
+                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-cyan-500/30 hover:bg-cyan-500/[0.03] transition group text-sm font-semibold"
               >
                 <span>🏷️ Đăng khuyến mãi mới</span>
               </Link>
               <Link
                 href="/admin/indicators"
-                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-emerald-500/30 hover:bg-emerald-500/[0.03] transition group text-sm font-semibold"
+                className="flex items-center gap-3 p-3 rounded bg-zinc-950/60 border border-zinc-800/50 text-zinc-300 hover:text-white hover:border-teal-500/30 hover:bg-teal-500/[0.03] transition group text-sm font-semibold"
               >
                 <span>📈 Tải lên chỉ báo kỹ thuật</span>
               </Link>
@@ -228,7 +228,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="mt-6 pt-4 border-t border-zinc-800 text-center">
-            <Link href="/" className="text-xs font-bold text-orange-400 hover:text-orange-300 transition flex items-center justify-center gap-1">
+            <Link href="/" className="text-xs font-bold text-blue-400 hover:text-blue-300 transition flex items-center justify-center gap-1">
               Xem trang giao diện người dùng
               <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

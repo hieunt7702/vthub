@@ -17,15 +17,33 @@ const config: Config = {
         "primary-fixed-dim": "#ffb690",
         "on-secondary-fixed-variant": "#574500",
         tertiary: "#93ccff",
-        background: "#131315",
+        background: "#071b20", // Vinex Dark Teal
         secondary: "#ffe083",
         "on-surface": "#e5e1e4",
         "on-surface-variant": "#e0c0b1",
-        "surface-variant": "#353437",
+        "surface-variant": "#0a282f", // Lighter Teal
         "on-secondary-container": "#645000",
         "on-tertiary-fixed": "#001d32",
-        "surface-deep": "#09090B",
+        "surface-deep": "#0D5962", // Vinex Primary
         "surface-container-low": "#1c1b1d",
+        blue: {
+          50: '#E6F3F5',
+          100: '#C0E2E7',
+          200: '#99D0D8',
+          300: '#73BEC9',
+          400: '#4DABBB',
+          500: '#0D5962', // Vinex Primary Teal
+          600: '#0A4A52',
+          700: '#083B41',
+          800: '#052C31',
+          900: '#031D20',
+          950: '#071b20', // Vinex Background
+        },
+        cyan: {
+          400: '#5C7B6C', // Vinex Secondary Accent
+          500: '#476355',
+          600: '#344B40',
+        },
         "on-primary-container": "#582200",
         "tertiary-fixed": "#cde5ff",
         "on-primary-fixed-variant": "#783200",

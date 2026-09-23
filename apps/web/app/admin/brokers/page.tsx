@@ -316,7 +316,7 @@ export default function AdminBrokersPage() {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-lg shadow-orange-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
           Thêm Sàn Mới
@@ -336,7 +336,7 @@ export default function AdminBrokersPage() {
                 setSearch(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-orange-500/50"
+              className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-blue-500/50"
             />
           </div>
 
@@ -351,25 +351,25 @@ export default function AdminBrokersPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setRegulationFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả giấy phép
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setRegulationFilter('FCA'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'FCA' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'FCA' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     FCA (Anh)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setRegulationFilter('ASIC'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'ASIC' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'ASIC' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     ASIC (Úc)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setRegulationFilter('CySEC'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'CySEC' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${regulationFilter === 'CySEC' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     CySEC (Síp)
                   </button>
@@ -389,19 +389,19 @@ export default function AdminBrokersPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setSpreadFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả loại Spread
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setSpreadFilter('Fixed'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === 'Fixed' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === 'Fixed' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Spread cố định (Fixed)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setSpreadFilter('Variable'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === 'Variable' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${spreadFilter === 'Variable' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Spread thả nổi (Variable)
                   </button>
@@ -418,7 +418,7 @@ export default function AdminBrokersPage() {
             </span>
             <button
               onClick={clearFilters}
-              className="text-xs text-orange-400 hover:text-orange-300 font-bold transition"
+              className="text-xs text-blue-400 hover:text-blue-300 font-bold transition"
             >
               Clear Filters (Xóa bộ lọc)
             </button>
@@ -473,7 +473,7 @@ export default function AdminBrokersPage() {
               {loading ? (
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-zinc-500">
-                    <div className="inline-block animate-spin h-5 w-5 border-2 border-orange-500 border-t-transparent rounded-full mr-2"></div>
+                    <div className="inline-block animate-spin h-5 w-5 border-2 border-blue-500 border-t-transparent rounded-full mr-2"></div>
                     Đang tải danh sách sàn forex...
                   </td>
                 </tr>
@@ -501,7 +501,7 @@ export default function AdminBrokersPage() {
                     </td>
                     <td className="px-6 py-4 text-xs font-mono text-zinc-400">{broker.slug}</td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 text-xs font-bold border border-cyan-500/20">
                         ★ {broker.rating}
                       </span>
                     </td>
@@ -542,7 +542,7 @@ export default function AdminBrokersPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(broker.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2"
+                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
                             >
                               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                               Xóa
@@ -645,7 +645,7 @@ export default function AdminBrokersPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="VD: Exness"
                   />
                 </div>
@@ -655,7 +655,7 @@ export default function AdminBrokersPage() {
                     type="text"
                     value={formData.slug}
                     onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="exness (tự tạo nếu trống)"
                   />
                 </div>
@@ -667,7 +667,7 @@ export default function AdminBrokersPage() {
                   type="text"
                   value={formData.logo}
                   onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   placeholder="https://example.com/logo.webp"
                 />
               </div>
@@ -677,7 +677,7 @@ export default function AdminBrokersPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50 min-h-[80px]"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50 min-h-[80px]"
                   placeholder="Mô tả sàn..."
                 />
               </div>
@@ -693,7 +693,7 @@ export default function AdminBrokersPage() {
                     required
                     value={formData.rating}
                     onChange={(e) => setFormData({ ...formData, rating: Number(e.target.value) })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   />
                 </div>
                 <div>
@@ -703,7 +703,7 @@ export default function AdminBrokersPage() {
                     required
                     value={formData.foundedYear}
                     onChange={(e) => setFormData({ ...formData, foundedYear: Number(e.target.value) })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   />
                 </div>
                 <div>
@@ -713,7 +713,7 @@ export default function AdminBrokersPage() {
                     required
                     value={formData.headquarters}
                     onChange={(e) => setFormData({ ...formData, headquarters: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="VD: Cyprus"
                   />
                 </div>
@@ -726,7 +726,7 @@ export default function AdminBrokersPage() {
                     type="text"
                     value={formData.regulations}
                     onChange={(e) => setFormData({ ...formData, regulations: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="FCA, CySEC, ASIC"
                   />
                 </div>
@@ -736,7 +736,7 @@ export default function AdminBrokersPage() {
                     type="text"
                     value={formData.platforms}
                     onChange={(e) => setFormData({ ...formData, platforms: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="MT4, MT5, cTrader"
                   />
                 </div>
@@ -749,7 +749,7 @@ export default function AdminBrokersPage() {
                     type="number"
                     value={formData.minDeposit}
                     onChange={(e) => setFormData({ ...formData, minDeposit: Number(e.target.value) })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                   />
                 </div>
                 <div>
@@ -758,14 +758,14 @@ export default function AdminBrokersPage() {
                     type="number"
                     value={formData.maxLeverage}
                     onChange={(e) => setFormData({ ...formData, maxLeverage: Number(e.target.value) })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-orange-500/50"
+                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
                     placeholder="VD: 1000"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Loại Spread</label>
                   <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-orange-500/50">
+                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-blue-500/50">
                       <span>{formData.spreadType === 'Variable' ? 'Thả nổi (Variable)' : 'Cố định (Fixed)'}</span>
                       <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                     </summary>
@@ -774,14 +774,14 @@ export default function AdminBrokersPage() {
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, spreadType: 'Variable' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.spreadType === 'Variable' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.spreadType === 'Variable' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           Thả nổi (Variable)
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, spreadType: 'Fixed' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.spreadType === 'Fixed' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.spreadType === 'Fixed' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           Cố định (Fixed)
                         </button>
@@ -804,7 +804,7 @@ export default function AdminBrokersPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold transition shadow-lg shadow-orange-500/20 text-sm"
+                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
                 >
                   Lưu dữ liệu
                 </button>

@@ -12,7 +12,7 @@ export function Footer() {
           <div className="flex items-center gap-2 mb-2">
             <span className="font-extrabold text-2xl tracking-tight text-white flex items-center gap-1.5">
               VT
-              <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">Rewards</span>
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Rewards</span>
             </span>
           </div>
           <p className="text-zinc-400 text-sm leading-relaxed">
@@ -31,19 +31,19 @@ export function Footer() {
         {/* Links Column 1 */}
         <div className="flex flex-col gap-4">
           <h4 className="text-white font-bold text-sm mb-2 uppercase tracking-wider">Hệ thống quyền lợi</h4>
-          <Link href="/rewards" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Chương trình thưởng</Link>
-          <Link href="/offers-bonus" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Ưu đãi khách hàng</Link>
-          <Link href="/ib-commission-overview" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Cơ chế IB / Đối tác</Link>
-          <Link href="/indicators" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Công cụ giao dịch</Link>
+          <Link href="/rewards" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Chương trình thưởng</Link>
+          <Link href="/offers-bonus" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Ưu đãi khách hàng</Link>
+          <Link href="/ib-commission-overview" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Cơ chế IB / Đối tác</Link>
+          <Link href="/indicators" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Công cụ giao dịch</Link>
         </div>
 
         {/* Links Column 2 */}
         <div className="flex flex-col gap-4">
           <h4 className="text-white font-bold text-sm mb-2 uppercase tracking-wider">Hỗ trợ & Công cụ</h4>
-          <Link href="/contact" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Hướng dẫn liên kết tài khoản</Link>
-          <Link href="/contact" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Liên hệ đội ngũ hỗ trợ</Link>
-          <Link href="/gia-vang-hom-nay" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Giá vàng trực tuyến</Link>
-          <Link href="/courses" className="text-zinc-400 hover:text-orange-400 transition-colors text-sm w-fit">Khóa học Trading</Link>
+          <Link href="/contact" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Hướng dẫn liên kết tài khoản</Link>
+          <Link href="/contact" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Liên hệ đội ngũ hỗ trợ</Link>
+          <Link href="/gia-vang-hom-nay" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Giá vàng trực tuyến</Link>
+          <Link href="/courses" className="text-zinc-400 hover:text-blue-400 transition-colors text-sm w-fit">Khóa học Trading</Link>
         </div>
 
         {/* Legal Column */}

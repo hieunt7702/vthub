@@ -221,20 +221,20 @@ export default function CoursesPage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-40"></div>
-          <div className="absolute -top-40 right-0 w-[600px] h-[400px] bg-orange-500/15 rounded-full blur-[140px] pointer-events-none"></div>
-          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-amber-500/8 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute -top-40 right-0 w-[600px] h-[400px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-cyan-500/8 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-8 pt-12 pb-10">
             {/* Breadcrumbs */}
             <nav className="text-xs text-zinc-500 mb-5 flex items-center gap-2 flex-wrap">
-              <Link href="/" className="hover:text-orange-300 transition">Trang chủ</Link>
+              <Link href="/" className="hover:text-blue-300 transition">Trang chủ</Link>
               <span>›</span>
               <span className="text-zinc-300">Khoá học</span>
             </nav>
 
             <div className="grid lg:grid-cols-12 gap-8 items-end">
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-4">
                   🎓 HỌC VIỆN BROKERSHUB
                 </div>
                 <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
@@ -246,7 +246,7 @@ export default function CoursesPage() {
               <div className="lg:col-span-5 w-full">
                 <div className="grid grid-cols-3 gap-3">
                   <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4 text-center">
-                    <div className="text-2xl md:text-3xl font-extrabold text-orange-300 tabular-nums">{stats.total}</div>
+                    <div className="text-2xl md:text-3xl font-extrabold text-blue-300 tabular-nums">{stats.total}</div>
                     <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Khoá học</div>
                   </div>
                   <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4 text-center">
@@ -254,7 +254,7 @@ export default function CoursesPage() {
                     <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Thời lượng</div>
                   </div>
                   <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4 text-center">
-                    <div className="text-2xl md:text-3xl font-extrabold text-emerald-300 tabular-nums">{stats.free}</div>
+                    <div className="text-2xl md:text-3xl font-extrabold text-teal-300 tabular-nums">{stats.free}</div>
                     <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Miễn phí</div>
                   </div>
                 </div>
@@ -267,13 +267,13 @@ export default function CoursesPage() {
         {featuredCourse && (
           <section className="border-b border-white/5 bg-[#0A0B0D]">
             <div className="max-w-7xl mx-auto px-4 lg:px-8 py-10">
-              <Link href={`/courses/${featuredCourse.slug}`} className="group block rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/15 via-amber-500/5 to-transparent overflow-hidden hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/20 transition relative">
+              <Link href={`/courses/${featuredCourse.slug}`} className="group block rounded border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-cyan-500/5 to-transparent overflow-hidden hover:border-blue-400/60 hover:shadow-2xl hover:shadow-blue-500/20 transition relative">
                 <div className="grid md:grid-cols-12 gap-0">
 
                   <div className="md:col-span-5 aspect-video md:aspect-auto relative overflow-hidden bg-zinc-900 min-h-[220px]">
                     <img src={featuredCourse.cover} alt={featuredCourse.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-zinc-950/40"></div>
-                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider shadow-lg">
+                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider shadow-lg">
                       ⭐ NỔI BẬT
                     </div>
                   </div>
@@ -284,7 +284,7 @@ export default function CoursesPage() {
                         <span className="rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 px-2.5 py-0.5 text-xs font-semibold">{featuredCourse.difficulty}</span>
                         <span className="rounded-full bg-white/[0.06] border border-white/15 text-zinc-200 px-2.5 py-0.5 text-xs font-semibold">{featuredCourse.category}</span>
                       </div>
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight group-hover:text-orange-200 transition">{featuredCourse.title}</h2>
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight group-hover:text-blue-200 transition">{featuredCourse.title}</h2>
                       <p className="mt-3 text-zinc-300 leading-relaxed line-clamp-2">{featuredCourse.description}</p>
                     </div>
 
@@ -298,7 +298,7 @@ export default function CoursesPage() {
                           <span className="text-3xl font-extrabold text-white">{featuredCourse.price}</span>
                           {!featuredCourse.isFree && <span className="text-sm text-zinc-400 font-semibold ml-1">USDT</span>}
                         </div>
-                        <span className="inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-orange-400 to-amber-600 px-5 py-2.5 text-sm font-extrabold text-zinc-950 group-hover:from-orange-300 group-hover:to-amber-500 transition shadow-lg">
+                        <span className="inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-5 py-2.5 text-sm font-extrabold text-zinc-950 group-hover:from-blue-300 group-hover:to-cyan-500 transition shadow-lg">
                           Xem khoá học →
                         </span>
                       </div>
@@ -329,7 +329,7 @@ export default function CoursesPage() {
                     setSearchQuery(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                  className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                 />
               </div>
 
@@ -344,8 +344,8 @@ export default function CoursesPage() {
                       setCurrentPage(1);
                     }}
                     className={`px-3 py-1.5 rounded text-xs font-bold transition ${difficultyFilter === level
-                        ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 shadow-md shadow-orange-500/25"
-                        : "text-zinc-300 hover:bg-white/5 hover:text-orange-300"
+                        ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 shadow-md shadow-blue-500/25"
+                        : "text-zinc-300 hover:bg-white/5 hover:text-blue-300"
                       }`}
                   >
                     {level === "" ? "Tất cả" : level}
@@ -357,7 +357,7 @@ export default function CoursesPage() {
             {/* Title Header */}
             <div className="mb-6 flex items-end justify-between gap-3 flex-wrap">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-2">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">
                   📖 TOÀN BỘ KHOÁ HỌC
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-white">Khoá học dành cho bạn</h2>
@@ -379,7 +379,7 @@ export default function CoursesPage() {
                   <Link
                     key={course.slug}
                     href={`/courses/${course.slug}`}
-                    className="group rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] overflow-hidden transition hover:border-orange-400/40 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1 flex flex-col h-full"
+                    className="group rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] overflow-hidden transition hover:border-blue-400/40 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col h-full"
                   >
                     <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-indigo-500/5 relative overflow-hidden shrink-0">
                       <img src={course.cover} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
@@ -387,12 +387,12 @@ export default function CoursesPage() {
 
                       <div className="absolute top-2.5 left-2.5 right-2.5 flex items-start justify-between gap-2">
                         {course.isFeatured ? (
-                          <span className="rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow">⭐ FEATURED</span>
+                          <span className="rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow">⭐ FEATURED</span>
                         ) : (
                           <span></span>
                         )}
                         <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${course.isFree
-                            ? "bg-emerald-500/90 text-zinc-950 font-extrabold shadow"
+                            ? "bg-teal-500/90 text-zinc-950 font-extrabold shadow"
                             : "bg-zinc-950/80 border border-white/10 text-white"
                           }`}>
                           {course.price}
@@ -401,10 +401,10 @@ export default function CoursesPage() {
 
                       <div className="absolute bottom-2.5 left-2.5 flex items-center gap-2 text-[10px]">
                         <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-bold ${course.difficulty === "Beginner"
-                            ? "bg-emerald-500/80 text-zinc-950"
+                            ? "bg-teal-500/80 text-zinc-950"
                             : course.difficulty === "Intermediate"
-                              ? "bg-amber-500/80 text-zinc-950"
-                              : "bg-rose-500/80 text-zinc-950"
+                              ? "bg-cyan-500/80 text-zinc-950"
+                              : "bg-indigo-500/80 text-zinc-950"
                           }`}>
                           {course.difficulty === "Beginner" ? "🌱" : course.difficulty === "Intermediate" ? "⚡" : "🚀"} {course.difficulty}
                         </span>
@@ -418,8 +418,8 @@ export default function CoursesPage() {
 
                     <div className="p-5 flex flex-col flex-1 justify-between">
                       <div>
-                        <div className="text-[10px] uppercase tracking-wider text-orange-300/80 font-bold mb-1.5">{course.category}</div>
-                        <h3 className="font-extrabold text-white text-lg group-hover:text-orange-300 transition leading-snug line-clamp-2">{course.title}</h3>
+                        <div className="text-[10px] uppercase tracking-wider text-blue-300/80 font-bold mb-1.5">{course.category}</div>
+                        <h3 className="font-extrabold text-white text-lg group-hover:text-blue-300 transition leading-snug line-clamp-2">{course.title}</h3>
                         <p className="mt-2 text-sm text-zinc-400 line-clamp-2 leading-relaxed">{course.description}</p>
                       </div>
 
@@ -429,7 +429,7 @@ export default function CoursesPage() {
                           <span className="text-zinc-700">·</span>
                           <span className="truncate max-w-[100px]">{course.author}</span>
                         </span>
-                        <span className="inline-flex items-center gap-1 text-orange-300 font-bold group-hover:translate-x-0.5 transition shrink-0">
+                        <span className="inline-flex items-center gap-1 text-blue-300 font-bold group-hover:translate-x-0.5 transition shrink-0">
                           Xem →
                         </span>
                       </div>
@@ -459,7 +459,7 @@ export default function CoursesPage() {
                     disabled={currentPage === 1}
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition ${currentPage === 1
                         ? "bg-white/[0.02] text-zinc-600 cursor-not-allowed"
-                        : "bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300"
+                        : "bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300"
                       }`}
                   >
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
@@ -474,8 +474,8 @@ export default function CoursesPage() {
                         type="button"
                         onClick={() => setCurrentPage(pageNum)}
                         className={`inline-flex h-10 min-w-[40px] items-center justify-center rounded-full px-3 text-sm transition ${isActive
-                            ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 font-extrabold shadow-md shadow-orange-500/25"
-                            : "border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 font-semibold"
+                            ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 font-extrabold shadow-md shadow-blue-500/25"
+                            : "border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 font-semibold"
                           }`}
                       >
                         {pageNum}
@@ -489,7 +489,7 @@ export default function CoursesPage() {
                     disabled={currentPage === totalPages}
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition ${currentPage === totalPages
                         ? "bg-white/[0.02] text-zinc-600 cursor-not-allowed"
-                        : "bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300"
+                        : "bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300"
                       }`}
                   >
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
@@ -504,20 +504,20 @@ export default function CoursesPage() {
         {/* Partners Call-To-Action (CTA) Section */}
         <section className="bg-[#0A0B0D]">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/15 via-amber-500/5 to-transparent p-8 md:p-12 relative overflow-hidden">
-              <div className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-orange-500/20 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="rounded border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-cyan-500/5 to-transparent p-8 md:p-12 relative overflow-hidden">
+              <div className="absolute -top-32 -right-32 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
               <div className="relative grid md:grid-cols-12 gap-8 items-center">
                 <div className="md:col-span-7">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/40 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-3">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-3">
                     🤝 CHƯƠNG TRÌNH IB
                   </div>
                   <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-3 leading-tight">
-                    Bạn là <span className="bg-gradient-to-r from-orange-300 to-amber-500 bg-clip-text text-transparent">IB partner</span>?
+                    Bạn là <span className="bg-gradient-to-r from-blue-300 to-cyan-500 bg-clip-text text-transparent">IB partner</span>?
                   </h3>
                   <p className="text-zinc-300 leading-relaxed mb-5 max-w-xl">
                     Đăng ký IB partner HieuNTHUB để được giảm giá / miễn phí một số khoá + nhận hoa hồng khi share course với client của bạn.
                   </p>
-                  <Link href="/ib-commission-overview" className="inline-flex items-center gap-2 rounded bg-gradient-to-r from-orange-400 to-amber-600 px-6 py-3 font-extrabold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-xl shadow-orange-500/30">
+                  <Link href="/ib-commission-overview" className="inline-flex items-center gap-2 rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-6 py-3 font-extrabold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-xl shadow-blue-500/30">
                     Tìm hiểu chương trình IB →
                   </Link>
                 </div>
@@ -525,12 +525,12 @@ export default function CoursesPage() {
                 <div className="md:col-span-5 grid grid-cols-2 gap-3">
                   <div className="rounded border border-white/10 bg-white/[0.04] p-4 text-center">
                     <div className="text-2xl">💸</div>
-                    <div className="mt-1 font-extrabold text-amber-300 text-lg">Giảm giá</div>
+                    <div className="mt-1 font-extrabold text-cyan-300 text-lg">Giảm giá</div>
                     <div className="text-[11px] text-zinc-500 mt-0.5">Khoá trả phí</div>
                   </div>
                   <div className="rounded border border-white/10 bg-white/[0.04] p-4 text-center">
                     <div className="text-2xl">📤</div>
-                    <div className="mt-1 font-extrabold text-emerald-300 text-lg">Ref share</div>
+                    <div className="mt-1 font-extrabold text-teal-300 text-lg">Ref share</div>
                     <div className="text-[11px] text-zinc-500 mt-0.5">Hoa hồng/đơn</div>
                   </div>
                   <div className="rounded border border-white/10 bg-white/[0.04] p-4 text-center">
@@ -540,7 +540,7 @@ export default function CoursesPage() {
                   </div>
                   <div className="rounded border border-white/10 bg-white/[0.04] p-4 text-center">
                     <div className="text-2xl">∞</div>
-                    <div className="mt-1 font-extrabold text-purple-300 text-lg">Trọn đời</div>
+                    <div className="mt-1 font-extrabold text-indigo-300 text-lg">Trọn đời</div>
                     <div className="text-[11px] text-zinc-500 mt-0.5">Truy cập</div>
                   </div>
                 </div>

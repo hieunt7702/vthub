@@ -167,18 +167,18 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-orange-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
+          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-8 py-12 lg:py-16">
             <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-medium text-orange-300 mb-4">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-300 mb-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
                 29+ sàn forex được tuyển chọn
               </div>
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
                 Tất cả{" "}
-                <span className="bg-gradient-to-r from-orange-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">sàn forex</span>
+                <span className="bg-gradient-to-r from-blue-300 via-cyan-400 to-cyan-500 bg-clip-text text-transparent">sàn forex</span>
               </h1>
               <p className="mt-4 text-zinc-400 text-lg">
                 Đánh giá độc lập từ team HH, không sponsor. Lọc theo spread, rebate, giấy phép.
@@ -186,32 +186,32 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
 
               {/* Search Form */}
               <form className="mt-8 flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto" method="GET" action="/brokers">
-                <div className="flex-1 flex items-center gap-3 rounded border border-white/10 bg-white/5 px-5 py-4 focus-within:border-orange-400/50 transition backdrop-blur">
+                <div className="flex-1 flex items-center gap-3 rounded border border-white/10 bg-white/5 px-5 py-4 focus-within:border-blue-400/50 transition backdrop-blur">
                   <svg className="h-5 w-5 text-zinc-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                   </svg>
                   <input type="text" name="q" placeholder="Tìm FPG, Mitrade, Exness..." autoComplete="off" className="flex-1 bg-transparent placeholder:text-zinc-500 outline-none text-zinc-100" />
                 </div>
-                <button type="submit" className="rounded bg-gradient-to-r from-orange-400 to-amber-600 px-8 py-4 font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-xl shadow-orange-500/30 whitespace-nowrap">
+                <button type="submit" className="rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-8 py-4 font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-xl shadow-blue-500/30 whitespace-nowrap">
                   Tìm sàn ngay →
                 </button>
               </form>
 
               {/* Quick Tags */}
               <div className="mt-6 flex flex-wrap justify-center gap-2">
-                <Link href="/brokers?sort=spread" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300">
+                <Link href="/brokers?sort=spread" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
                   ⚡ Spread thấp
                 </Link>
-                <Link href="/brokers?rebate=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300">
+                <Link href="/brokers?rebate=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
                   💰 Rebate cao
                 </Link>
-                <Link href="/brokers?cpa=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300">
+                <Link href="/brokers?cpa=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
                   🚀 CPA Lifetime
                 </Link>
-                <Link href="/brokers?xauusd=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300">
+                <Link href="/brokers?xauusd=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
                   🥇 XAUUSD
                 </Link>
-                <Link href="/brokers?regulated=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-orange-400/40 hover:text-orange-300">
+                <Link href="/brokers?regulated=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
                   🛡️ Có giấy phép
                 </Link>
               </div>
@@ -230,22 +230,22 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
             <div className="flex items-center gap-2.5 relative">
               <span className="text-xs text-zinc-500 font-medium">Sắp xếp:</span>
               <details className="relative group text-left" data-hh-nav-dropdown="">
-                <summary className="list-none cursor-pointer inline-flex items-center justify-between gap-2 rounded border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 outline-none hover:border-orange-500/30 hover:bg-white/[0.08] transition-all min-w-[160px] select-none shadow-lg shadow-black/10">
+                <summary className="list-none cursor-pointer inline-flex items-center justify-between gap-2 rounded border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 outline-none hover:border-blue-500/30 hover:bg-white/[0.08] transition-all min-w-[160px] select-none shadow-lg shadow-black/10">
                   <span className="font-semibold text-zinc-100">{currentSortLabel}</span>
                   <svg className="h-4 w-4 text-zinc-400 transition group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg>
                 </summary>
                 <div className="absolute right-0 top-full pt-2 z-50 min-w-[180px]">
                   <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md shadow-2xl p-1.5 flex flex-col gap-1">
-                    <Link href="/brokers" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${!currentSort ? 'bg-orange-500/20 text-orange-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
+                    <Link href="/brokers" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${!currentSort ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
                       Mặc định
                     </Link>
-                    <Link href="/brokers?sort=rating" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rating' ? 'bg-orange-500/20 text-orange-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
+                    <Link href="/brokers?sort=rating" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rating' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
                       Đánh giá cao nhất
                     </Link>
-                    <Link href="/brokers?sort=spread" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'spread' ? 'bg-orange-500/20 text-orange-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
+                    <Link href="/brokers?sort=spread" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'spread' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
                       Spread thấp
                     </Link>
-                    <Link href="/brokers?sort=rebate" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rebate' ? 'bg-orange-500/20 text-orange-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
+                    <Link href="/brokers?sort=rebate" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rebate' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
                       Rebate cao
                     </Link>
                   </div>
@@ -263,8 +263,8 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                 <div
                   key={broker.id}
                   className={`broker-card group relative rounded border transition flex flex-col ${broker.topPick
-                      ? "border-orange-400/40 bg-gradient-to-b from-orange-500/10 to-orange-500/[0.02] hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/20"
-                      : "border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] hover:border-orange-400/30 hover:shadow-lg hover:shadow-orange-500/10"
+                      ? "border-blue-400/40 bg-gradient-to-b from-blue-500/10 to-blue-500/[0.02] hover:border-blue-400/60 hover:shadow-2xl hover:shadow-blue-500/20"
+                      : "border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] hover:border-blue-400/30 hover:shadow-lg hover:shadow-blue-500/10"
                     }`}
                   data-broker-id={broker.id}
                   data-broker-name={broker.name}
@@ -273,7 +273,7 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                   {/* Badges */}
                   <div className="absolute top-3 right-3 z-10 flex flex-col items-end gap-1">
                     {broker.topPick && (
-                      <span className="rounded-full bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow-lg shadow-orange-500/40">
+                      <span className="rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow-lg shadow-blue-500/40">
                         ⭐ TOP PICK
                       </span>
                     )}
@@ -289,18 +289,18 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                       <img
                         src={broker.logo}
                         alt={broker.name}
-                        className={`h-14 w-14 rounded text-base object-cover shrink-0 ${broker.topPick ? "shadow-lg shadow-orange-500/30" : ""
+                        className={`h-14 w-14 rounded text-base object-cover shrink-0 ${broker.topPick ? "shadow-lg shadow-blue-500/30" : ""
                           }`}
                         loading="lazy"
                         decoding="async"
                       />
                       <div className="flex-1 min-w-0 mt-0.5">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <h3 className="font-extrabold text-base text-white group-hover:text-orange-300 transition truncate">
+                          <h3 className="font-extrabold text-base text-white group-hover:text-blue-300 transition truncate">
                             {broker.name}
                           </h3>
                           {broker.verified && (
-                            <svg className="h-3.5 w-3.5 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
+                            <svg className="h-3.5 w-3.5 text-teal-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
                               <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                             </svg>
                           )}
@@ -311,13 +311,13 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                               const starVal = idx + 1;
                               if (starVal <= Math.floor(Number(broker.rating))) {
                                 return (
-                                  <svg key={idx} className="h-3 w-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                  <svg key={idx} className="h-3 w-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" />
                                   </svg>
                                 );
                               } else if (starVal - 0.5 === Number(broker.rating)) {
                                 return (
-                                  <svg key={idx} className="h-3 w-3 text-amber-400" viewBox="0 0 20 20">
+                                  <svg key={idx} className="h-3 w-3 text-cyan-400" viewBox="0 0 20 20">
                                     <defs>
                                       <linearGradient id={`hs-${broker.id}`} x1="0" x2="1" y1="0" y2="0">
                                         <stop offset="50%" stopColor="currentColor" />
@@ -329,7 +329,7 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                                 );
                               } else {
                                 return (
-                                  <svg key={idx} className="h-3 w-3 text-amber-400/30" fill="currentColor" viewBox="0 0 20 20">
+                                  <svg key={idx} className="h-3 w-3 text-cyan-400/30" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" />
                                   </svg>
                                 );
@@ -347,11 +347,11 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                         <span
                           key={index}
                           className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${lic.status === "high"
-                              ? "bg-emerald-500/15 border border-emerald-400/30 text-emerald-300"
+                              ? "bg-teal-500/15 border border-teal-400/30 text-teal-300"
                               : "bg-white/[0.05] border border-white/10 text-zinc-400"
                             }`}
                         >
-                          {lic.status === "high" && <span className="text-emerald-400">●</span>}
+                          {lic.status === "high" && <span className="text-teal-400">●</span>}
                           {lic.name}
                         </span>
                       ))}
@@ -365,7 +365,7 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                       </div>
                       <div className="rounded px-2 py-1.5 text-center border-x border-white/5">
                         <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-bold">Lev</div>
-                        <div className="text-xs font-extrabold text-amber-300 tabular-nums truncate">{broker.leverage}</div>
+                        <div className="text-xs font-extrabold text-cyan-300 tabular-nums truncate">{broker.leverage}</div>
                       </div>
                       <div className="rounded px-2 py-1.5 text-center">
                         <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-bold">Platform</div>
@@ -376,9 +376,9 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                     {/* Rebate Tag */}
                     {broker.rebate && (
                       <div className="mt-3 flex flex-wrap gap-1.5">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/12 border border-amber-400/30 text-amber-300 px-2 py-0.5 text-[10px] font-bold">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/12 border border-cyan-400/30 text-cyan-300 px-2 py-0.5 text-[10px] font-bold">
                           <span>Rebate</span>
-                          <span className="text-amber-200">✓</span>
+                          <span className="text-cyan-200">✓</span>
                         </span>
                       </div>
                     )}
@@ -389,8 +389,8 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                     <Link
                       href={`/brokers/danh-gia-${broker.slug}`}
                       className={`rounded px-3 py-2 text-xs font-extrabold transition flex items-center justify-center gap-1.5 ${broker.topPick
-                          ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 hover:from-orange-300 hover:to-amber-500 shadow-md shadow-orange-500/25"
-                          : "border border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 text-zinc-200"
+                          ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 hover:from-blue-300 hover:to-cyan-500 shadow-md shadow-blue-500/25"
+                          : "border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-200"
                         }`}
                     >
                       Xem chi tiết →
@@ -398,7 +398,7 @@ export default async function BrokersPage({ searchParams }: { searchParams?: Pro
                     <button
                       type="button"
                       data-action="compare"
-                      className="rounded border border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 px-3 py-2 text-xs font-semibold text-zinc-400 transition flex items-center justify-center gap-1.5"
+                      className="rounded border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 px-3 py-2 text-xs font-semibold text-zinc-400 transition flex items-center justify-center gap-1.5"
                     >
                       So sánh
                     </button>

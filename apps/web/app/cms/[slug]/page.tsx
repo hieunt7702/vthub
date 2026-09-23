@@ -38,20 +38,20 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
 
           {/* Breadcrumbs */}
           <nav className="text-xs text-zinc-500 mb-6 flex items-center gap-2 flex-wrap">
-            <Link href="/" className="hover:text-orange-300 transition">Trang chủ</Link>
+            <Link href="/" className="hover:text-blue-300 transition">Trang chủ</Link>
             <span>›</span>
-            <Link href="/cms" className="hover:text-orange-300 transition">Tin tức &amp; phân tích</Link>
+            <Link href="/cms" className="hover:text-blue-300 transition">Tin tức &amp; phân tích</Link>
             <span>›</span>
             <span className="text-zinc-300 truncate max-w-[300px]">{article.title}</span>
           </nav>
 
           {/* Hero Article Card */}
           <article className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] overflow-hidden p-6 lg:p-10 mb-8 relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-transparent to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent pointer-events-none"></div>
 
             <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 mb-4">
-                <span className="rounded-full bg-orange-500/15 border border-orange-400/30 text-orange-300 px-3 py-1 font-semibold">
+                <span className="rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 px-3 py-1 font-semibold">
                   {article.categoryLabel}
                 </span>
                 <span className="flex items-center gap-1">
@@ -103,7 +103,7 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
             {article.toc && article.toc.length > 0 && (
               <aside className="lg:col-span-4 sticky top-24 hidden lg:block order-last lg:order-first">
                 <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 text-orange-300">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 text-blue-300">
                     Mục lục nội dung
                   </h3>
                   <nav className="space-y-3">
@@ -111,9 +111,9 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        className="flex items-start gap-3 group text-sm text-zinc-400 hover:text-orange-300 transition duration-150"
+                        className="flex items-start gap-3 group text-sm text-zinc-400 hover:text-blue-300 transition duration-150"
                       >
-                        <span className="flex items-center justify-center shrink-0 w-5 h-5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-zinc-400 group-hover:bg-orange-500/20 group-hover:border-orange-400/40 group-hover:text-orange-300 transition duration-150">
+                        <span className="flex items-center justify-center shrink-0 w-5 h-5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-zinc-400 group-hover:bg-blue-500/20 group-hover:border-blue-400/40 group-hover:text-blue-300 transition duration-150">
                           {item.num}
                         </span>
                         <span className="leading-tight">{item.label}</span>
@@ -145,7 +145,7 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
                         <a
                           key={item.id}
                           href={`#${item.id}`}
-                          className="flex items-center gap-3 text-sm text-zinc-300 hover:text-orange-300 transition"
+                          className="flex items-center gap-3 text-sm text-zinc-300 hover:text-blue-300 transition"
                         >
                           <span className="flex items-center justify-center shrink-0 w-5 h-5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-zinc-400">
                             {item.num}
@@ -161,24 +161,24 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
               {/* Rich Body Content */}
               <article className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-6 md:p-8">
                 <div
-                  className="prose prose-invert max-w-none prose-orange leading-relaxed space-y-6 text-zinc-300"
+                  className="pindigo pindigo-invert max-w-none pindigo-blue leading-relaxed space-y-6 text-zinc-300"
                   dangerouslySetInnerHTML={{ __html: article.contentHtml || "" }}
                 />
               </article>
 
               {/* Action conversions CTA block */}
-              <div className="rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/15 via-amber-500/5 to-transparent p-8 text-center relative overflow-hidden">
-                <div className="absolute -top-24 -right-24 w-[300px] h-[300px] bg-orange-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+              <div className="rounded border border-blue-400/30 bg-gradient-to-br from-blue-500/15 via-cyan-500/5 to-transparent p-8 text-center relative overflow-hidden">
+                <div className="absolute -top-24 -right-24 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[80px] pointer-events-none"></div>
                 <div className="relative">
                   <h3 className="text-xl md:text-2xl font-extrabold text-white">
                     Khám phá thêm trên{" "}
-                    <span className="bg-gradient-to-r from-orange-300 to-amber-500 bg-clip-text text-transparent">HieuNTHUB</span>
+                    <span className="bg-gradient-to-r from-blue-300 to-cyan-500 bg-clip-text text-transparent">HieuNTHUB</span>
                   </h3>
                   <p className="mt-2 text-sm text-zinc-400 max-w-lg mx-auto">
                     So sánh broker, xem cơ chế IB và tìm đối tác giao dịch phù hợp nhất.
                   </p>
                   <div className="mt-6 flex flex-wrap justify-center gap-3">
-                    <Link href="/brokers" className="rounded bg-gradient-to-r from-orange-400 to-amber-600 px-5 py-2.5 text-sm font-bold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-lg">
+                    <Link href="/brokers" className="rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-5 py-2.5 text-sm font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-lg">
                       So sánh Broker
                     </Link>
                     <Link href="/cms" className="rounded border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/20 transition">
@@ -191,7 +191,7 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
               {/* Related posts */}
               {relatedArticles.length > 0 && (
                 <section className="space-y-4">
-                  <h3 className="text-lg font-bold text-white uppercase tracking-wider border-l-2 border-orange-500 pl-3">
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-3">
                     Bài viết liên quan
                   </h3>
                   <div className="grid gap-5 md:grid-cols-3">
@@ -199,21 +199,21 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
                       <Link
                         key={art.slug}
                         href={`/cms/${art.slug}`}
-                        className="group flex flex-col rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] overflow-hidden hover:border-orange-400/40 hover:shadow-md transition h-full"
+                        className="group flex flex-col rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] overflow-hidden hover:border-blue-400/40 hover:shadow-md transition h-full"
                       >
                         <div className="relative aspect-video overflow-hidden border-b border-white/5">
                           <img src={art.cover} alt={art.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
-                          <span className="absolute top-2 left-2 rounded-full bg-zinc-900/80 backdrop-blur-sm border border-white/10 text-orange-300 px-2 py-0.5 text-[9px] font-semibold">
+                          <span className="absolute top-2 left-2 rounded-full bg-zinc-900/80 backdrop-blur-sm border border-white/10 text-blue-300 px-2 py-0.5 text-[9px] font-semibold">
                             {art.categoryLabel}
                           </span>
                         </div>
                         <div className="p-4 flex flex-col flex-1 justify-between">
-                          <h4 className="font-bold text-white text-sm group-hover:text-orange-300 transition line-clamp-2 leading-snug">
+                          <h4 className="font-bold text-white text-sm group-hover:text-blue-300 transition line-clamp-2 leading-snug">
                             {art.title}
                           </h4>
                           <span className="text-[10px] text-zinc-500 mt-3 flex items-center justify-between">
                             <span>{art.date}</span>
-                            <span className="text-orange-300 group-hover:translate-x-0.5 transition font-bold">→</span>
+                            <span className="text-blue-300 group-hover:translate-x-0.5 transition font-bold">→</span>
                           </span>
                         </div>
                       </Link>
@@ -224,7 +224,7 @@ function CMSArticleRender({ article, allArticles }: { article: Article; allArtic
 
               {/* Return link */}
               <div className="pt-4 border-t border-white/5 flex justify-center">
-                <Link href="/cms" className="inline-flex items-center gap-2 rounded border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-orange-400/40 hover:text-orange-300 hover:bg-orange-500/5 transition">
+                <Link href="/cms" className="inline-flex items-center gap-2 rounded border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-blue-400/40 hover:text-blue-300 hover:bg-blue-500/5 transition">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                   </svg>

@@ -204,7 +204,7 @@ export default function AdminPassviewsPage() {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-lg shadow-orange-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
           Thêm Passview Mới
@@ -238,19 +238,19 @@ export default function AdminPassviewsPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setStatusFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả trạng thái
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setStatusFilter('ACTIVE'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'ACTIVE' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'ACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Đang hoạt động (ACTIVE)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setStatusFilter('INACTIVE'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'INACTIVE' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'INACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Ngừng hoạt động (INACTIVE)
                   </button>
@@ -318,7 +318,7 @@ export default function AdminPassviewsPage() {
                     <td className="px-6 py-4">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
                         pv.status === 'ACTIVE'
-                          ? 'bg-emerald-500/10 border-emerald-500/25 text-emerald-400'
+                          ? 'bg-teal-500/10 border-teal-500/25 text-teal-400'
                           : 'bg-zinc-800 border-zinc-700 text-zinc-500'
                       }`}>
                         {pv.status}
@@ -341,7 +341,7 @@ export default function AdminPassviewsPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(pv.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2"
+                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
                             >
                               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                               Xóa
@@ -485,14 +485,14 @@ export default function AdminPassviewsPage() {
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, status: 'ACTIVE' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'ACTIVE' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'ACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           Hoạt động (ACTIVE)
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, status: 'INACTIVE' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'INACTIVE' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'INACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           Ngừng hoạt động (INACTIVE)
                         </button>
@@ -512,7 +512,7 @@ export default function AdminPassviewsPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold transition shadow-lg shadow-orange-500/20 text-sm"
+                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
                 >
                   Lưu
                 </button>

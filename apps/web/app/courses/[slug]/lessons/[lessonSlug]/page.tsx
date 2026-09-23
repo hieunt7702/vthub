@@ -101,11 +101,11 @@ export default function CourseLessonPage() {
         <section className="border-b border-white/5">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 pt-6 pb-3">
             <nav className="text-xs text-zinc-500 flex items-center gap-2 flex-wrap">
-              <Link href="/" className="hover:text-orange-300 transition">Trang chủ</Link>
+              <Link href="/" className="hover:text-blue-300 transition">Trang chủ</Link>
               <span>›</span>
-              <Link href="/courses" className="hover:text-orange-300 transition">Khoá học</Link>
+              <Link href="/courses" className="hover:text-blue-300 transition">Khoá học</Link>
               <span>›</span>
-              <Link href={`/courses/${courseSyllabus.slug}`} className="hover:text-orange-300 transition truncate max-w-[280px]">
+              <Link href={`/courses/${courseSyllabus.slug}`} className="hover:text-blue-300 transition truncate max-w-[280px]">
                 {courseSyllabus.title}
               </Link>
               <span>›</span>
@@ -142,11 +142,11 @@ export default function CourseLessonPage() {
                 {/* Lesson Description and Actions */}
                 <div className="mt-5 rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 md:p-6">
                   <div className="flex items-center gap-2 flex-wrap text-xs mb-3">
-                    <span className="rounded-full bg-orange-400/15 border border-orange-400/30 text-orange-300 px-2.5 py-0.5 font-bold">
+                    <span className="rounded-full bg-blue-400/15 border border-blue-400/30 text-blue-300 px-2.5 py-0.5 font-bold">
                       Bài {activeLessonIndex + 1} / {courseSyllabus.lessons.length}
                     </span>
                     {activeLesson.isPreview && (
-                      <span className="rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px]">Xem trước</span>
+                      <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px]">Xem trước</span>
                     )}
                   </div>
 
@@ -157,14 +157,14 @@ export default function CourseLessonPage() {
                       <button
                         type="button"
                         onClick={handleNextLesson}
-                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-orange-400 to-amber-600 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-md shadow-orange-500/25 cursor-pointer"
+                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-md shadow-blue-500/25 cursor-pointer"
                       >
                         Tiếp tục bài tiếp theo →
                       </button>
                     ) : (
                       <Link
                         href={`/courses/${courseSyllabus.slug}`}
-                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-emerald-400 to-teal-500 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-emerald-300 hover:to-teal-500 transition shadow-md"
+                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-teal-400 to-teal-500 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-teal-300 hover:to-teal-500 transition shadow-md"
                       >
                         Hoàn thành khoá học! 🎓
                       </Link>
@@ -178,16 +178,16 @@ export default function CourseLessonPage() {
                 <div className="sticky top-24 rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] overflow-hidden">
 
                   {/* Progress Header */}
-                  <div className="px-5 py-4 border-b border-white/5 bg-gradient-to-r from-orange-500/8 to-transparent">
+                  <div className="px-5 py-4 border-b border-white/5 bg-gradient-to-r from-blue-500/8 to-transparent">
                     <div className="flex items-center justify-between gap-3 mb-2">
-                      <div className="text-[10px] uppercase tracking-[0.12em] text-orange-300 font-bold">Các bài trong khoá</div>
+                      <div className="text-[10px] uppercase tracking-[0.12em] text-blue-300 font-bold">Các bài trong khoá</div>
                       <span className="text-[11px] text-zinc-400 font-bold tabular-nums">
                         {Object.keys(completedLessons).filter(k => k.startsWith(courseSlug)).length}/{courseSyllabus.lessons.length}
                       </span>
                     </div>
                     <h2 className="text-sm font-extrabold text-white truncate" title={courseSyllabus.title}>{courseSyllabus.title}</h2>
                     <div className="mt-2.5 h-1.5 rounded-full bg-white/10 overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300" style={{ width: `${completionPercentage}%` }}></div>
+                      <div className="h-full bg-gradient-to-r from-blue-400 to-cyan-500 transition-all duration-300" style={{ width: `${completionPercentage}%` }}></div>
                     </div>
                     <div className="mt-1.5 text-[10px] text-zinc-500">{completionPercentage}% hoàn thành</div>
                   </div>
@@ -203,17 +203,17 @@ export default function CourseLessonPage() {
                           key={lesson.id}
                           onClick={() => handleSelectLesson(lesson)}
                           className={`flex items-center gap-3 px-4 py-3 transition group cursor-pointer border-l-2 ${isActive
-                              ? "bg-orange-500/10 border-l-orange-400"
-                              : "border-l-transparent hover:bg-orange-500/5"
+                              ? "bg-blue-500/10 border-l-blue-400"
+                              : "border-l-transparent hover:bg-blue-500/5"
                             }`}
                         >
                           <div className="font-mono text-[10px] font-bold text-zinc-500 tabular-nums w-6 shrink-0 text-right">{lesson.id}</div>
 
                           <div className={`h-7 w-7 rounded-full flex items-center justify-center shrink-0 border transition ${isActive
-                              ? "bg-orange-500/20 border-orange-400/50 text-orange-300"
+                              ? "bg-blue-500/20 border-blue-400/50 text-blue-300"
                               : isCompleted
-                                ? "bg-emerald-500/20 border-emerald-400/50 text-emerald-300"
-                                : "bg-white/[0.04] border-white/10 text-zinc-400 group-hover:border-orange-400/30 group-hover:text-orange-300"
+                                ? "bg-teal-500/20 border-teal-400/50 text-teal-300"
+                                : "bg-white/[0.04] border-white/10 text-zinc-400 group-hover:border-blue-400/30 group-hover:text-blue-300"
                             }`}>
                             {isCompleted ? (
                               <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="m6 12 4 4 8-8" /></svg>
@@ -223,15 +223,15 @@ export default function CourseLessonPage() {
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <div className={`text-[13px] leading-snug font-semibold line-clamp-2 ${isActive ? "text-orange-200" : "text-zinc-200 group-hover:text-white"}`}>
+                            <div className={`text-[13px] leading-snug font-semibold line-clamp-2 ${isActive ? "text-blue-200" : "text-zinc-200 group-hover:text-white"}`}>
                               {lesson.title}
                             </div>
                             <div className="mt-0.5 flex items-center gap-1.5 text-[10px] text-zinc-500">
                               {lesson.isPreview && (
-                                <span className="text-emerald-300/80 font-bold uppercase tracking-wider">· Preview</span>
+                                <span className="text-teal-300/80 font-bold uppercase tracking-wider">· Preview</span>
                               )}
                               {isCompleted && (
-                                <span className="text-emerald-400 font-bold uppercase tracking-wider">· Đã xong</span>
+                                <span className="text-teal-400 font-bold uppercase tracking-wider">· Đã xong</span>
                               )}
                             </div>
                           </div>
@@ -241,7 +241,7 @@ export default function CourseLessonPage() {
                   </div>
 
                   {/* Sidebar Footer Link */}
-                  <Link href={`/courses/${courseSyllabus.slug}`} className="block px-5 py-3 text-xs font-semibold text-zinc-400 hover:text-orange-300 hover:bg-orange-500/5 transition border-t border-white/5">
+                  <Link href={`/courses/${courseSyllabus.slug}`} className="block px-5 py-3 text-xs font-semibold text-zinc-400 hover:text-blue-300 hover:bg-blue-500/5 transition border-t border-white/5">
                     ← Quay lại trang khoá học
                   </Link>
                 </div>

@@ -31,14 +31,14 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-zinc-950 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-orange-500/10 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-amber-500/10 blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none"></div>
 
       <div className="w-full max-w-md p-8 relative z-10">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <span className="font-black text-2xl text-white tracking-wider">HieuNTHUB</span>
-            <span className="text-[10px] bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
+            <span className="text-[10px] bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
               Admin
             </span>
           </Link>
@@ -47,9 +47,9 @@ export default function AdminLoginPage() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/20 rounded flex items-start gap-3">
-            <svg className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-            <p className="text-sm font-medium text-rose-400">{error}</p>
+          <div className="mb-6 p-4 bg-indigo-500/10 border border-indigo-500/20 rounded flex items-start gap-3">
+            <svg className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <p className="text-sm font-medium text-indigo-400">{error}</p>
           </div>
         )}
 
@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-zinc-950/50 border border-zinc-800 rounded text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/50 transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-zinc-950/50 border border-zinc-800 rounded text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all"
                   placeholder="admin@gmail.com"
                 />
               </div>
@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
                 <label className="block text-xs font-bold text-zinc-400 uppercase tracking-wide">
                   Mật khẩu
                 </label>
-                <Link href="#" className="text-xs text-orange-400 hover:text-orange-300 transition-colors font-medium">
+                <Link href="#" className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium">
                   Quên mật khẩu?
                 </Link>
               </div>
@@ -96,7 +96,7 @@ export default function AdminLoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-zinc-950/50 border border-zinc-800 rounded text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/50 transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-zinc-950/50 border border-zinc-800 rounded text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all"
                   placeholder="••••••••"
                 />
               </div>
@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-zinc-950 font-bold rounded transition-all shadow-lg shadow-orange-500/20 text-sm disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2 mt-4"
+              className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-zinc-950 font-bold rounded transition-all shadow-lg shadow-blue-500/20 text-sm disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2 mt-4"
             >
               {isLoading ? (
                 <>

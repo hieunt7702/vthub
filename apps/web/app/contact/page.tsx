@@ -146,11 +146,11 @@ export default function ContactPage() {
         {/* Banner Hero */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-orange-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
+          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="relative max-w-5xl mx-auto px-4 lg:px-8 py-12 lg:py-16 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-4 animate-pulse">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-4 animate-pulse">
               💬 {t("contact.support_1v1")}
             </div>
             <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
@@ -161,13 +161,13 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-emerald-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1.5 text-teal-300">
                 <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4" />
                 </svg>
                 <span className="font-bold">{t("contact.response_24h")}</span>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1.5 text-amber-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1.5 text-cyan-300">
                 <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
@@ -194,35 +194,35 @@ export default function ContactPage() {
 
                   {/* Basic Contact Info Section */}
                   <section className="space-y-4">
-                    <div className="text-xs font-bold text-orange-400 uppercase tracking-widest flex items-center gap-2">
-                      <span className="w-6 h-[2px] bg-orange-400 rounded-full inline-block"></span>
+                    <div className="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-2">
+                      <span className="w-6 h-[2px] bg-blue-400 rounded-full inline-block"></span>
                       {t("contact.section.info")}
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-1.5">
                         <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                          {t("contact.label.name")} <span className="text-rose-500">*</span>
+                          {t("contact.label.name")} <span className="text-indigo-500">*</span>
                         </label>
                         <input
                           type="text"
                           required
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                         />
                       </div>
 
                       <div className="space-y-1.5">
                         <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                          {t("contact.label.phone")} <span className="text-rose-500">*</span>
+                          {t("contact.label.phone")} <span className="text-indigo-500">*</span>
                         </label>
                         <input
                           type="tel"
                           required
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                         />
                       </div>
                     </div>
@@ -230,7 +230,7 @@ export default function ContactPage() {
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-1.5">
                         <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                          {t("contact.label.email")} <span className="text-rose-500">*</span>
+                          {t("contact.label.email")} <span className="text-indigo-500">*</span>
                         </label>
                         <input
                           type="email"
@@ -238,7 +238,7 @@ export default function ContactPage() {
                           placeholder="name@example.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                         />
                       </div>
 
@@ -251,7 +251,7 @@ export default function ContactPage() {
                           value={telegram}
                           onChange={(e) => setTelegram(e.target.value)}
                           placeholder="@username"
-                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                          className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                         />
                       </div>
                     </div>
@@ -259,8 +259,8 @@ export default function ContactPage() {
 
                   {/* Group Selector Cards Section */}
                   <section className="space-y-4">
-                    <div className="text-xs font-bold text-orange-400 uppercase tracking-widest flex items-center gap-2">
-                      <span className="w-6 h-[2px] bg-orange-400 rounded-full inline-block"></span>
+                    <div className="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-2">
+                      <span className="w-6 h-[2px] bg-blue-400 rounded-full inline-block"></span>
                       {t("contact.section.role")}
                     </div>
 
@@ -271,11 +271,11 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => handleRoleChange("trader")}
                         className={`flex flex-col items-start gap-1 text-left rounded border p-4 transition-all duration-200 ${selectedRole === "trader"
-                            ? "border-orange-400/60 bg-gradient-to-br from-amber-500/20 via-amber-500/5 to-transparent shadow-lg shadow-amber-500/10"
-                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-orange-400/40 hover:bg-white/[0.06]"
+                            ? "border-blue-400/60 bg-gradient-to-br from-cyan-500/20 via-cyan-500/5 to-transparent shadow-lg shadow-cyan-500/10"
+                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/40 hover:bg-white/[0.06]"
                           }`}
                       >
-                        <strong className={`font-extrabold text-sm ${selectedRole === "trader" ? "text-orange-300" : "text-white"}`}>
+                        <strong className={`font-extrabold text-sm ${selectedRole === "trader" ? "text-blue-300" : "text-white"}`}>
                           {t("contact.role.trader")}
                         </strong>
                         <span className="text-[11px] text-zinc-400 leading-normal">
@@ -288,11 +288,11 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => handleRoleChange("ib")}
                         className={`flex flex-col items-start gap-1 text-left rounded border p-4 transition-all duration-200 ${selectedRole === "ib"
-                            ? "border-orange-400/60 bg-gradient-to-br from-amber-500/20 via-amber-500/5 to-transparent shadow-lg shadow-amber-500/10"
-                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-orange-400/40 hover:bg-white/[0.06]"
+                            ? "border-blue-400/60 bg-gradient-to-br from-cyan-500/20 via-cyan-500/5 to-transparent shadow-lg shadow-cyan-500/10"
+                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/40 hover:bg-white/[0.06]"
                           }`}
                       >
-                        <strong className={`font-extrabold text-sm ${selectedRole === "ib" ? "text-orange-300" : "text-white"}`}>
+                        <strong className={`font-extrabold text-sm ${selectedRole === "ib" ? "text-blue-300" : "text-white"}`}>
                           {t("contact.role.ib")}
                         </strong>
                         <span className="text-[11px] text-zinc-400 leading-normal">
@@ -305,11 +305,11 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => handleRoleChange("broker")}
                         className={`flex flex-col items-start gap-1 text-left rounded border p-4 transition-all duration-200 ${selectedRole === "broker"
-                            ? "border-orange-400/60 bg-gradient-to-br from-amber-500/20 via-amber-500/5 to-transparent shadow-lg shadow-amber-500/10"
-                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-orange-400/40 hover:bg-white/[0.06]"
+                            ? "border-blue-400/60 bg-gradient-to-br from-cyan-500/20 via-cyan-500/5 to-transparent shadow-lg shadow-cyan-500/10"
+                            : "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/40 hover:bg-white/[0.06]"
                           }`}
                       >
-                        <strong className={`font-extrabold text-sm ${selectedRole === "broker" ? "text-orange-300" : "text-white"}`}>
+                        <strong className={`font-extrabold text-sm ${selectedRole === "broker" ? "text-blue-300" : "text-white"}`}>
                           {t("contact.role.broker")}
                         </strong>
                         <span className="text-[11px] text-zinc-400 leading-normal">
@@ -323,8 +323,8 @@ export default function ContactPage() {
 
                   {/* Dynamic Topic inquiry and fields section */}
                   <section className="space-y-4">
-                    <div className="text-xs font-bold text-orange-400 uppercase tracking-widest flex items-center gap-2">
-                      <span className="w-6 h-[2px] bg-orange-400 rounded-full inline-block"></span>
+                    <div className="text-xs font-bold text-blue-400 uppercase tracking-widest flex items-center gap-2">
+                      <span className="w-6 h-[2px] bg-blue-400 rounded-full inline-block"></span>
                       Nội dung cần hỗ trợ
                     </div>
 
@@ -336,7 +336,7 @@ export default function ContactPage() {
                         required
                         value={inquiryType}
                         onChange={(e) => setInquiryType(e.target.value)}
-                        className="w-full rounded border border-white/10 bg-[#161719] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition"
+                        className="w-full rounded border border-white/10 bg-[#161719] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition"
                       >
                         <option value="">Chọn một mục</option>
                         {selectedRole === "trader" && (
@@ -366,8 +366,8 @@ export default function ContactPage() {
 
                     {/* Trader consultation sub-section fields */}
                     {inquiryType === "trader_consultation" && (
-                      <div className="rounded border border-orange-400/20 bg-gradient-to-b from-orange-500/[0.06] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/20 bg-gradient-to-b from-blue-500/[0.06] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ Trader: Tư vấn chọn broker
                         </div>
 
@@ -379,7 +379,7 @@ export default function ContactPage() {
                               value={traderCapital}
                               onChange={(e) => setTraderCapital(e.target.value)}
                               placeholder="Ví dụ: $1,000"
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
 
@@ -388,7 +388,7 @@ export default function ContactPage() {
                             <select
                               value={tradingExperience}
                               onChange={(e) => setTradingExperience(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             >
                               <option value="">Chọn một mức</option>
                               <option value="beginner">Mới bắt đầu</option>
@@ -404,7 +404,7 @@ export default function ContactPage() {
                             multiple
                             value={traderPriorities}
                             onChange={handlePriorityChange}
-                            className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[120px]"
+                            className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[120px]"
                           >
                             <option value="deposit_withdrawal">Ưu tiên nạp/rút nhanh</option>
                             <option value="execution_speed">Ưu tiên tốc độ khớp lệnh</option>
@@ -421,7 +421,7 @@ export default function ContactPage() {
                             onChange={(e) => setTraderDescription(e.target.value)}
                             rows={4}
                             placeholder="Mô tả các sản phẩm giao dịch yêu thích (Vàng, Forex...) hoặc yêu cầu đặc biệt..."
-                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[110px]"
+                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[110px]"
                           />
                         </div>
                       </div>
@@ -429,8 +429,8 @@ export default function ContactPage() {
 
                     {/* IB commission fields */}
                     {inquiryType === "ib_commission" && (
-                      <div className="rounded border border-orange-400/20 bg-gradient-to-b from-orange-500/[0.06] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/20 bg-gradient-to-b from-blue-500/[0.06] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ IB: Tư vấn cơ chế hoa hồng
                         </div>
 
@@ -440,7 +440,7 @@ export default function ContactPage() {
                             <select
                               value={ibBrokerId}
                               onChange={(e) => setIbBrokerId(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             >
                               <option value="">Chọn sàn broker</option>
                               {brokerList.map((broker) => (
@@ -454,7 +454,7 @@ export default function ContactPage() {
                             <select
                               value={commissionModel}
                               onChange={(e) => setCommissionModel(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             >
                               <option value="">Chọn một mô hình</option>
                               <option value="cpa">CPA</option>
@@ -471,7 +471,7 @@ export default function ContactPage() {
                             <select
                               value={trafficChannelType}
                               onChange={(e) => setTrafficChannelType(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             >
                               <option value="">Chọn loại kênh</option>
                               <option value="online">Online (Website, Telegram, Youtube...)</option>
@@ -487,7 +487,7 @@ export default function ContactPage() {
                               value={monthlyVolume}
                               onChange={(e) => setMonthlyVolume(e.target.value)}
                               placeholder="Ví dụ: 1000 lots / tháng"
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
                         </div>
@@ -499,7 +499,7 @@ export default function ContactPage() {
                             onChange={(e) => setIbModelDescription(e.target.value)}
                             rows={4}
                             placeholder="Mô tả kỹ hơn về team, tệp khách hàng hoặc yêu cầu cơ chế lót đặc biệt..."
-                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[110px]"
+                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[110px]"
                           />
                         </div>
                       </div>
@@ -507,8 +507,8 @@ export default function ContactPage() {
 
                     {/* IB cooperation fields */}
                     {inquiryType === "ib_cooperation" && (
-                      <div className="rounded border border-orange-400/20 bg-gradient-to-b from-orange-500/[0.06] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/20 bg-gradient-to-b from-blue-500/[0.06] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ IB: Đề nghị hợp tác
                         </div>
                         <div className="space-y-1.5">
@@ -519,7 +519,7 @@ export default function ContactPage() {
                             rows={4}
                             required
                             placeholder="Mô tả phương án hoặc kế hoạch phát triển thị trường..."
-                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[110px]"
+                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[110px]"
                           />
                         </div>
                       </div>
@@ -527,8 +527,8 @@ export default function ContactPage() {
 
                     {/* Broker cooperation fields */}
                     {inquiryType === "broker_cooperation" && (
-                      <div className="rounded border border-orange-400/20 bg-gradient-to-b from-orange-500/[0.06] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/20 bg-gradient-to-b from-blue-500/[0.06] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ Broker: Đề nghị hợp tác
                         </div>
                         <div className="space-y-1.5">
@@ -539,7 +539,7 @@ export default function ContactPage() {
                             rows={4}
                             required
                             placeholder="Đề xuất các chương trình chiến dịch truyền thông hoặc hợp tác đại lý..."
-                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[110px]"
+                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[110px]"
                           />
                         </div>
                       </div>
@@ -547,15 +547,15 @@ export default function ContactPage() {
 
                     {/* Broker listing fields */}
                     {inquiryType === "broker_listing" && (
-                      <div className="rounded border border-orange-400/20 bg-gradient-to-b from-orange-500/[0.06] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/20 bg-gradient-to-b from-blue-500/[0.06] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ Broker: Listing trên hệ thống
                         </div>
                         <p className="text-sm text-zinc-400">
                           Để gửi hồ sơ và thông số listing đầy đủ của broker lên hệ thống HieuNTHUB, vui lòng gửi qua form standard request của chúng tôi.
                         </p>
                         <div className="pt-2">
-                          <Link href="/brokers/submit-request" className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/5 border border-white/10 hover:border-orange-400/40 hover:bg-orange-500/10 text-xs font-bold text-white transition">
+                          <Link href="/brokers/submit-request" className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/5 border border-white/10 hover:border-blue-400/40 hover:bg-blue-500/10 text-xs font-bold text-white transition">
                             Đi tới Broker Standard Request →
                           </Link>
                         </div>
@@ -564,8 +564,8 @@ export default function ContactPage() {
 
                     {/* Banner Ads fields */}
                     {inquiryType === "banner_ads" && (
-                      <div className="rounded border border-orange-400/30 bg-gradient-to-b from-orange-500/[0.08] to-amber-500/[0.01] p-5 space-y-4 animate-fadeIn">
-                        <div className="text-sm font-extrabold text-orange-200 flex items-center gap-1.5">
+                      <div className="rounded border border-blue-400/30 bg-gradient-to-b from-blue-500/[0.08] to-cyan-500/[0.01] p-5 space-y-4 animate-fadeIn">
+                        <div className="text-sm font-extrabold text-blue-200 flex items-center gap-1.5">
                           ✨ Broker: Treo banner quảng cáo
                         </div>
 
@@ -582,7 +582,7 @@ export default function ContactPage() {
                               value={bannerBrokerName}
                               onChange={(e) => setBannerBrokerName(e.target.value)}
                               placeholder="Ví dụ: EC Markets"
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
 
@@ -594,7 +594,7 @@ export default function ContactPage() {
                               value={bannerBrokerWebsite}
                               onChange={(e) => setBannerBrokerWebsite(e.target.value)}
                               placeholder="https://example.com"
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
                         </div>
@@ -606,7 +606,7 @@ export default function ContactPage() {
                               required
                               value={bannerSlotCode}
                               onChange={(e) => setBannerSlotCode(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-[#161719] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             >
                               <option value="">Chọn một vị trí</option>
                               {bannerSlots.map((slot) => (
@@ -625,7 +625,7 @@ export default function ContactPage() {
                               value={bannerLandingUrl}
                               onChange={(e) => setBannerLandingUrl(e.target.value)}
                               placeholder="https://example.com/promo"
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
                         </div>
@@ -660,7 +660,7 @@ export default function ContactPage() {
                               required
                               value={bannerStartsAt}
                               onChange={(e) => setBannerStartsAt(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
 
@@ -671,14 +671,14 @@ export default function ContactPage() {
                               required
                               value={bannerEndsAt}
                               onChange={(e) => setBannerEndsAt(e.target.value)}
-                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition"
+                              className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition"
                             />
                           </div>
                         </div>
 
                         {/* Calendar Slot Conflicts Preview */}
                         {bannerSlotCode && bannerStartsAt && bannerEndsAt ? (
-                          <div className="rounded border border-emerald-400/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-300">
+                          <div className="rounded border border-teal-400/30 bg-teal-500/10 p-3.5 text-xs text-teal-300">
                             <div className="font-bold text-white mb-0.5">✅ Slot lịch trống an toàn</div>
                             <div>Vị trí này đang trống từ {bannerStartsAt} đến {bannerEndsAt}. Đội ngũ hỗ trợ sẽ lock giữ chỗ sau khi nhận form.</div>
                           </div>
@@ -713,7 +713,7 @@ export default function ContactPage() {
                               <button
                                 type="button"
                                 onClick={clearCreativeFile}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-rose-500/15 border border-rose-500/30 text-xs font-semibold text-rose-300 hover:bg-rose-500/25 transition"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-indigo-500/15 border border-indigo-500/30 text-xs font-semibold text-indigo-300 hover:bg-indigo-500/25 transition"
                               >
                                 Xoá tệp
                               </button>
@@ -742,7 +742,7 @@ export default function ContactPage() {
                             onChange={(e) => setBannerAdsDescription(e.target.value)}
                             rows={4}
                             placeholder="Mô tả kỹ hơn về các đề xuất kích thước hoặc yêu cầu thiết kế nếu có..."
-                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 transition min-h-[110px]"
+                            className="w-full rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 transition min-h-[110px]"
                           />
                         </div>
                       </div>
@@ -753,7 +753,7 @@ export default function ContactPage() {
                   <div className="pt-4 border-t border-white/5 contact-submit-row-desktop">
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 rounded bg-gradient-to-r from-orange-400 to-amber-600 px-6 py-3.5 font-extrabold text-zinc-950 hover:from-orange-300 hover:to-amber-500 transition shadow-lg shadow-orange-500/30"
+                      className="inline-flex items-center gap-2 rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-6 py-3.5 font-extrabold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-lg shadow-blue-500/30"
                     >
                       Gửi liên hệ
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -771,7 +771,7 @@ export default function ContactPage() {
               <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-6 sticky top-24 space-y-6">
 
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-[10px] font-bold text-orange-300 mb-3 uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-[10px] font-bold text-blue-300 mb-3 uppercase tracking-wider">
                     📞 Kênh liên hệ
                   </div>
                   <h3 className="text-lg font-bold text-white">Hoặc nhắn trực tiếp</h3>
@@ -804,20 +804,20 @@ export default function ContactPage() {
                   {/* Email */}
                   <a
                     href="mailto:admin@hieunthub.co"
-                    className="flex items-center gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-amber-400/40 hover:bg-amber-500/5 transition group"
+                    className="flex items-center gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-cyan-400/40 hover:bg-cyan-500/5 transition group"
                   >
-                    <span className="h-10 w-10 rounded bg-amber-500/15 border border-amber-400/30 flex items-center justify-center shrink-0">
-                      <svg className="h-5 w-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="h-10 w-10 rounded bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0">
+                      <svg className="h-5 w-5 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Email</div>
-                      <div className="font-extrabold text-white text-sm truncate group-hover:text-amber-300 transition">
+                      <div className="font-extrabold text-white text-sm truncate group-hover:text-cyan-300 transition">
                         admin@hieunthub.co
                       </div>
                     </div>
-                    <svg className="h-4 w-4 text-zinc-500 group-hover:text-amber-300 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 text-zinc-500 group-hover:text-cyan-300 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
@@ -826,7 +826,7 @@ export default function ContactPage() {
                 {/* Team meta properties tags */}
                 <div className="pt-6 border-t border-white/5 space-y-4">
                   <div className="flex items-start gap-3 text-sm">
-                    <svg className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5 text-teal-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                     <div>
@@ -836,7 +836,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-3 text-sm">
-                    <svg className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                     <div>
@@ -867,7 +867,7 @@ export default function ContactPage() {
           <button
             type="submit"
             form="contact-form"
-            className="w-full rounded bg-gradient-to-r from-orange-400 to-amber-600 py-3.5 font-extrabold text-zinc-950 text-center hover:from-orange-300 hover:to-amber-500 transition shadow-lg"
+            className="w-full rounded bg-gradient-to-r from-blue-400 to-cyan-600 py-3.5 font-extrabold text-zinc-950 text-center hover:from-blue-300 hover:to-cyan-500 transition shadow-lg"
           >
             Gửi liên hệ →
           </button>

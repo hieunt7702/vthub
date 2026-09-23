@@ -169,28 +169,28 @@ export default function PassviewPage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute -top-40 right-0 w-[700px] h-[500px] bg-orange-500/15 rounded-full blur-[140px] pointer-events-none"></div>
-          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute -top-40 right-0 w-[700px] h-[500px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-12">
             {/* Breadcrumbs */}
             <nav className="text-xs text-zinc-500 mb-5 flex items-center gap-2 flex-wrap">
-              <Link href="/" className="hover:text-orange-300 transition">Trang chủ</Link>
+              <Link href="/" className="hover:text-blue-300 transition">Trang chủ</Link>
               <span>›</span>
               <span className="text-zinc-300">Passview</span>
             </nav>
 
             <div className="grid lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-300 mb-4">
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1 text-xs font-bold text-teal-300 mb-4">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
                   </span>
                   MINH BẠCH 100%
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05]">
-                  <span className="bg-gradient-to-r from-orange-300 via-amber-400 to-orange-500 bg-clip-text text-transparent">Passview</span>
+                  <span className="bg-gradient-to-r from-blue-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent">Passview</span>
                   <span className="block mt-1">Theo dõi sàn live thực tế</span>
                 </h1>
                 <p className="mt-4 max-w-2xl text-zinc-300 text-base md:text-lg leading-relaxed">
@@ -199,7 +199,7 @@ export default function PassviewPage() {
 
                 <div className="mt-5 flex items-center gap-3 text-xs text-zinc-400">
                   <div className="flex items-center gap-1.5">
-                    <svg className="h-4 w-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="h-4 w-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                     </svg>
                     <span>Verified bởi HieuNTHUB</span>
@@ -216,10 +216,10 @@ export default function PassviewPage() {
 
               <div className="lg:col-span-5">
                 <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-5 md:p-6">
-                  <div className="text-[10px] uppercase tracking-[0.12em] text-orange-300 font-bold mb-3">TRẠNG THÁI HIỆN TẠI</div>
+                  <div className="text-[10px] uppercase tracking-[0.12em] text-blue-300 font-bold mb-3">TRẠNG THÁI HIỆN TẠI</div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
-                      <div className="text-3xl md:text-4xl font-extrabold text-orange-300 tabular-nums">10</div>
+                      <div className="text-3xl md:text-4xl font-extrabold text-blue-300 tabular-nums">10</div>
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Tài khoản công khai</div>
                     </div>
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
@@ -228,15 +228,15 @@ export default function PassviewPage() {
                     </div>
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-3xl md:text-4xl font-extrabold text-emerald-300 tabular-nums">8</span>
+                        <span className="text-3xl md:text-4xl font-extrabold text-teal-300 tabular-nums">8</span>
                         <span className="text-xs text-zinc-500">/ 2</span>
                       </div>
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">MT5 / MT4</div>
                     </div>
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-3xl md:text-4xl font-extrabold text-emerald-300 tabular-nums">10</span>
-                        <span className="text-xs text-emerald-400">●</span>
+                        <span className="text-3xl md:text-4xl font-extrabold text-teal-300 tabular-nums">10</span>
+                        <span className="text-xs text-teal-400">●</span>
                       </div>
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Khoẻ</div>
                     </div>
@@ -251,17 +251,17 @@ export default function PassviewPage() {
         <section className="border-b border-white/5">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 py-10">
             <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-bold text-orange-300 mb-2">
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">
                 📖 CÁCH SỬ DỤNG
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-white">3 bước theo dõi sàn live</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-orange-400/30 transition group">
+              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-blue-400/30 transition group">
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="h-12 w-12 rounded bg-orange-500/15 border border-orange-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">📋</div>
-                  <div className="text-3xl font-extrabold text-orange-300/40 tabular-nums">01</div>
+                  <div className="h-12 w-12 rounded bg-blue-500/15 border border-blue-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">📋</div>
+                  <div className="text-3xl font-extrabold text-blue-300/40 tabular-nums">01</div>
                 </div>
                 <h3 className="font-extrabold text-white text-base mb-1">Copy server + login + password</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">Click nút copy ở từng tài khoản bên dưới — credentials sẽ vào clipboard.</p>
@@ -274,10 +274,10 @@ export default function PassviewPage() {
                 <h3 className="font-extrabold text-white text-base mb-1">Mở MT4/MT5 (web hoặc app)</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">Dùng app cài sẵn hoặc web terminal. Login → chọn server từ list → paste credentials.</p>
               </div>
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-emerald-400/30 transition group">
+              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-teal-400/30 transition group">
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="h-12 w-12 rounded bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">👁</div>
-                  <div className="text-3xl font-extrabold text-emerald-300/40 tabular-nums">03</div>
+                  <div className="h-12 w-12 rounded bg-teal-500/15 border border-teal-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">👁</div>
+                  <div className="text-3xl font-extrabold text-teal-300/40 tabular-nums">03</div>
                 </div>
                 <h3 className="font-extrabold text-white text-base mb-1">Quan sát live (read-only)</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">Xem lệnh đang chạy, history, P&L. Không thể đặt lệnh — đây là investor password an toàn.</p>
@@ -300,7 +300,7 @@ export default function PassviewPage() {
                   placeholder="Tìm theo tên broker, server, login..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition animate-none"
+                  className="w-full rounded border border-white/10 bg-white/[0.04] pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition animate-none"
                 />
               </div>
 
@@ -309,8 +309,8 @@ export default function PassviewPage() {
                   type="button"
                   onClick={() => setSelectedPlatform("")}
                   className={`px-3 py-1.5 rounded text-xs font-bold transition ${selectedPlatform === ""
-                      ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 shadow-md shadow-orange-500/25"
-                      : "text-zinc-300 hover:bg-white/5 hover:text-orange-300"
+                      ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 shadow-md shadow-blue-500/25"
+                      : "text-zinc-300 hover:bg-white/5 hover:text-blue-300"
                     }`}
                 >
                   Tất cả
@@ -319,8 +319,8 @@ export default function PassviewPage() {
                   type="button"
                   onClick={() => setSelectedPlatform("MT4")}
                   className={`px-3 py-1.5 rounded text-xs font-bold transition ${selectedPlatform === "MT4"
-                      ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 shadow-md shadow-orange-500/25"
-                      : "text-zinc-300 hover:bg-white/5 hover:text-orange-300"
+                      ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 shadow-md shadow-blue-500/25"
+                      : "text-zinc-300 hover:bg-white/5 hover:text-blue-300"
                     }`}
                 >
                   MT4
@@ -329,8 +329,8 @@ export default function PassviewPage() {
                   type="button"
                   onClick={() => setSelectedPlatform("MT5")}
                   className={`px-3 py-1.5 rounded text-xs font-bold transition ${selectedPlatform === "MT5"
-                      ? "bg-gradient-to-r from-orange-400 to-amber-600 text-zinc-950 shadow-md shadow-orange-500/25"
-                      : "text-zinc-300 hover:bg-white/5 hover:text-orange-300"
+                      ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 shadow-md shadow-blue-500/25"
+                      : "text-zinc-300 hover:bg-white/5 hover:text-blue-300"
                     }`}
                 >
                   MT5
@@ -371,7 +371,7 @@ export default function PassviewPage() {
                   const ibLinks = account.registerLinks.filter(l => l.group === "Link IB");
 
                   return (
-                    <article key={account.id} className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-orange-400/25 transition">
+                    <article key={account.id} className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/25 transition">
                       <div className="grid lg:grid-cols-12 gap-0">
 
                         {/* Profile Info block */}
@@ -380,13 +380,13 @@ export default function PassviewPage() {
                             <img src={account.brokerLogo} alt={account.brokerName} className="h-14 w-14 rounded object-cover shrink-0" loading="lazy" />
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1.5 flex-wrap">
-                                <strong className="font-extrabold text-white text-base group-hover:text-orange-300 transition truncate">{account.brokerName}</strong>
-                                <svg className="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
+                                <strong className="font-extrabold text-white text-base group-hover:text-blue-300 transition truncate">{account.brokerName}</strong>
+                                <svg className="h-4 w-4 text-teal-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
                                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                                 </svg>
                               </div>
                               <div className="mt-1 flex items-center gap-1.5 text-xs text-zinc-400">
-                                <span className="text-amber-400">★</span>
+                                <span className="text-cyan-400">★</span>
                                 <span className="font-bold text-white">{account.rating}</span>
                                 <span className="text-zinc-500">/5</span>
                               </div>
@@ -394,21 +394,21 @@ export default function PassviewPage() {
                           </Link>
 
                           <div className="flex flex-wrap gap-1.5">
-                            <span className="rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.accountType}</span>
+                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.accountType}</span>
                             <span className="rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.platform}</span>
-                            <span className="rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
-                              <span className="text-emerald-400">●</span> {account.status}
+                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
+                              <span className="text-teal-400">●</span> {account.status}
                             </span>
                           </div>
                         </div>
 
                         {/* Credentials block */}
                         <div className="lg:col-span-5 p-5 lg:border-r border-white/5">
-                          <div className="text-[10px] uppercase tracking-[0.12em] text-orange-300 font-bold mb-3">THÔNG TIN ĐĂNG NHẬP</div>
+                          <div className="text-[10px] uppercase tracking-[0.12em] text-blue-300 font-bold mb-3">THÔNG TIN ĐĂNG NHẬP</div>
                           <div className="space-y-2">
 
                             {/* Server field */}
-                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-orange-400/25 hover:bg-orange-500/5 px-3 py-2.5 transition group">
+                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-blue-400/25 hover:bg-blue-500/5 px-3 py-2.5 transition group">
                               <span className="h-7 w-7 rounded bg-white/[0.06] border border-white/10 flex items-center justify-center text-xs shrink-0">🌐</span>
                               <div className="flex-1 min-w-0">
                                 <div className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Server</div>
@@ -418,8 +418,8 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-server`, account.server)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${serverCopied
-                                    ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                                    : "border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 text-zinc-400"
+                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={serverCopied ? "Đã sao chép" : "Sao chép"}
                               >
@@ -432,7 +432,7 @@ export default function PassviewPage() {
                             </div>
 
                             {/* Login field */}
-                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-orange-400/25 hover:bg-orange-500/5 px-3 py-2.5 transition group">
+                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-blue-400/25 hover:bg-blue-500/5 px-3 py-2.5 transition group">
                               <span className="h-7 w-7 rounded bg-white/[0.06] border border-white/10 flex items-center justify-center text-xs shrink-0">#</span>
                               <div className="flex-1 min-w-0">
                                 <div className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Login</div>
@@ -442,8 +442,8 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-login`, account.login)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${loginCopied
-                                    ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                                    : "border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 text-zinc-400"
+                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={loginCopied ? "Đã sao chép" : "Sao chép"}
                               >
@@ -456,7 +456,7 @@ export default function PassviewPage() {
                             </div>
 
                             {/* Password field */}
-                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-orange-400/25 hover:bg-orange-500/5 px-3 py-2.5 transition group">
+                            <div className="flex items-center gap-2 rounded border border-white/10 bg-white/[0.03] hover:border-blue-400/25 hover:bg-blue-500/5 px-3 py-2.5 transition group">
                               <span className="h-7 w-7 rounded bg-white/[0.06] border border-white/10 flex items-center justify-center text-xs shrink-0">🔑</span>
                               <div className="flex-1 min-w-0">
                                 <div className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Mật khẩu investor</div>
@@ -467,7 +467,7 @@ export default function PassviewPage() {
                               <button
                                 type="button"
                                 onClick={() => setRevealedStates(prev => ({ ...prev, [account.id]: !pwdRevealed }))}
-                                className="h-7 w-7 rounded border border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 flex items-center justify-center text-zinc-400 transition"
+                                className="h-7 w-7 rounded border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 flex items-center justify-center text-zinc-400 transition"
                                 title={pwdRevealed ? "Ẩn" : "Hiện"}
                               >
                                 {pwdRevealed ? (
@@ -480,8 +480,8 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-pwd`, account.passwordInvestor)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${pwdCopied
-                                    ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
-                                    : "border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-orange-300 text-zinc-400"
+                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={pwdCopied ? "Đã sao chép" : "Sao chép"}
                               >
@@ -499,7 +499,7 @@ export default function PassviewPage() {
                         {/* CTA / Actions block */}
                         <div className="lg:col-span-3 p-5 flex flex-col gap-2">
                           <details className="ref-link-menu relative" data-prefer-dropup="1">
-                            <summary className="flex items-center justify-center gap-2 rounded border border-orange-400/30 bg-orange-500/10 hover:border-orange-400/50 hover:bg-orange-500/20 px-4 py-2.5 text-sm font-bold text-orange-200 transition ref-link-menu-summary cursor-pointer select-none">
+                            <summary className="flex items-center justify-center gap-2 rounded border border-blue-400/30 bg-blue-500/10 hover:border-blue-400/50 hover:bg-blue-500/20 px-4 py-2.5 text-sm font-bold text-blue-200 transition ref-link-menu-summary cursor-pointer select-none">
                               <span>Đăng ký</span>
                               <span className="ref-link-menu-caret" aria-hidden="true">
                                 <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
@@ -511,7 +511,7 @@ export default function PassviewPage() {
                                 <>
                                   <div className="px-3 py-1 text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Link khách lẻ</div>
                                   {retailLinks.map((link, lIdx) => (
-                                    <Link key={lIdx} href={link.href} className="block w-full text-left px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-white/5 hover:text-orange-300 rounded transition" role="menuitem">
+                                    <Link key={lIdx} href={link.href} className="block w-full text-left px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-white/5 hover:text-blue-300 rounded transition" role="menuitem">
                                       {link.label}
                                     </Link>
                                   ))}
@@ -521,7 +521,7 @@ export default function PassviewPage() {
                                 <>
                                   <div className="px-3 py-1 text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-2 pt-2 border-t border-white/5">Link IB</div>
                                   {ibLinks.map((link, lIdx) => (
-                                    <Link key={lIdx} href={link.href} className="block w-full text-left px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-white/5 hover:text-orange-300 rounded transition" role="menuitem">
+                                    <Link key={lIdx} href={link.href} className="block w-full text-left px-3 py-2 text-xs font-semibold text-zinc-300 hover:bg-white/5 hover:text-blue-300 rounded transition" role="menuitem">
                                       {link.label}
                                     </Link>
                                   ))}
@@ -537,7 +537,7 @@ export default function PassviewPage() {
                           <button
                             type="button"
                             onClick={() => openReport(account.id, account.brokerId, account.platform, account.brokerName, account.login)}
-                            className="flex items-center justify-center gap-2 rounded border border-white/10 bg-white/[0.02] hover:border-rose-400/30 hover:bg-rose-500/5 hover:text-rose-300 px-4 py-2 text-xs font-semibold text-zinc-400 transition mt-auto"
+                            className="flex items-center justify-center gap-2 rounded border border-white/10 bg-white/[0.02] hover:border-indigo-400/30 hover:bg-indigo-500/5 hover:text-indigo-300 px-4 py-2 text-xs font-semibold text-zinc-400 transition mt-auto"
                             aria-label="Báo passview lỗi"
                           >
                             ⚠ Báo lỗi
@@ -566,7 +566,7 @@ export default function PassviewPage() {
               </button>
 
               <h3 className="text-xl font-extrabold text-white mb-2">Báo lỗi Passview</h3>
-              <p className="text-xs text-zinc-400 mb-4">Mục tiêu: <strong className="text-orange-300">{reportModal.title}</strong></p>
+              <p className="text-xs text-zinc-400 mb-4">Mục tiêu: <strong className="text-blue-300">{reportModal.title}</strong></p>
 
               <form onSubmit={handleSendReport} className="space-y-4">
                 <input type="hidden" name="accountId" value={reportModal.accountId} />
@@ -582,7 +582,7 @@ export default function PassviewPage() {
                     placeholder="Mật khẩu sai, server không kết nối được, tài khoản bị khóa..."
                     value={reportModal.note}
                     onChange={(e) => setReportModal(prev => ({ ...prev, note: e.target.value }))}
-                    className="w-full rounded border border-white/10 bg-white/[0.04] p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-400/40 focus:border-orange-400/50 transition resize-none"
+                    className="w-full rounded border border-white/10 bg-white/[0.04] p-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/50 transition resize-none"
                     autoFocus
                   />
                 </div>
@@ -597,7 +597,7 @@ export default function PassviewPage() {
                   </button>
                   <button
                     type="submit"
-                    className="rounded bg-gradient-to-r from-orange-400 to-amber-600 hover:from-orange-300 hover:to-amber-500 px-5 py-2.5 text-xs font-bold text-zinc-950 transition shadow-lg shadow-orange-500/20"
+                    className="rounded bg-gradient-to-r from-blue-400 to-cyan-600 hover:from-blue-300 hover:to-cyan-500 px-5 py-2.5 text-xs font-bold text-zinc-950 transition shadow-lg shadow-blue-500/20"
                   >
                     Gửi báo cáo
                   </button>
@@ -609,9 +609,9 @@ export default function PassviewPage() {
 
         {/* Global Toast Success Message */}
         {toastMessage && (
-          <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded border border-emerald-400/30 bg-[#0F1E19] px-4 py-3.5 shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 duration-300">
-            <span className="h-8 w-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold shrink-0">✓</span>
-            <p className="text-xs font-semibold text-emerald-200 leading-relaxed">{toastMessage}</p>
+          <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded border border-teal-400/30 bg-[#0F1E19] px-4 py-3.5 shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 duration-300">
+            <span className="h-8 w-8 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400 font-bold shrink-0">✓</span>
+            <p className="text-xs font-semibold text-teal-200 leading-relaxed">{toastMessage}</p>
           </div>
         )}
 

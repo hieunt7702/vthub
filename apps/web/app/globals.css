@@ -11,19 +11,32 @@
 
 @layer utilities {
   .bg-gradient-hero {
-    background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(255, 182, 144, 0.05), transparent 50%);
+    background: radial-gradient(circle at top right, rgba(13, 89, 98, 0.15), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(92, 123, 108, 0.05), transparent 50%);
   }
   
   .card-glow {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.05);
+    box-shadow: 0 0 20px rgba(13, 89, 98, 0.05);
     transition: all 0.3s ease;
   }
   
   .card-glow:hover {
-    box-shadow: 0 0 30px rgba(249, 115, 22, 0.15);
+    box-shadow: 0 0 30px rgba(13, 89, 98, 0.15);
     transform: translateY(-2px);
-    border-color: theme('colors.primary-container');
+    border-color: theme('colors.cyan.400');
+  }
+
+  .glass-liquid {
+    border: 1px solid rgba(13, 89, 98, 0.4);
+    background: linear-gradient(90deg, rgba(13, 89, 98, 0.24) 0%, rgba(92, 123, 108, 0.24) 100%);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(13, 89, 98, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .glass-liquid:hover {
+    box-shadow: 0 0 40px rgba(13, 89, 98, 0.4);
+    border-color: rgba(13, 89, 98, 0.8);
   }
 
   .hh-hero-bg {

@@ -229,7 +229,7 @@ export default function AdminOffersPage() {
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-lg shadow-orange-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
           Thêm Khuyến Mãi Mới
@@ -249,7 +249,7 @@ export default function AdminOffersPage() {
                 setSearch(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-500/50"
+              className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50"
             />
           </div>
 
@@ -268,25 +268,25 @@ export default function AdminOffersPage() {
                 <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
                   <button
                     onClick={(e) => { e.preventDefault(); setTypeFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === '' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Tất cả loại Bonus
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setTypeFilter('WELCOME_BONUS'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'WELCOME_BONUS' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'WELCOME_BONUS' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Thưởng chào mừng (Welcome)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setTypeFilter('DEPOSIT_BONUS'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'DEPOSIT_BONUS' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'DEPOSIT_BONUS' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Thưởng nạp tiền (Deposit)
                   </button>
                   <button
                     onClick={(e) => { e.preventDefault(); setTypeFilter('NO_DEPOSIT'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'NO_DEPOSIT' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${typeFilter === 'NO_DEPOSIT' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                   >
                     Không cần nạp tiền (No Deposit)
                   </button>
@@ -361,20 +361,20 @@ export default function AdminOffersPage() {
                     <td className="px-6 py-4 text-xs font-mono">
                       <span className={`px-2 py-0.5 rounded-full border ${
                         offer.type === 'WELCOME_BONUS'
-                          ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                          ? 'bg-teal-500/10 border-teal-500/20 text-teal-400'
                           : offer.type === 'DEPOSIT_BONUS'
                           ? 'bg-blue-500/10 border-blue-500/20 text-blue-400'
-                          : 'bg-amber-500/10 border-amber-500/20 text-amber-400'
+                          : 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400'
                       }`}>
                         {offer.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-xs font-extrabold text-amber-300 tabular-nums">
+                    <td className="px-6 py-4 text-xs font-extrabold text-cyan-300 tabular-nums">
                       ${offer.amount.toLocaleString()}
                     </td>
                     <td className="px-6 py-4">
                       {offer.isHot ? (
-                        <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[9px] font-extrabold tracking-wider">
+                        <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 text-[9px] font-extrabold tracking-wider">
                           🔥 HOT
                         </span>
                       ) : (
@@ -398,7 +398,7 @@ export default function AdminOffersPage() {
                             </button>
                             <button
                               onClick={() => handleDelete(offer.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2"
+                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
                             >
                               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                               Xóa
@@ -479,7 +479,7 @@ export default function AdminOffersPage() {
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-amber-500/50"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-cyan-500/50"
                   placeholder="VD: Nhận ngay 30 USD chào mừng"
                 />
               </div>
@@ -489,7 +489,7 @@ export default function AdminOffersPage() {
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-amber-500/50 min-h-[80px]"
+                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-cyan-500/50 min-h-[80px]"
                   placeholder="Mô tả cơ chế hoặc điều kiện..."
                 />
               </div>
@@ -498,7 +498,7 @@ export default function AdminOffersPage() {
                 <div>
                   <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Sàn liên kết</label>
                   <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-amber-500/50">
+                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-cyan-500/50">
                       <span>{brokers.find(b => b.id === formData.brokerId)?.name || 'Chọn sàn'}</span>
                       <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                     </summary>
@@ -509,7 +509,7 @@ export default function AdminOffersPage() {
                             key={b.id}
                             type="button"
                             onClick={(e) => { e.preventDefault(); setFormData({ ...formData, brokerId: b.id }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                            className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.brokerId === b.id ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                            className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.brokerId === b.id ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                           >
                             {b.name}
                           </button>
@@ -521,7 +521,7 @@ export default function AdminOffersPage() {
                 <div>
                   <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Loại Khuyến mãi</label>
                   <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-amber-500/50">
+                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-cyan-500/50">
                       <span>{formData.type === 'WELCOME_BONUS' ? 'WELCOME_BONUS' : formData.type === 'DEPOSIT_BONUS' ? 'DEPOSIT_BONUS' : 'NO_DEPOSIT'}</span>
                       <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                     </summary>
@@ -530,21 +530,21 @@ export default function AdminOffersPage() {
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, type: 'WELCOME_BONUS' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'WELCOME_BONUS' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'WELCOME_BONUS' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           WELCOME_BONUS
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, type: 'DEPOSIT_BONUS' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'DEPOSIT_BONUS' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'DEPOSIT_BONUS' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           DEPOSIT_BONUS
                         </button>
                         <button
                           type="button"
                           onClick={(e) => { e.preventDefault(); setFormData({ ...formData, type: 'NO_DEPOSIT' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'NO_DEPOSIT' ? 'bg-orange-500/10 text-orange-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
+                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.type === 'NO_DEPOSIT' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           NO_DEPOSIT
                         </button>
@@ -582,7 +582,7 @@ export default function AdminOffersPage() {
                   id="isHot"
                   checked={formData.isHot}
                   onChange={(e) => setFormData({ ...formData, isHot: e.target.checked })}
-                  className="rounded border-zinc-850 bg-zinc-900 text-amber-500 focus:ring-amber-500"
+                  className="rounded border-zinc-850 bg-zinc-900 text-cyan-500 focus:ring-cyan-500"
                 />
                 <label htmlFor="isHot" className="text-xs font-bold text-zinc-300 uppercase cursor-pointer">Đánh dấu là khuyến mãi NỔI BẬT (HOT 🔥)</label>
               </div>
@@ -599,7 +599,7 @@ export default function AdminOffersPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold transition shadow-lg shadow-orange-500/20 text-sm"
+                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
                 >
                   Lưu
                 </button>

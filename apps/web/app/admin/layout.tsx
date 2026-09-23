@@ -105,7 +105,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (isAuthChecking) {
     return (
       <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <svg className="animate-spin h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24">
+        <svg className="animate-spin h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
@@ -121,7 +121,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="h-16 flex items-center px-6 border-b border-zinc-800/60 bg-zinc-950/20">
           <Link href="/admin" className="font-extrabold text-xl text-white tracking-wider flex items-center gap-1.5">
             <span>HieuNTHUB</span>
-            <span className="text-xs bg-gradient-to-r from-orange-400 to-amber-500 text-zinc-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
+            <span className="text-xs bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
               Admin
             </span>
           </Link>
@@ -137,11 +137,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded transition-all duration-200 group ${
                   isActive
-                    ? 'bg-zinc-800 text-orange-400 shadow-md'
+                    ? 'bg-zinc-800 text-blue-400 shadow-md'
                     : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50'
                 }`}
               >
-                <div className={`transition-colors duration-200 ${isActive ? 'text-orange-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                <div className={`transition-colors duration-200 ${isActive ? 'text-blue-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
                   {item.icon}
                 </div>
                 <span>{item.name}</span>
@@ -176,12 +176,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className="ml-auto flex items-center space-x-4">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
-              <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
+              <div className="h-2 w-2 rounded-full bg-teal-500 animate-pulse"></div>
               <span className="text-xs text-zinc-400 font-medium hidden sm:block">admin@gmail.com</span>
             </div>
             
             <details className="relative group" data-hh-nav-dropdown="">
-              <summary className="list-none cursor-pointer h-9 w-9 rounded-full bg-orange-500/10 flex items-center justify-center border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition">
+              <summary className="list-none cursor-pointer h-9 w-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
               </summary>
               <div className="absolute right-0 top-full mt-2 w-56 z-50">
@@ -206,7 +206,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   
                   <div className="h-px bg-zinc-800 my-1"></div>
                   
-                  <button onClick={handleLogout} className="w-full text-left rounded px-3 py-2 text-sm transition text-rose-400 hover:bg-rose-500/10 flex items-center gap-2">
+                  <button onClick={handleLogout} className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2">
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     Đăng xuất
                   </button>
