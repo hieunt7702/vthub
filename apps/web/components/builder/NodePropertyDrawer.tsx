@@ -41,7 +41,7 @@ export const NodePropertyDrawer: React.FC<NodePropertyDrawerProps> = ({
   };
 
   return (
-    <div className="absolute right-4 top-4 bottom-4 w-80 rounded-2xl border border-teal-500/30 bg-[#07131a]/95 backdrop-blur-2xl shadow-2xl p-4 flex flex-col z-40 animate-in slide-in-from-right-4">
+    <div className="absolute inset-x-2 bottom-2 max-h-[75vh] sm:inset-auto sm:right-4 sm:top-4 sm:bottom-4 sm:w-80 rounded-2xl border border-teal-500/30 bg-[#07131a]/98 backdrop-blur-2xl shadow-2xl p-4 flex flex-col z-40 animate-in slide-in-from-bottom-4 sm:slide-in-from-right-4">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-teal-500/20 pb-3 mb-4">
         <div className="flex items-center gap-2">

@@ -380,16 +380,16 @@ export const VisualFlowBuilder: React.FC<VisualFlowBuilderProps> = ({
   return (
     <div className="relative h-full w-full bg-[#03090e]" ref={reactFlowWrapper}>
       {/* Top Floating Control Toolbar */}
-      <div className="absolute left-6 top-4 z-30 flex flex-wrap items-center gap-2 rounded-2xl border border-teal-500/25 bg-[#06141b]/90 p-2 shadow-2xl backdrop-blur-2xl">
+      <div className="absolute left-2 right-2 sm:left-6 sm:right-auto top-2 sm:top-4 z-30 flex flex-wrap items-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl border border-teal-500/25 bg-[#06141b]/95 p-1.5 sm:p-2 shadow-2xl backdrop-blur-2xl">
         {/* Template Selector Dropdown */}
         <div className="relative">
           <button
             onClick={() => setTemplateDropdownOpen(!templateDropdownOpen)}
-            className="flex items-center gap-1.5 rounded-xl border border-teal-500/30 bg-teal-950/60 px-3 py-2 text-xs font-bold text-teal-300 hover:bg-teal-900/60 transition-all"
+            className="flex items-center gap-1 sm:gap-1.5 rounded-lg sm:rounded-xl border border-teal-500/30 bg-teal-950/60 px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-teal-300 hover:bg-teal-900/60 transition-all cursor-pointer"
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Mẫu Bot Có Sẵn</span>
-            <ChevronDown className="h-3.5 w-3.5" />
+            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            <span>Mẫu Bot</span>
+            <ChevronDown className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           </button>
 
           {templateDropdownOpen && (
@@ -425,11 +425,11 @@ export const VisualFlowBuilder: React.FC<VisualFlowBuilderProps> = ({
         <div className="relative">
           <button
             onClick={() => setNodeToolboxOpen(!nodeToolboxOpen)}
-            className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-900/90 px-3 py-2 text-xs font-bold text-slate-200 hover:bg-slate-800 hover:text-white transition-all"
+            className="flex items-center gap-1 sm:gap-1.5 rounded-lg sm:rounded-xl border border-slate-700 bg-slate-900/90 px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-slate-200 hover:bg-slate-800 hover:text-white transition-all cursor-pointer"
           >
-            <Plus className="h-3.5 w-3.5 text-teal-400" />
-            <span>Thêm Khối Node</span>
-            <ChevronDown className="h-3.5 w-3.5" />
+            <Plus className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-teal-400" />
+            <span>Thêm Node</span>
+            <ChevronDown className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           </button>
 
           {nodeToolboxOpen && (
@@ -489,7 +489,7 @@ export const VisualFlowBuilder: React.FC<VisualFlowBuilderProps> = ({
                   className="w-full flex items-center gap-2 rounded-xl px-2.5 py-2 text-xs text-slate-200 hover:bg-teal-950/60 hover:text-teal-300 transition-colors"
                 >
                   <CheckCircle2 className="h-4 w-4 text-teal-400" />
-                  <span>Kết Thúc Vòng Lặp (Finish)</span>
+                  <span>Kết Thúc (Finish)</span>
                 </button>
               </div>
             </div>
@@ -499,10 +499,10 @@ export const VisualFlowBuilder: React.FC<VisualFlowBuilderProps> = ({
         {/* Reset Canvas Button */}
         <button
           onClick={handleResetCanvas}
-          className="flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+          className="flex items-center gap-1 sm:gap-1.5 rounded-lg sm:rounded-xl border border-slate-800 bg-slate-900/60 px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
           title="Làm mới Canvas"
         >
-          <RotateCcw className="h-3.5 w-3.5" />
+          <RotateCcw className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           <span className="hidden sm:inline">Reset</span>
         </button>
 
@@ -512,10 +512,10 @@ export const VisualFlowBuilder: React.FC<VisualFlowBuilderProps> = ({
         <button
           onClick={handleTriggerGenerate}
           disabled={isGenerating}
-          className="flex items-center gap-2 rounded-xl border border-teal-400/40 bg-gradient-to-r from-teal-500 via-teal-400 to-emerald-400 px-4 py-2 text-xs font-black text-slate-950 hover:brightness-110 hover:shadow-teal-500/40 hover:shadow-xl disabled:opacity-50 transition-all shadow-lg shadow-teal-500/25"
+          className="flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl border border-teal-400/40 bg-gradient-to-r from-teal-500 via-teal-400 to-emerald-400 px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-black text-slate-950 hover:brightness-110 hover:shadow-teal-500/40 hover:shadow-xl disabled:opacity-50 transition-all shadow-lg shadow-teal-500/25 cursor-pointer"
         >
-          <Zap className="h-4 w-4 fill-slate-950" />
-          <span>{isGenerating ? 'Đang Biên Dịch MT5...' : 'Sinh Mã Nguồn MT5 (.mq5)'}</span>
+          <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-slate-950" />
+          <span>{isGenerating ? 'Biên Dịch...' : 'Sinh Code MT5'}</span>
         </button>
       </div>
 

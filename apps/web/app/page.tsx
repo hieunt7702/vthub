@@ -210,25 +210,25 @@ export default function Home() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-[0_20px_45px_rgba(0,0,0,0.95)]">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-tight sm:leading-[0.95] drop-shadow-[0_20px_45px_rgba(0,0,0,0.95)]">
               {t('hero.title_main')}
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-4 text-xl sm:text-2xl md:text-3xl font-extrabold text-[#00C2FF] uppercase tracking-wide drop-shadow-lg max-w-3xl">
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-[#00C2FF] uppercase tracking-wide drop-shadow-lg max-w-3xl">
               {t('hero.title_sub')}
             </p>
 
             {/* Description */}
-            <p className="mt-4 max-w-3xl text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-medium drop-shadow">
+            <p className="mt-3 sm:mt-4 max-w-3xl text-xs sm:text-base md:text-lg text-slate-200 leading-relaxed font-medium drop-shadow px-2">
               {t('hero.description')}
             </p>
 
             {/* Large Clear Action Buttons */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <Link
                 href="/rewards"
-                className="w-full sm:w-auto px-9 py-4 rounded-full bg-white hover:bg-slate-100 text-[#0052FF] font-black text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-6 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white hover:bg-slate-100 text-[#0052FF] font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_35px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Gift className="w-4 h-4 text-[#0052FF]" />
                 <span>{t('hero.btn_get_started')}</span>
@@ -236,7 +236,7 @@ export default function Home() {
 
               <Link
                 href="/ib-commission-overview"
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#050D1A]/90 hover:bg-[#08152B] text-white font-bold text-sm border border-slate-700/80 backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2 hover:border-[#00C2FF]/60"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#050D1A]/90 hover:bg-[#08152B] text-white font-bold text-xs sm:text-sm border border-slate-700/80 backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2 hover:border-[#00C2FF]/60"
               >
                 <DollarSign className="w-4 h-4 text-[#00C2FF]" />
                 <span>Xem Cơ Chế Hoàn Phí Backcom</span>
@@ -244,21 +244,21 @@ export default function Home() {
             </div>
 
             {/* Metrics Bar */}
-            <div className="mt-12 grid grid-cols-3 gap-4 sm:gap-10 w-full max-w-2xl pt-8 border-t border-white/15">
+            <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-6 md:gap-10 w-full max-w-2xl pt-6 sm:pt-8 border-t border-white/15">
               <Link href="/ib-commission-overview" className="flex flex-col items-center hover:scale-105 transition-transform group">
-                <span className="text-3xl sm:text-4xl font-black text-[#00C2FF] tracking-tight">{t('hero.stat_rebate')}</span>
-                <span className="text-xs text-slate-300 font-medium mt-1 group-hover:text-[#00C2FF] transition-colors">{t('hero.stat_rebate_lbl')}</span>
+                <span className="text-xl sm:text-3xl md:text-4xl font-black text-[#00C2FF] tracking-tight">{t('hero.stat_rebate')}</span>
+                <span className="text-[10px] sm:text-xs text-slate-300 font-medium mt-0.5 sm:mt-1 group-hover:text-[#00C2FF] transition-colors text-center">{t('hero.stat_rebate_lbl')}</span>
               </Link>
-              <Link href="/gioi-thieu-vt-markets" className="flex flex-col items-center border-x border-white/15 px-3 hover:scale-105 transition-transform group">
-                <span className="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight">{t('hero.stat_rating')}</span>
-                <span className="text-xs text-slate-300 font-medium mt-1 group-hover:text-amber-300 transition-colors flex items-center gap-1">
+              <Link href="/gioi-thieu-vt-markets" className="flex flex-col items-center border-x border-white/15 px-1 sm:px-3 hover:scale-105 transition-transform group">
+                <span className="text-xl sm:text-3xl md:text-4xl font-black text-amber-400 tracking-tight">{t('hero.stat_rating')}</span>
+                <span className="text-[10px] sm:text-xs text-slate-300 font-medium mt-0.5 sm:mt-1 group-hover:text-amber-300 transition-colors flex items-center gap-1 text-center">
                   <span>{t('hero.stat_rating_lbl')}</span>
-                  <ExternalLink className="w-3 h-3 text-amber-400" />
+                  <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-400" />
                 </span>
               </Link>
               <Link href="/indicators" className="flex flex-col items-center hover:scale-105 transition-transform group">
-                <span className="text-3xl sm:text-4xl font-black text-[#00C2FF] tracking-tight">9 Bot EA</span>
-                <span className="text-xs text-slate-300 font-medium mt-1 group-hover:text-[#00C2FF] transition-colors">Suite MT5 Miễn Phí</span>
+                <span className="text-xl sm:text-3xl md:text-4xl font-black text-[#00C2FF] tracking-tight">9 Bot EA</span>
+                <span className="text-[10px] sm:text-xs text-slate-300 font-medium mt-0.5 sm:mt-1 group-hover:text-[#00C2FF] transition-colors text-center">Suite MT5 Miễn Phí</span>
               </Link>
             </div>
           </div>
@@ -312,29 +312,29 @@ export default function Home() {
         {/* 3. VT MARKETS 3D PERSPECTIVE COIN ARRAY & AUTO-ROTATING SHOWCASE */}
         <section 
           id="showcase-section" 
-          className="py-24 max-w-7xl mx-auto px-4 lg:px-8"
+          className="py-16 sm:py-24 max-w-7xl mx-auto px-4 lg:px-8"
           onMouseEnter={() => setIsHoveringShowcase(true)}
           onMouseLeave={() => setIsHoveringShowcase(false)}
         >
           {/* Header Title Matching VT Markets */}
-          <div className="text-center max-w-4xl mx-auto mb-14 scroll-reveal">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-4 py-1.5 text-xs font-bold text-[#00C2FF] mb-4 shadow-[0_0_20px_rgba(0,194,255,0.15)]">
+          <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 scroll-reveal">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-3.5 py-1 text-[11px] sm:text-xs font-bold text-[#00C2FF] mb-3 sm:mb-4 shadow-[0_0_20px_rgba(0,194,255,0.15)]">
               <Sparkles className="w-3.5 h-3.5 text-[#00C2FF]" />
               <span>HỆ SINH THÁI TIỆN ÍCH ĐỘT PHÁ VT REWARDS HUB</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase">
+            <h2 className="text-2xl sm:text-4xl lg:text-6xl font-black text-white tracking-tight leading-tight uppercase">
               Mọi Bước Chuyển Dịch Thị Trường &bull;{' '}
               <span className="text-[#00C2FF] drop-shadow-[0_0_35px_rgba(0,194,255,0.35)]">
                 Mở Ra Vô Hạn Cơ Hội
               </span>
             </h2>
-            <p className="mt-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+            <p className="mt-3 sm:mt-4 text-slate-300 text-xs sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto px-2">
               Nhấp chọn từng biểu tượng hoặc thẻ dịch vụ để khám phá trọn vẹn đặc quyền tài chính, bộ công cụ tự động hóa và học viện chuyên sâu VT Markets.
             </p>
           </div>
 
           {/* Interactive Feature Category Tabs Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 mb-14 scroll-reveal">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 mb-10 sm:mb-14 scroll-reveal">
             {SHOWCASE_TABS.map((tab, idx) => {
               const isSelected = activeShowcaseTab === idx;
               const TabIcon = tab.icon;
@@ -345,13 +345,13 @@ export default function Home() {
                   onClick={() => {
                     setActiveShowcaseTab(idx);
                   }}
-                  className={`group relative px-4 sm:px-6 py-3.5 rounded-2xl border text-xs sm:text-sm font-black transition-all duration-300 cursor-pointer flex items-center gap-2.5 ${
+                  className={`group relative px-3 sm:px-6 py-2 sm:py-3.5 rounded-xl sm:rounded-2xl border text-[11px] sm:text-sm font-black transition-all duration-300 cursor-pointer flex items-center gap-1.5 sm:gap-2.5 ${
                     isSelected
                       ? 'bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white border-[#00C2FF] shadow-[0_0_30px_rgba(0,194,255,0.4)] scale-105 z-20'
                       : 'bg-[#050D1A] border-slate-800 text-slate-300 hover:text-white hover:border-[#00C2FF]/40 hover:bg-[#08152B]'
                   }`}
                 >
-                  <TabIcon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-[#00C2FF]'}`} />
+                  <TabIcon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isSelected ? 'text-white' : 'text-[#00C2FF]'}`} />
                   <span>{tab.short}</span>
                 </button>
               );
@@ -359,8 +359,8 @@ export default function Home() {
           </div>
 
           {/* AUTHENTIC VT MARKETS 3D PERSPECTIVE GLASS COIN ARRAY WITH AUTO-ROTATION */}
-          <div className="mb-14 px-2 py-6 overflow-hidden scroll-reveal">
-            <div className="flex items-center justify-center -space-x-4 sm:-space-x-8 lg:-space-x-10 perspective-1000 py-6">
+          <div className="mb-10 sm:mb-14 px-1 sm:px-2 py-4 sm:py-6 overflow-hidden scroll-reveal">
+            <div className="flex items-center justify-center -space-x-2 sm:-space-x-6 lg:-space-x-10 perspective-1000 py-4 sm:py-6">
               {SHOWCASE_TABS.map((tab, idx) => {
                 const isSelected = activeShowcaseTab === idx;
                 return (
@@ -369,38 +369,38 @@ export default function Home() {
                     onClick={() => setActiveShowcaseTab(idx)}
                     className={`cursor-pointer transition-all duration-500 transform ${
                       isSelected
-                        ? '-translate-y-8 scale-110 z-30'
-                        : 'hover:-translate-y-4 hover:scale-105 opacity-85 hover:opacity-100 z-10'
+                        ? '-translate-y-4 sm:-translate-y-8 scale-105 sm:scale-110 z-30'
+                        : 'hover:-translate-y-2 sm:hover:-translate-y-4 hover:scale-105 opacity-80 sm:opacity-85 hover:opacity-100 z-10'
                     }`}
                     style={{
                       transform: isSelected 
-                        ? 'translateY(-24px) scale(1.15) rotateY(0deg) rotateX(5deg)' 
-                        : `rotateY(${(idx - activeShowcaseTab) * 8}deg) rotateX(12deg) translateY(${Math.abs(idx - activeShowcaseTab) * 6}px)`,
+                        ? 'translateY(-14px) scale(1.1) rotateY(0deg) rotateX(5deg)' 
+                        : `rotateY(${(idx - activeShowcaseTab) * 8}deg) rotateX(10deg) translateY(${Math.abs(idx - activeShowcaseTab) * 4}px)`,
                       transformStyle: 'preserve-3d'
                     }}
                   >
                     {/* Glass Coin / Medallion Rim */}
                     <div
-                      className={`relative w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full flex flex-col items-center justify-center p-3 text-center transition-all duration-500 ${
+                      className={`relative w-14 h-14 sm:w-28 sm:h-28 lg:w-40 lg:h-40 rounded-full flex flex-col items-center justify-center p-1.5 sm:p-3 text-center transition-all duration-500 ${
                         isSelected
-                          ? 'border-2 border-[#00C2FF] bg-gradient-to-br from-white/25 via-[#00C2FF]/15 to-[#0052FF]/30 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,194,255,0.6)] animate-coin-active'
+                          ? 'border-2 border-[#00C2FF] bg-gradient-to-br from-white/25 via-[#00C2FF]/15 to-[#0052FF]/30 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,194,255,0.6)] animate-coin-active'
                           : 'border border-white/20 bg-gradient-to-br from-white/10 via-slate-900/60 to-slate-950/80 backdrop-blur-lg shadow-2xl hover:border-[#00C2FF]/50'
                       }`}
                     >
                       {/* Inner metallic/crystal ring */}
-                      <div className="absolute inset-1.5 rounded-full border border-white/20 pointer-events-none" />
+                      <div className="absolute inset-1 sm:inset-1.5 rounded-full border border-white/20 pointer-events-none" />
                       
                       {/* 3D Coin Emblem */}
-                      <span className="text-3xl sm:text-4xl lg:text-5xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] transform transition-transform group-hover:scale-110">
+                      <span className="text-lg sm:text-3xl lg:text-5xl drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] transform transition-transform group-hover:scale-110">
                         {tab.coinSymbol}
                       </span>
                       
-                      <span className="mt-1 text-[9px] sm:text-[10px] lg:text-[11px] font-black text-white uppercase tracking-wider line-clamp-1">
+                      <span className="mt-0.5 sm:mt-1 text-[7px] sm:text-[10px] lg:text-[11px] font-black text-white uppercase tracking-wider line-clamp-1 max-w-[48px] sm:max-w-none">
                         {tab.short}
                       </span>
 
                       {isSelected && (
-                        <div className="absolute -bottom-2 w-3 h-3 bg-[#00C2FF] rounded-full shadow-[0_0_12px_#00C2FF]" />
+                        <div className="absolute -bottom-1.5 sm:-bottom-2 w-2 h-2 sm:w-3 sm:h-3 bg-[#00C2FF] rounded-full shadow-[0_0_12px_#00C2FF]" />
                       )}
                     </div>
                   </div>
@@ -410,45 +410,45 @@ export default function Home() {
           </div>
 
           {/* Dynamic 3D Glass Showcase Feature Card */}
-          <div className="relative rounded-3xl border border-[#00C2FF]/30 bg-gradient-to-b from-[#08152B] via-[#050D1A] to-[#020712] p-8 sm:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden scroll-reveal">
+          <div className="relative rounded-2xl sm:rounded-3xl border border-[#00C2FF]/30 bg-gradient-to-b from-[#08152B] via-[#050D1A] to-[#020712] p-5 sm:p-8 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden scroll-reveal">
             {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-[#00C2FF]/15 blur-[140px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[200px] sm:h-[300px] bg-[#00C2FF]/15 blur-[140px] pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center relative z-10">
               {/* Left Column: Feature Details */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] text-xs font-bold uppercase tracking-wider">
-                  <Star className="w-3.5 h-3.5 fill-[#00C2FF]" />
+              <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                  <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#00C2FF]" />
                   <span>{currentTab.badge}</span>
                 </div>
 
-                <h3 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
                   {currentTab.title}
                 </h3>
 
-                <div className="text-xl sm:text-2xl font-black text-[#00C2FF]">
+                <div className="text-lg sm:text-xl lg:text-2xl font-black text-[#00C2FF]">
                   {currentTab.highlight}
                 </div>
 
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-300 text-xs sm:text-base leading-relaxed">
                   {currentTab.description}
                 </p>
 
                 {/* Features List */}
-                <div className="space-y-2.5 pt-2">
+                <div className="space-y-2 sm:space-y-2.5 pt-1 sm:pt-2">
                   {currentTab.features.map((feat, i) => (
-                    <div key={i} className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
-                      <CheckCircle2 className="w-4 h-4 text-[#00C2FF] shrink-0" />
+                    <div key={i} className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm text-slate-200">
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00C2FF] shrink-0" />
                       <span>{feat}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Direct Action Button */}
-                <div className="pt-4">
+                <div className="pt-2 sm:pt-4">
                   <Link
                     href={currentTab.link}
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-[#00C2FF]/25 hover:brightness-110 hover:scale-105 transition-all"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-[#00C2FF]/25 hover:brightness-110 hover:scale-105 transition-all"
                   >
                     <span>{currentTab.btnText}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -457,8 +457,8 @@ export default function Home() {
               </div>
 
               {/* Right Column: 3D Showcase Medallion Presentation */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-                <div className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
+              <div className="lg:col-span-5 flex flex-col items-center justify-center relative pt-4 lg:pt-0">
+                <div className="relative w-44 h-44 sm:w-64 sm:h-64 lg:w-72 lg:h-72 flex items-center justify-center">
                   {/* Background layered glow */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#0052FF]/30 to-[#00C2FF]/30 blur-2xl animate-pulse" />
                   
@@ -466,20 +466,20 @@ export default function Home() {
                   <div className="absolute inset-1 rounded-full border-2 border-dashed border-[#00C2FF]/40 animate-spin-slow" />
                   
                   {/* Glass Disc 1 (Back Depth Layer) */}
-                  <div className="absolute w-48 h-48 rounded-full bg-white/5 border border-white/20 backdrop-blur-md transform -translate-x-4 -translate-y-4 shadow-xl" />
+                  <div className="absolute w-36 h-36 sm:w-48 sm:h-48 rounded-full bg-white/5 border border-white/20 backdrop-blur-md transform -translate-x-3 -translate-y-3 sm:-translate-x-4 sm:-translate-y-4 shadow-xl" />
                   
                   {/* Glass Disc 2 (Active Foreground 3D Medallion) */}
-                  <div className="relative w-56 h-56 rounded-full bg-gradient-to-br from-white/20 via-white/5 to-[#00C2FF]/15 border-2 border-[#00C2FF] backdrop-blur-2xl flex flex-col items-center justify-center shadow-[0_0_50px_rgba(0,194,255,0.45)] transform hover:scale-105 transition-transform duration-500">
-                    <span className="text-6xl drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]">
+                  <div className="relative w-40 h-40 sm:w-56 sm:h-56 rounded-full bg-gradient-to-br from-white/20 via-white/5 to-[#00C2FF]/15 border-2 border-[#00C2FF] backdrop-blur-2xl flex flex-col items-center justify-center shadow-[0_0_50px_rgba(0,194,255,0.45)] transform hover:scale-105 transition-transform duration-500">
+                    <span className="text-4xl sm:text-6xl drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]">
                       {currentTab.coinSymbol}
                     </span>
-                    <span className="mt-3 text-xs font-black text-white uppercase tracking-wider bg-[#020712]/90 px-3.5 py-1 rounded-full border border-white/20 shadow-lg">
+                    <span className="mt-2 sm:mt-3 text-[10px] sm:text-xs font-black text-white uppercase tracking-wider bg-[#020712]/90 px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full border border-white/20 shadow-lg">
                       {currentTab.short}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-4 text-xs text-slate-400 font-bold uppercase tracking-wider">
+                <div className="mt-3 sm:mt-4 text-[11px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider text-center">
                   Khám phá toàn diện hệ sinh thái VT Markets
                 </div>
               </div>
@@ -488,27 +488,27 @@ export default function Home() {
         </section>
 
         {/* 4. BACKCOM REBATE CALCULATOR */}
-        <section id="calculator-section" className="py-16 max-w-7xl mx-auto px-4 lg:px-8 border-t border-slate-800/80 scroll-reveal">
-          <div className="bg-[#050D1A] border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-2xl relative overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/30 text-[#00C2FF] text-xs font-bold uppercase tracking-wider">
+        <section id="calculator-section" className="py-12 sm:py-16 max-w-7xl mx-auto px-4 lg:px-8 border-t border-slate-800/80 scroll-reveal">
+          <div className="bg-[#050D1A] border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/30 text-[#00C2FF] text-[10px] sm:text-xs font-bold uppercase tracking-wider">
                   <Sliders className="w-3.5 h-3.5 text-[#00C2FF]" />
                   <span>{t('calc.badge')}</span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight">
                   {t('calc.title')}
                 </h2>
 
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                   {t('calc.desc')}
                 </p>
 
-                <div className="bg-[#020712] p-5 rounded-2xl border border-slate-800 space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-2 border-b border-slate-800/80">
+                <div className="bg-[#020712] p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pb-2 border-b border-slate-800/80">
                     <div>
-                      <label className="text-xs font-bold text-slate-400 uppercase block mb-1.5">
+                      <label className="text-[11px] sm:text-xs font-bold text-slate-400 uppercase block mb-1">
                         {t('calc.rate_label')}
                       </label>
                       <div className="relative">
@@ -520,13 +520,13 @@ export default function Home() {
                           step="0.5"
                           value={customRebateRate}
                           onChange={(e) => setCustomRebateRate(Math.max(1, Number(e.target.value)))}
-                          className="w-full pl-7 pr-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-black text-[#00C2FF] focus:outline-none focus:border-[#00C2FF]"
+                          className="w-full pl-7 pr-3 py-2 sm:py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-black text-[#00C2FF] focus:outline-none focus:border-[#00C2FF]"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-400 uppercase block mb-1.5">
+                      <label className="text-[11px] sm:text-xs font-bold text-slate-400 uppercase block mb-1">
                         {t('calc.lots_label')}
                       </label>
                       <div className="flex items-center gap-2">
@@ -536,7 +536,7 @@ export default function Home() {
                           max="1000"
                           value={monthlyLots}
                           onChange={(e) => setMonthlyLots(Math.max(1, Number(e.target.value)))}
-                          className="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-black text-white focus:outline-none focus:border-[#00C2FF]"
+                          className="w-full px-3 py-2 sm:py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm font-black text-white focus:outline-none focus:border-[#00C2FF]"
                         />
                         <span className="text-xs text-slate-400 whitespace-nowrap font-semibold">
                           {t('calc.lots_unit')}
@@ -569,11 +569,11 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-[#08152B] border border-slate-800 rounded-2xl p-6 text-center space-y-4">
-                <span className="text-xs font-bold text-slate-400 uppercase block">
+              <div className="lg:col-span-5 bg-[#08152B] border border-slate-800 rounded-2xl p-5 sm:p-6 text-center space-y-3 sm:space-y-4">
+                <span className="text-[11px] sm:text-xs font-bold text-slate-400 uppercase block">
                   {t('calc.monthly_title')}
                 </span>
-                <div className="text-4xl sm:text-5xl font-black text-[#00C2FF]">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#00C2FF]">
                   ${estimatedMonthlyCashback.toLocaleString('en-US')} USD
                 </div>
                 <div className="text-xs text-[#00C2FF] font-semibold">
@@ -597,22 +597,22 @@ export default function Home() {
         </section>
 
         {/* 5. 9 BOT EA MT5 SHOWCASE & STUDIO (WITH DISCLAIMER) */}
-        <section className="py-16 max-w-7xl mx-auto px-4 lg:px-8 border-t border-slate-800/80 scroll-reveal">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
+        <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 lg:px-8 border-t border-slate-800/80 scroll-reveal">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-6 sm:mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 text-[#00C2FF] text-xs font-bold uppercase tracking-wider mb-1">
+              <div className="inline-flex items-center gap-1.5 text-[#00C2FF] text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1">
                 <Bot className="w-4 h-4" />
                 <span>KHO BOT EA MT5 & STUDIO NO-CODE</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white">
                 Bộ 9 Expert Advisor VT-Markets
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mt-1">
                 Tải file .ex5 miễn phí, tích hợp AI OpenAI API hoặc tự tay thiết kế Bot EA với Studio No-Code.
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <Link href="/builder" className="px-4 py-2 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+              <Link href="/builder" className="px-3.5 py-1.5 sm:px-4 sm:py-2 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all">
                 <Sparkles className="w-3.5 h-3.5 text-teal-400" />
                 <span>Studio Build Bot</span>
               </Link>

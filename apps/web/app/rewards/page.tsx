@@ -86,29 +86,29 @@ export default function RewardsPage() {
         </section>
 
         {/* Interactive Volume Simulator */}
-        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-10">
-          <div className="bg-[#050D1A] border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-6 sm:mt-10">
+          <div className="bg-[#050D1A] border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 sm:pb-6 border-b border-slate-800">
               <div>
-                <div className="text-xs font-bold text-[#00C2FF] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <div className="text-[10px] sm:text-xs font-bold text-[#00C2FF] uppercase tracking-wider mb-1 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Mô Phỏng Trực Tuyến</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white">Máy Tính Khối Lượng Trading Volume & Dự Phóng Thưởng</h2>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white">Máy Tính Trading Volume & Dự Phóng Thưởng</h2>
               </div>
 
-              <div className="p-3 rounded-2xl bg-[#08152B] border border-[#00C2FF]/30 text-right">
+              <div className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#08152B] border border-[#00C2FF]/30 text-left sm:text-right w-full sm:w-auto">
                 <div className="text-[10px] text-slate-400 font-bold uppercase">Volume Hiện Tính:</div>
-                <div className="text-lg font-black text-[#00C2FF] font-mono">
+                <div className="text-base sm:text-lg font-black text-[#00C2FF] font-mono">
                   ${(calculatedVolume / 1000000).toLocaleString('en-US', { maximumFractionDigits: 1 })} Triệu USD
                 </div>
               </div>
             </div>
 
             {/* Formula block */}
-            <div className="my-6 p-4 rounded-2xl bg-[#020712] border border-slate-800 text-xs text-slate-300">
-              <span className="font-bold text-[#00C2FF] uppercase tracking-wider block mb-1">Công Thức Chính Thức VT Markets:</span>
-              <code className="font-mono text-white text-sm bg-[#050D1A] px-3 py-1.5 rounded-lg border border-slate-700 block mt-1">
+            <div className="my-4 sm:my-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#020712] border border-slate-800 text-xs text-slate-300">
+              <span className="font-bold text-[#00C2FF] uppercase tracking-wider block mb-1 text-[11px] sm:text-xs">Công Thức Chính Thức VT Markets:</span>
+              <code className="font-mono text-white text-xs sm:text-sm bg-[#050D1A] px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-700 block mt-1 overflow-x-auto whitespace-normal">
                 Trading Volume = Số lot × Kích thước hợp đồng (100) × (Giá mở + Giá đóng)
               </code>
             </div>

@@ -140,18 +140,18 @@ export default function IBCommissionOverviewPage() {
         </section>
 
         {/* Tab Selector */}
-        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-6 sm:mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
             {[
-              { id: 'backcom-matrix', label: '1. BẢNG CƠ CHẾ BACKCOM', sub: 'Theo cấp bậc & Loại link' },
-              { id: 'volume-rewards', label: '2. THƯỞNG TRADING VOLUME', sub: 'Thưởng mốc lên đến $200k' },
-              { id: 'tier-guide', label: '3. ĐỊNH NGHĨA CẤP BẬC', sub: 'Quyền lợi & Điều kiện thăng tiến' },
-              { id: 'calc', label: '4. TÍNH TOÁN DỰ PHÓNG', sub: 'Ước tính hoa hồng tự động' }
+              { id: 'backcom-matrix', label: '1. CƠ CHẾ BACKCOM', sub: 'Theo cấp bậc & link' },
+              { id: 'volume-rewards', label: '2. THƯỞNG VOLUME', sub: 'Mốc lên đến $200k' },
+              { id: 'tier-guide', label: '3. ĐỊNH NGHĨA CẤP BẬC', sub: 'Quyền lợi & Thăng tiến' },
+              { id: 'calc', label: '4. TÍNH DỰ PHÓNG', sub: 'Ước tính tự động' }
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl border text-left transition-all cursor-pointer ${
                   activeTab === tab.id
                     ? 'bg-[#08152B] border-[#00C2FF] shadow-[0_0_20px_rgba(0,194,255,0.2)]'
                     : 'bg-[#050D1A] border-slate-800 hover:border-slate-700 text-slate-400'
@@ -160,21 +160,21 @@ export default function IBCommissionOverviewPage() {
                 <div className={`font-black text-xs sm:text-sm ${activeTab === tab.id ? 'text-[#00C2FF]' : 'text-white'}`}>
                   {tab.label}
                 </div>
-                <div className="text-[11px] text-slate-400 mt-0.5">{tab.sub}</div>
+                <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">{tab.sub}</div>
               </button>
             ))}
           </div>
 
           {/* TAB 1: BẢNG CƠ CHẾ BACKCOM THEO CẤP BẬC & LOẠI LINK */}
           {activeTab === 'backcom-matrix' && (
-            <div className="mt-8 bg-[#050D1A] border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div className="mt-6 sm:mt-8 bg-[#050D1A] border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 sm:pb-6 border-b border-slate-800">
                 <div>
-                  <div className="text-xs font-bold text-[#00C2FF] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <div className="text-[10px] sm:text-xs font-bold text-[#00C2FF] uppercase tracking-wider mb-1 flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Bảng Chuẩn Chính Thức VT Markets</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-white">Cơ Chế Chi Trả Backcom Theo Cấp Bậc & Loại Link</h2>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white">Cơ Chế Chi Trả Backcom Theo Cấp Bậc & Loại Link</h2>
                   <p className="text-slate-400 text-xs sm:text-sm mt-1">Đơn vị chi trả: <strong>USD / Lot</strong>. Tự động chi trả trực tiếp vào tài khoản giao dịch.</p>
                 </div>
 
