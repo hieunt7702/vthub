@@ -133,7 +133,7 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormSent(true);
-    alert("Cảm ơn bạn đã gửi liên hệ! Đội ngũ hỗ trợ HieuNTHUB sẽ phản hồi bạn trong 1-2h.");
+    alert("Cảm ơn bạn đã gửi liên hệ! Đội ngũ hỗ trợ VT Rewards Hub sẽ phản hồi bạn trong 1-2h.");
   };
 
   const selectedSlot = bannerSlots.find(s => s.code === bannerSlotCode);
@@ -161,7 +161,7 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs">
-              <div className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1.5 text-teal-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-3 py-1.5 text-[#00C2FF]">
                 <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4" />
                 </svg>
@@ -678,7 +678,7 @@ export default function ContactPage() {
 
                         {/* Calendar Slot Conflicts Preview */}
                         {bannerSlotCode && bannerStartsAt && bannerEndsAt ? (
-                          <div className="rounded border border-teal-400/30 bg-teal-500/10 p-3.5 text-xs text-teal-300">
+                          <div className="rounded border border-[#00C2FF]/30 bg-[#00C2FF]/10 p-3.5 text-xs text-[#00C2FF]">
                             <div className="font-bold text-white mb-0.5">✅ Slot lịch trống an toàn</div>
                             <div>Vị trí này đang trống từ {bannerStartsAt} đến {bannerEndsAt}. Đội ngũ hỗ trợ sẽ lock giữ chỗ sau khi nhận form.</div>
                           </div>
@@ -780,7 +780,7 @@ export default function ContactPage() {
                 <div className="space-y-3">
                   {/* Telegram */}
                   <a
-                    href="https://t.me/hieunthubco"
+                    href="https://t.me/lambofx_support"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-blue-400/40 hover:bg-blue-500/5 transition group"
@@ -793,7 +793,7 @@ export default function ContactPage() {
                     <div className="flex-1 min-w-0">
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Telegram</div>
                       <div className="font-extrabold text-white text-sm truncate group-hover:text-blue-300 transition">
-                        @hieunthubco
+                        @vtrewardshub
                       </div>
                     </div>
                     <svg className="h-4 w-4 text-zinc-500 group-hover:text-blue-300 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -803,7 +803,7 @@ export default function ContactPage() {
 
                   {/* Email */}
                   <a
-                    href="mailto:admin@hieunthub.co"
+                    href="mailto:support@vtrewardshub.com"
                     className="flex items-center gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-cyan-400/40 hover:bg-cyan-500/5 transition group"
                   >
                     <span className="h-10 w-10 rounded bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0">
@@ -814,7 +814,7 @@ export default function ContactPage() {
                     <div className="flex-1 min-w-0">
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Email</div>
                       <div className="font-extrabold text-white text-sm truncate group-hover:text-cyan-300 transition">
-                        admin@hieunthub.co
+                        support@vtrewardshub.com
                       </div>
                     </div>
                     <svg className="h-4 w-4 text-zinc-500 group-hover:text-cyan-300 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -826,7 +826,7 @@ export default function ContactPage() {
                 {/* Team meta properties tags */}
                 <div className="pt-6 border-t border-white/5 space-y-4">
                   <div className="flex items-start gap-3 text-sm">
-                    <svg className="h-5 w-5 text-teal-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-5 w-5 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                     <div>

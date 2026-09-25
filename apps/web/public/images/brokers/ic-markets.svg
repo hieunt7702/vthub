@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" width="160" height="50">
+  <rect width="160" height="50" rx="8" fill="#0A0A0A"/>
+  <rect x="12" y="14" width="22" height="22" rx="4" fill="#00D084"/>
+  <text x="16" y="30" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="14" fill="#000000">IC</text>
+  <text x="40" y="32" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="16" fill="#ffffff" letter-spacing="-0.5">IC Markets</text>
+</svg>

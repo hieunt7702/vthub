@@ -1,415 +1,535 @@
-import { Header } from "../../components/layout/Header";
-import { Footer } from "../../components/layout/Footer";
-import Link from "next/link";
+'use client';
 
-const brokers = [
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Header } from '../../components/layout/Header';
+import { Footer } from '../../components/layout/Footer';
+import { 
+  Search, Scale, ArrowRight, Star, CheckCircle2 
+} from 'lucide-react';
+
+export interface BrokerItem {
+  id: string;
+  name: string;
+  slug: string;
+  logo: string;
+  wikifxScore: string;
+  isTopPick?: boolean;
+  isSponsored?: boolean;
+  verified: boolean;
+  minDeposit: string;
+  foundedYear: number;
+  maxLeverage: string;
+  spreadType: string;
+  minSpread: string;
+  platform: string;
+  rebateGold: string;
+  rebateFx: string;
+  rebateBadge: string;
+  licenses: { name: string; tier: 'tier1' | 'tier2' | 'normal' }[];
+  features: string[];
+}
+
+export const TOP_BROKERS_DATA: BrokerItem[] = [
   {
-    id: "24",
-    name: "GTCFX",
-    slug: "gtcfx",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJC1HBZDKDEMV3T7WCF03QBW.webp",
-    rating: "4.3",
-    stars: 4,
-    topPick: true,
-    sponsored: true,
+    id: 'vt-markets',
+    name: 'VT Markets',
+    slug: 'vt-markets',
+    logo: '/images/brokers/vt-markets.svg',
+    wikifxScore: '8.68',
+    isTopPick: true,
+    isSponsored: true,
     verified: true,
+    minDeposit: '$50',
+    foundedYear: 2015,
+    maxLeverage: '1:1000',
+    spreadType: 'Raw ECN',
+    minSpread: 'Từ 0.0 Pip',
+    platform: 'MT4 / MT5 / App',
+    rebateGold: 'Tỷ lệ tối đa thị trường',
+    rebateFx: 'Hoàn phí tự động',
+    rebateBadge: 'Tỷ lệ hoàn phí cao nhất',
     licenses: [
-      { name: "FCA", status: "high" },
-      { name: "ASIC", status: "high" },
-      { name: "VFSC", status: "normal" }
+      { name: 'FSCA No. 50865', tier: 'tier1' },
+      { name: 'FSC No. GB23202269', tier: 'tier1' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: true
+    features: [
+      'Bộ chỉ báo kỹ thuật chuyên sâu & Trình tạo EA MQL5 không cần code',
+      'Tự động chi trả Backcom trực tiếp vào tài khoản giao dịch',
+      'Nạp rút VietQR 24/7 tức thì không phí'
+    ]
   },
   {
-    id: "33",
-    name: "Vantage",
-    slug: "vantage",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KP2ZTF2WF63CXQGN8JQQ90HH.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
-    verified: false,
+    id: 'exness',
+    name: 'Exness',
+    slug: 'exness',
+    logo: '/images/brokers/exness.svg',
+    wikifxScore: '8.90',
+    verified: true,
+    minDeposit: '$10',
+    foundedYear: 2008,
+    maxLeverage: 'Vô cực (1:Unlimited)',
+    spreadType: 'Raw Spread / Pro',
+    minSpread: 'Từ 0.1 Pip',
+    platform: 'MT4 / MT5 / Web',
+    rebateGold: '$6.0 / lot',
+    rebateFx: '$3.5 / lot',
+    rebateBadge: 'Hoàn phí cơ bản $6/lot',
     licenses: [
-      { name: "ASIC", status: "high" },
-      { name: "FCA", status: "high" },
-      { name: "VFSC", status: "normal" }
+      { name: 'FCA (Anh Quốc)', tier: 'tier1' },
+      { name: 'CySEC', tier: 'tier1' },
+      { name: 'FSA', tier: 'normal' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: true
+    features: ['Khối lượng thanh khoản lớn', 'Nạp rút tức thì tự động']
   },
   {
-    id: "19",
-    name: "HFM",
-    slug: "hfm",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4SBN05D7JBA333SC0S2NG7.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
+    id: 'ic-markets',
+    name: 'IC Markets',
+    slug: 'ic-markets',
+    logo: '/images/brokers/ic-markets.svg',
+    wikifxScore: '8.75',
     verified: true,
+    minDeposit: '$200',
+    foundedYear: 2007,
+    maxLeverage: '1:500',
+    spreadType: 'True ECN',
+    minSpread: 'Từ 0.0 Pip',
+    platform: 'MT4 / MT5 / cTrader',
+    rebateGold: '$4.5 / lot',
+    rebateFx: '$2.5 / lot',
+    rebateBadge: 'Hoàn phí cơ bản $4.5/lot',
     licenses: [
-      { name: "FCA", status: "high" },
-      { name: "CySEC", status: "high" },
-      { name: "FSCA", status: "high" }
+      { name: 'ASIC (Úc)', tier: 'tier1' },
+      { name: 'CySEC', tier: 'tier1' },
+      { name: 'SCB', tier: 'normal' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: false
+    features: ['Khớp lệnh True ECN', 'Hỗ trợ cTrader']
   },
   {
-    id: "15",
-    name: "TMGM",
-    slug: "tmgm",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4SNYTVW6J7FPCJEK0ZC2R8.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
+    id: 'xm',
+    name: 'XM Global',
+    slug: 'xm',
+    logo: '/images/brokers/xm.svg',
+    wikifxScore: '8.85',
     verified: true,
+    minDeposit: '$5',
+    foundedYear: 2009,
+    maxLeverage: '1:1000',
+    spreadType: 'Ultra Low / Standard',
+    minSpread: 'Từ 0.6 Pip',
+    platform: 'MT4 / MT5 / App',
+    rebateGold: '$5.0 / lot',
+    rebateFx: '$3.0 / lot',
+    rebateBadge: 'Hoàn phí cơ bản $5/lot',
     licenses: [
-      { name: "ASIC", status: "high" },
-      { name: "VFSC", status: "normal" }
+      { name: 'ASIC (Úc)', tier: 'tier1' },
+      { name: 'CySEC', tier: 'tier1' },
+      { name: 'FSC', tier: 'normal' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: false
+    features: ['Nhiều chương trình bonus nạp', 'Không phí swap một số cặp']
   },
   {
-    id: "13",
-    name: "Mitrade",
-    slug: "mitrade",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4T4V0SC5NNTKVVZWK0PAC7.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
+    id: 'vantage',
+    name: 'Vantage Markets',
+    slug: 'vantage',
+    logo: '/images/brokers/vantage.svg',
+    wikifxScore: '8.60',
     verified: true,
+    minDeposit: '$50',
+    foundedYear: 2009,
+    maxLeverage: '1:500',
+    spreadType: 'Raw ECN',
+    minSpread: 'Từ 0.0 Pip',
+    platform: 'MT4 / MT5 / App',
+    rebateGold: '$8.0 / lot',
+    rebateFx: '$4.0 / lot',
+    rebateBadge: 'Hoàn phí $8/lot',
     licenses: [
-      { name: "ASIC", status: "high" },
-      { name: "CySEC", status: "high" },
-      { name: "CIMA", status: "high" }
+      { name: 'ASIC (Úc)', tier: 'tier1' },
+      { name: 'VFSC', tier: 'normal' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "Mobile App/Proprietary",
-    rebate: false
+    features: ['Hệ sinh thái copytrade', 'Giao diện ứng dụng tốt']
   },
   {
-    id: "11",
-    name: "Axi",
-    slug: "axi",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KHQZS599JZATCC6YP88TVDH0.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
+    id: 'tmgm',
+    name: 'TMGM',
+    slug: 'tmgm',
+    logo: '/images/brokers/tmgm.svg',
+    wikifxScore: '8.55',
     verified: true,
+    minDeposit: '$100',
+    foundedYear: 2013,
+    maxLeverage: '1:500',
+    spreadType: 'EDGE ECN',
+    minSpread: 'Từ 0.1 Pip',
+    platform: 'MT4 / MT5 / IRESS',
+    rebateGold: '$6.0 / lot',
+    rebateFx: '$3.0 / lot',
+    rebateBadge: 'Hoàn phí $6/lot',
     licenses: [
-      { name: "ASIC", status: "high" },
-      { name: "FCA", status: "high" }
+      { name: 'ASIC (Úc)', tier: 'tier1' },
+      { name: 'VFSC', tier: 'normal' },
+      { name: 'FMA NZ', tier: 'tier1' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: false
+    features: ['Khớp lệnh tốc độ cao', 'Hỗ trợ nền tảng IRESS']
   },
   {
-    id: "10",
-    name: "Exness",
-    slug: "exness",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4SCJ88E286DJM4DC19B8QH.webp",
-    rating: "4.7",
-    stars: 4.5,
-    topPick: false,
-    sponsored: false,
+    id: 'hfm',
+    name: 'HFM (HF Markets)',
+    slug: 'hfm',
+    logo: '/images/brokers/hfm.svg',
+    wikifxScore: '8.40',
     verified: true,
+    minDeposit: '$0',
+    foundedYear: 2010,
+    maxLeverage: '1:2000',
+    spreadType: 'Zero Spread',
+    minSpread: 'Từ 0.2 Pip',
+    platform: 'MT4 / MT5 / HFM App',
+    rebateGold: '$7.0 / lot',
+    rebateFx: '$3.5 / lot',
+    rebateBadge: 'Hoàn phí $7/lot',
     licenses: [
-      { name: "FCA", status: "high" },
-      { name: "CySEC", status: "high" }
+      { name: 'FCA (Anh Quốc)', tier: 'tier1' },
+      { name: 'CySEC', tier: 'tier1' },
+      { name: 'FSCA', tier: 'normal' }
     ],
-    minDeposit: "Free",
-    leverage: "—",
-    platform: "MT4/MT5",
-    rebate: true
+    features: ['Tài khoản Zero Spread', 'Đòn bẩy 1:2000']
+  },
+  {
+    id: 'gtcfx',
+    name: 'GTCFX',
+    slug: 'gtcfx',
+    logo: '/images/brokers/gtcfx.svg',
+    wikifxScore: '8.20',
+    verified: true,
+    minDeposit: '$50',
+    foundedYear: 2012,
+    maxLeverage: '1:500',
+    spreadType: 'Standard / ECN',
+    minSpread: 'Từ 0.4 Pip',
+    platform: 'MT4 / MT5',
+    rebateGold: '$9.0 / lot',
+    rebateFx: '$4.5 / lot',
+    rebateBadge: 'Hoàn phí $9/lot',
+    licenses: [
+      { name: 'FCA', tier: 'tier1' },
+      { name: 'VFSC', tier: 'normal' }
+    ],
+    features: ['Hỗ trợ giao dịch vàng', 'Thủ tục mở tài khoản nhanh']
+  },
+  {
+    id: 'ebc',
+    name: 'EBC Financial Group',
+    slug: 'ebc',
+    logo: '/images/brokers/ebc.svg',
+    wikifxScore: '8.35',
+    verified: true,
+    minDeposit: '$10',
+    foundedYear: 2020,
+    maxLeverage: '1:500',
+    spreadType: 'PRO ECN',
+    minSpread: 'Từ 0.2 Pip',
+    platform: 'MT4 / MT5',
+    rebateGold: '$5.0 / lot',
+    rebateFx: '$3.0 / lot',
+    rebateBadge: 'Hoàn phí $5/lot',
+    licenses: [
+      { name: 'FCA (Anh Quốc)', tier: 'tier1' },
+      { name: 'ASIC (Úc)', tier: 'tier1' },
+      { name: 'CIMA', tier: 'normal' }
+    ],
+    features: ['Mới nổi tại Châu Á', 'Khớp lệnh khá tốt']
   }
 ];
 
-interface SearchParams {
-  sort?: string;
-  q?: string;
-  rebate?: string;
-  cpa?: string;
-  xauusd?: string;
-  regulated?: string;
-}
+export default function BrokersPage() {
+  const router = useRouter();
+  const [search, setSearch] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [compareList, setCompareList] = useState<string[]>(['vt-markets']);
 
-export default async function BrokersPage({ searchParams }: { searchParams?: Promise<SearchParams> }) {
-  const resolvedSearchParams = searchParams ? await searchParams : {};
-  const currentSort = resolvedSearchParams?.sort || "";
+  const toggleCompare = (id: string) => {
+    if (compareList.includes(id)) {
+      setCompareList(compareList.filter((item) => item !== id));
+    } else {
+      if (compareList.length >= 4) {
+        alert('Bạn chỉ có thể so sánh tối đa 4 sàn cùng lúc.');
+        return;
+      }
+      setCompareList([...compareList, id]);
+    }
+  };
 
-  let currentSortLabel = "Mặc định";
-  if (currentSort === "rating") currentSortLabel = "Đánh giá cao nhất";
-  else if (currentSort === "spread") currentSortLabel = "Spread thấp";
-  else if (currentSort === "rebate") currentSortLabel = "Rebate cao";
+  const handleGoToCompare = () => {
+    const query = compareList.join(',');
+    router.push(`/brokers/so-sanh?brokers=${query}`);
+  };
+
+  const filteredBrokers = TOP_BROKERS_DATA.filter((b) => {
+    const matchSearch =
+      b.name.toLowerCase().includes(search.toLowerCase()) ||
+      b.slug.toLowerCase().includes(search.toLowerCase());
+    
+    if (activeFilter === 'spread') return matchSearch && b.minSpread.includes('0.0');
+    if (activeFilter === 'rebate') return matchSearch && (b.rebateGold.includes('$15') || b.rebateGold.includes('$9') || b.rebateGold.includes('$8'));
+    if (activeFilter === 'gold') return matchSearch && b.features.some(f => f.includes('Vàng') || f.includes('Bot EA') || b.id === 'vt-markets');
+    if (activeFilter === 'license') return matchSearch && b.licenses.some(l => l.tier === 'tier1');
+
+    return matchSearch;
+  });
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-[#020712] text-slate-100 selection:bg-[#00C2FF]/30 selection:text-[#00C2FF]">
       <Header />
-      <main id="main-content" className="flex-grow">
+
+      <main id="main-content" className="flex-grow pt-8 pb-28">
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-white/5">
-          <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <section className="relative overflow-hidden border-b border-slate-800 bg-[#050D1A] py-14">
+          <div className="relative max-w-7xl mx-auto px-4 lg:px-8 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-4 py-1.5 text-xs font-bold text-[#00C2FF] mb-5 shadow-[0_0_20px_rgba(0,194,255,0.15)]">
+              <Scale className="w-3.5 h-3.5 text-[#00C2FF]" />
+              <span>Dữ Liệu Xếp Hạng & So Sánh Sàn Chuẩn WikiFX 2026</span>
+            </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 lg:px-8 py-12 lg:py-16">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-300 mb-4">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-                29+ sàn forex được tuyển chọn
-              </div>
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-                Tất cả{" "}
-                <span className="bg-gradient-to-r from-blue-300 via-cyan-400 to-cyan-500 bg-clip-text text-transparent">sàn forex</span>
-              </h1>
-              <p className="mt-4 text-zinc-400 text-lg">
-                Đánh giá độc lập từ team HH, không sponsor. Lọc theo spread, rebate, giấy phép.
-              </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase">
+              Bảng Xếp Hạng &{' '}
+              <span className="text-[#00C2FF]">
+                So Sánh Sàn Forex
+              </span>
+            </h1>
 
-              {/* Search Form */}
-              <form className="mt-8 flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto" method="GET" action="/brokers">
-                <div className="flex-1 flex items-center gap-3 rounded border border-white/10 bg-white/5 px-5 py-4 focus-within:border-blue-400/50 transition backdrop-blur">
-                  <svg className="h-5 w-5 text-zinc-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                  <input type="text" name="q" placeholder="Tìm FPG, Mitrade, Exness..." autoComplete="off" className="flex-1 bg-transparent placeholder:text-zinc-500 outline-none text-zinc-100" />
-                </div>
-                <button type="submit" className="rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-8 py-4 font-bold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-xl shadow-blue-500/30 whitespace-nowrap">
-                  Tìm sàn ngay →
+            <p className="mt-4 max-w-2xl mx-auto text-slate-300 text-sm md:text-base leading-relaxed">
+              Tổng hợp dữ liệu giấy phép, điểm đánh giá WikiFX, đòn bẩy, spread và mức hoàn phí Backcom. So sánh trực quan đối đầu giữa <strong>VT Markets</strong> và các sàn giao dịch hàng đầu.
+            </p>
+
+            {/* Search Bar */}
+            <div className="mt-8 max-w-2xl mx-auto relative">
+              <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Tìm kiếm VT Markets, Exness, XM, IC Markets, Vantage, TMGM..."
+                className="w-full pl-12 pr-32 py-4 bg-[#020712] border border-slate-800 rounded-2xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00C2FF] shadow-xl"
+              />
+              <button
+                onClick={handleGoToCompare}
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-5 py-2.5 bg-[#0052FF] hover:bg-[#0045DC] text-white font-black text-xs rounded-xl shadow-md transition-all uppercase cursor-pointer"
+              >
+                So sánh sàn →
+              </button>
+            </div>
+
+            {/* Quick Filters */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs">
+              <span className="text-slate-400 font-semibold mr-1">Lọc nhanh:</span>
+              {[
+                { id: 'all', label: 'Tất cả sàn' },
+                { id: 'spread', label: 'Spread 0.0 Pip' },
+                { id: 'rebate', label: 'Tỷ lệ Rebate cao' },
+                { id: 'gold', label: 'Tối ưu Vàng' },
+                { id: 'license', label: 'Có giấy phép Tier-1' }
+              ].map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setActiveFilter(f.id)}
+                  className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                    activeFilter === f.id
+                      ? 'bg-[#00C2FF] text-slate-950 shadow-md font-black'
+                      : 'bg-[#020712] text-slate-300 hover:text-white border border-slate-800'
+                  }`}
+                >
+                  {f.label}
                 </button>
-              </form>
-
-              {/* Quick Tags */}
-              <div className="mt-6 flex flex-wrap justify-center gap-2">
-                <Link href="/brokers?sort=spread" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
-                  ⚡ Spread thấp
-                </Link>
-                <Link href="/brokers?rebate=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
-                  💰 Rebate cao
-                </Link>
-                <Link href="/brokers?cpa=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
-                  🚀 CPA Lifetime
-                </Link>
-                <Link href="/brokers?xauusd=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
-                  🥇 XAUUSD
-                </Link>
-                <Link href="/brokers?regulated=1" className="rounded-full px-3.5 py-1.5 text-xs transition border border-white/10 bg-white/5 text-zinc-300 hover:border-blue-400/40 hover:text-blue-300">
-                  🛡️ Có giấy phép
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Filters and Sorting header */}
-        <section className="border-b border-white/5 bg-zinc-950/40">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-5 flex flex-wrap items-center justify-between gap-4">
-            <div className="text-sm text-zinc-400">
-              <strong className="text-white">29</strong> sàn được tuyển chọn
-            </div>
-
-            {/* Custom Premium Dropdown */}
-            <div className="flex items-center gap-2.5 relative">
-              <span className="text-xs text-zinc-500 font-medium">Sắp xếp:</span>
-              <details className="relative group text-left" data-hh-nav-dropdown="">
-                <summary className="list-none cursor-pointer inline-flex items-center justify-between gap-2 rounded border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 outline-none hover:border-blue-500/30 hover:bg-white/[0.08] transition-all min-w-[160px] select-none shadow-lg shadow-black/10">
-                  <span className="font-semibold text-zinc-100">{currentSortLabel}</span>
-                  <svg className="h-4 w-4 text-zinc-400 transition group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg>
-                </summary>
-                <div className="absolute right-0 top-full pt-2 z-50 min-w-[180px]">
-                  <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md shadow-2xl p-1.5 flex flex-col gap-1">
-                    <Link href="/brokers" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${!currentSort ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      Mặc định
-                    </Link>
-                    <Link href="/brokers?sort=rating" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rating' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      Đánh giá cao nhất
-                    </Link>
-                    <Link href="/brokers?sort=spread" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'spread' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      Spread thấp
-                    </Link>
-                    <Link href="/brokers?sort=rebate" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentSort === 'rebate' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      Rebate cao
-                    </Link>
-                  </div>
-                </div>
-              </details>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Brokers Grid */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-10">
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {brokers.map((broker) => (
+        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-10">
+          <div className="flex items-center justify-between mb-6">
+            <span className="text-xs font-bold text-slate-400">
+              Hiển thị <strong>{filteredBrokers.length}</strong> sàn giao dịch uy tín
+            </span>
+            <span className="text-xs text-[#00C2FF] font-bold">
+              💡 Bấm nút [⚖️ So Sánh] trên các sàn để đối đầu trực tiếp
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredBrokers.map((broker) => {
+              const isComparing = compareList.includes(broker.id);
+
+              return (
                 <div
                   key={broker.id}
-                  className={`broker-card group relative rounded border transition flex flex-col ${broker.topPick
-                      ? "border-blue-400/40 bg-gradient-to-b from-blue-500/10 to-blue-500/[0.02] hover:border-blue-400/60 hover:shadow-2xl hover:shadow-blue-500/20"
-                      : "border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] hover:border-blue-400/30 hover:shadow-lg hover:shadow-blue-500/10"
-                    }`}
-                  data-broker-id={broker.id}
-                  data-broker-name={broker.name}
-                  data-broker-slug={broker.slug}
+                  className={`group relative flex flex-col justify-between rounded-3xl p-6 transition-all duration-300 ${
+                    broker.isTopPick
+                      ? 'bg-gradient-to-b from-[#08152B] via-[#050D1A] to-[#020712] border-2 border-[#00C2FF] shadow-[0_0_35px_rgba(0,194,255,0.2)] hover:shadow-[0_0_50px_rgba(0,194,255,0.35)]'
+                      : 'bg-[#050D1A] border border-slate-800 hover:border-[#00C2FF]/40 shadow-xl'
+                  }`}
                 >
-                  {/* Badges */}
-                  <div className="absolute top-3 right-3 z-10 flex flex-col items-end gap-1">
-                    {broker.topPick && (
-                      <span className="rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow-lg shadow-blue-500/40">
-                        ⭐ TOP PICK
-                      </span>
-                    )}
-                    {broker.sponsored && (
-                      <span className="rounded-full bg-zinc-900/80 backdrop-blur-sm border border-white/10 text-zinc-400 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">
-                        Sponsored
-                      </span>
-                    )}
-                  </div>
-
-                  <Link href={`/brokers/danh-gia-${broker.slug}`} className="flex-1 block p-5">
-                    <div className="flex items-start gap-3">
-                      <img
-                        src={broker.logo}
-                        alt={broker.name}
-                        className={`h-14 w-14 rounded text-base object-cover shrink-0 ${broker.topPick ? "shadow-lg shadow-blue-500/30" : ""
-                          }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="flex-1 min-w-0 mt-0.5">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <h3 className="font-extrabold text-base text-white group-hover:text-blue-300 transition truncate">
-                            {broker.name}
-                          </h3>
-                          {broker.verified && (
-                            <svg className="h-3.5 w-3.5 text-teal-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
-                              <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
-                            </svg>
-                          )}
-                        </div>
-                        <div className="mt-1 flex items-center gap-1.5">
-                          <span className="inline-flex items-center gap-0.5">
-                            {Array.from({ length: 5 }).map((_, idx) => {
-                              const starVal = idx + 1;
-                              if (starVal <= Math.floor(Number(broker.rating))) {
-                                return (
-                                  <svg key={idx} className="h-3 w-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" />
-                                  </svg>
-                                );
-                              } else if (starVal - 0.5 === Number(broker.rating)) {
-                                return (
-                                  <svg key={idx} className="h-3 w-3 text-cyan-400" viewBox="0 0 20 20">
-                                    <defs>
-                                      <linearGradient id={`hs-${broker.id}`} x1="0" x2="1" y1="0" y2="0">
-                                        <stop offset="50%" stopColor="currentColor" />
-                                        <stop offset="50%" stopColor="transparent" />
-                                      </linearGradient>
-                                    </defs>
-                                    <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" fill={`url(#hs-${broker.id})`} stroke="currentColor" strokeWidth="0.5" />
-                                  </svg>
-                                );
-                              } else {
-                                return (
-                                  <svg key={idx} className="h-3 w-3 text-cyan-400/30" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" />
-                                  </svg>
-                                );
-                              }
-                            })}
+                  <div>
+                    {/* Header Badges */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      {broker.isTopPick ? (
+                        <div className="flex items-center gap-1.5">
+                          <span className="px-2.5 py-1 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-[10px] rounded-lg uppercase tracking-wider flex items-center gap-1 shadow">
+                            <Star className="w-3 h-3 fill-white" />
+                            <span>★ TOP 1 ĐỐI TÁC CHIẾN LƯỢC</span>
                           </span>
-                          <span className="text-xs font-bold text-white tabular-nums">{broker.rating}</span>
                         </div>
+                      ) : (
+                        <span className="px-2.5 py-0.5 bg-[#020712] border border-slate-800 text-slate-400 font-bold text-[10px] rounded-lg">
+                          Broker Quốc Tế
+                        </span>
+                      )}
+
+                      <div className="flex items-center gap-1 text-xs font-black text-[#00C2FF] bg-[#00C2FF]/10 px-2 py-0.5 rounded-lg border border-[#00C2FF]/20">
+                        <Star className="w-3.5 h-3.5 fill-[#00C2FF] text-[#00C2FF]" />
+                        <span>{broker.wikifxScore}</span>
                       </div>
                     </div>
 
-                    {/* Licenses */}
-                    <div className="mt-3 flex flex-wrap gap-1">
-                      {broker.licenses.map((lic, index) => (
+                    {/* Broker Official Logo & Basic Info */}
+                    <div className="flex items-center gap-3.5 mb-5">
+                      <div className="h-12 w-28 px-2 py-1 rounded-xl flex items-center justify-center shrink-0 bg-[#020712] border border-slate-800 shadow-inner">
+                        <img 
+                          src={broker.logo} 
+                          alt={broker.name} 
+                          className="h-7 w-auto max-w-[95px] object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-black text-white flex items-center gap-1.5 group-hover:text-[#00C2FF] transition-colors">
+                          {broker.name}
+                          {broker.verified && <CheckCircle2 className="w-4 h-4 text-[#00C2FF]" />}
+                        </h3>
+                        <p className="text-[11px] text-slate-400 mt-0.5">Thành lập năm {broker.foundedYear} • {broker.platform}</p>
+                      </div>
+                    </div>
+
+                    {/* 2x2 Specs Grid */}
+                    <div className="grid grid-cols-2 gap-2 bg-[#020712] p-3.5 rounded-2xl border border-slate-800/80 text-xs">
+                      <div>
+                        <span className="text-[10px] text-slate-500 uppercase font-semibold block">Nạp tối thiểu</span>
+                        <strong className="text-slate-200 font-bold">{broker.minDeposit}</strong>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-500 uppercase font-semibold block">Đòn bẩy tối đa</span>
+                        <strong className="text-[#00C2FF] font-bold">{broker.maxLeverage}</strong>
+                      </div>
+                      <div className="pt-2 border-t border-slate-800/80">
+                        <span className="text-[10px] text-slate-500 uppercase font-semibold block">Spread thấp nhất</span>
+                        <strong className="text-white font-bold">{broker.minSpread}</strong>
+                      </div>
+                      <div className="pt-2 border-t border-slate-800/80">
+                        <span className="text-[10px] text-slate-500 uppercase font-semibold block">Loại Spread</span>
+                        <strong className="text-slate-300 font-bold">{broker.spreadType}</strong>
+                      </div>
+                    </div>
+
+                    {/* Rebate Highlight Bar */}
+                    <div className={`mt-3 p-3 rounded-xl border flex items-center justify-between text-xs ${broker.isTopPick ? 'bg-[#00C2FF]/15 border-[#00C2FF]/40 text-[#00C2FF]' : 'bg-[#020712] border-slate-800 text-slate-300'}`}>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block uppercase font-bold">Hoàn Phí Backcom:</span>
+                        <strong className="text-[#00C2FF] font-black text-sm">{broker.rebateGold}</strong>
+                      </div>
+                      <span className="text-[10px] px-2 py-0.5 rounded-md font-bold bg-[#00C2FF]/20 text-[#00C2FF] border border-[#00C2FF]/30">
+                        {broker.rebateBadge}
+                      </span>
+                    </div>
+
+                    {/* Licenses Badges */}
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {broker.licenses.map((lic, i) => (
                         <span
-                          key={index}
-                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${lic.status === "high"
-                              ? "bg-teal-500/15 border border-teal-400/30 text-teal-300"
-                              : "bg-white/[0.05] border border-white/10 text-zinc-400"
-                            }`}
+                          key={i}
+                          className="px-2 py-0.5 bg-[#020712] border border-slate-800 text-slate-300 text-[10px] font-semibold rounded-md"
                         >
-                          {lic.status === "high" && <span className="text-teal-400">●</span>}
-                          {lic.name}
+                          ● {lic.name}
                         </span>
                       ))}
                     </div>
+                  </div>
 
-                    {/* Stats Grid */}
-                    <div className="mt-4 grid grid-cols-3 gap-1.5 rounded border border-white/10 bg-white/[0.02] p-1.5">
-                      <div className="rounded px-2 py-1.5 text-center">
-                        <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-bold">Min</div>
-                        <div className="text-xs font-extrabold text-white tabular-nums truncate">{broker.minDeposit}</div>
-                      </div>
-                      <div className="rounded px-2 py-1.5 text-center border-x border-white/5">
-                        <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-bold">Lev</div>
-                        <div className="text-xs font-extrabold text-cyan-300 tabular-nums truncate">{broker.leverage}</div>
-                      </div>
-                      <div className="rounded px-2 py-1.5 text-center">
-                        <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-bold">Platform</div>
-                        <div className="text-xs font-extrabold text-blue-300 truncate">{broker.platform}</div>
-                      </div>
-                    </div>
-
-                    {/* Rebate Tag */}
-                    {broker.rebate && (
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/12 border border-cyan-400/30 text-cyan-300 px-2 py-0.5 text-[10px] font-bold">
-                          <span>Rebate</span>
-                          <span className="text-cyan-200">✓</span>
-                        </span>
-                      </div>
-                    )}
-                  </Link>
-
-                  {/* Actions */}
-                  <div className="px-5 pb-5 grid grid-cols-2 gap-2">
+                  {/* Actions Bar */}
+                  <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2">
                     <Link
-                      href={`/brokers/danh-gia-${broker.slug}`}
-                      className={`rounded px-3 py-2 text-xs font-extrabold transition flex items-center justify-center gap-1.5 ${broker.topPick
-                          ? "bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 hover:from-blue-300 hover:to-cyan-500 shadow-md shadow-blue-500/25"
-                          : "border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-200"
-                        }`}
+                      href={broker.slug === 'vt-markets' ? '/brokers/vt-markets' : `/brokers/${broker.slug}`}
+                      className={`flex-1 py-2.5 rounded-xl font-black text-xs text-center transition-all flex items-center justify-center gap-1.5 ${
+                        broker.isTopPick
+                          ? 'bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white shadow-md hover:brightness-110'
+                          : 'bg-[#020712] hover:bg-slate-900 border border-slate-700 text-slate-200'
+                      }`}
                     >
-                      Xem chi tiết →
+                      <span>Xem Chi Tiết</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
+
+                    {/* Compare Checkbox Button */}
                     <button
-                      type="button"
-                      data-action="compare"
-                      className="rounded border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 px-3 py-2 text-xs font-semibold text-zinc-400 transition flex items-center justify-center gap-1.5"
+                      onClick={() => toggleCompare(broker.id)}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                        isComparing
+                          ? 'bg-[#00C2FF] text-slate-950 font-black border border-[#00C2FF] shadow-[0_0_15px_rgba(0,194,255,0.3)]'
+                          : 'bg-[#020712] hover:bg-slate-900 border border-slate-700 text-slate-400 hover:text-white'
+                      }`}
+                      title="Chọn so sánh"
                     >
-                      So sánh
+                      <Scale className="w-3.5 h-3.5" />
+                      <span>{isComparing ? 'Đã chọn' : 'So sánh'}</span>
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </section>
+
+        {/* Floating Comparison Drawer (When 1+ Brokers Selected) */}
+        {compareList.length > 0 && (
+          <div className="fixed bottom-6 inset-x-0 z-40 max-w-3xl mx-auto px-4 animate-in slide-in-from-bottom-6 duration-300">
+            <div className="bg-[#050D1A]/95 backdrop-blur-2xl border-2 border-[#00C2FF] rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-[#00C2FF]/20 text-[#00C2FF] rounded-2xl border border-[#00C2FF]/40">
+                  <Scale className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-white flex items-center gap-2">
+                    <span>Đang so sánh ({compareList.length}/4 sàn):</span>
+                    <span className="text-[#00C2FF] font-extrabold">
+                      {compareList.map((id) => TOP_BROKERS_DATA.find((b) => b.id === id)?.name).join(' vs ')}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">Xem bảng so sánh chi tiết điểm thắng của VT Markets</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <button
+                  onClick={() => setCompareList([])}
+                  className="px-3 py-2 bg-[#020712] hover:bg-slate-900 text-slate-400 hover:text-white rounded-xl text-xs font-bold"
+                >
+                  Xóa
+                </button>
+                <button
+                  onClick={handleGoToCompare}
+                  className="flex-1 sm:flex-none px-6 py-2.5 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-xs rounded-xl shadow-lg shadow-[#00C2FF]/30 hover:brightness-110 transition-all uppercase tracking-wider cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <span>So Sánh Chi Tiết</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 }

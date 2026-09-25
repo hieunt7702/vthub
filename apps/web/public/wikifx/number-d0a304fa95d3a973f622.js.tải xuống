@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["van-utils/validate/number"],{"./node_modules/vant/lib/utils/validate/number.js":function(e,n,i){"use strict";n.__esModule=!0,n.isNumeric=function(e){return/^\d+(\.\d+)?$/.test(e)},n.isNaN=function(e){if(Number.isNaN)return Number.isNaN(e);return e!=e}}}]);

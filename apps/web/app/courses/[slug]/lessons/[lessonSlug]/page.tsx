@@ -146,7 +146,7 @@ export default function CourseLessonPage() {
                       Bài {activeLessonIndex + 1} / {courseSyllabus.lessons.length}
                     </span>
                     {activeLesson.isPreview && (
-                      <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px]">Xem trước</span>
+                      <span className="rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px]">Xem trước</span>
                     )}
                   </div>
 
@@ -157,14 +157,14 @@ export default function CourseLessonPage() {
                       <button
                         type="button"
                         onClick={handleNextLesson}
-                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-blue-400 to-cyan-600 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-blue-300 hover:to-cyan-500 transition shadow-md shadow-blue-500/25 cursor-pointer"
+                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-[#00C2FF] to-[#0052FF] px-5 py-2.5 text-sm font-extrabold text-white hover:brightness-110 transition shadow-md shadow-[#00C2FF]/25 cursor-pointer"
                       >
                         Tiếp tục bài tiếp theo →
                       </button>
                     ) : (
                       <Link
                         href={`/courses/${courseSyllabus.slug}`}
-                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-teal-400 to-teal-500 px-5 py-2.5 text-sm font-extrabold text-zinc-950 hover:from-teal-300 hover:to-teal-500 transition shadow-md"
+                        className="ml-auto inline-flex items-center gap-1.5 rounded bg-gradient-to-r from-[#00C2FF] to-[#0052FF] px-5 py-2.5 text-sm font-extrabold text-white hover:brightness-110 transition shadow-md"
                       >
                         Hoàn thành khoá học! 🎓
                       </Link>
@@ -212,7 +212,7 @@ export default function CourseLessonPage() {
                           <div className={`h-7 w-7 rounded-full flex items-center justify-center shrink-0 border transition ${isActive
                               ? "bg-blue-500/20 border-blue-400/50 text-blue-300"
                               : isCompleted
-                                ? "bg-teal-500/20 border-teal-400/50 text-teal-300"
+                                ? "bg-[#00C2FF]/20 border-[#00C2FF]/50 text-[#00C2FF]"
                                 : "bg-white/[0.04] border-white/10 text-zinc-400 group-hover:border-blue-400/30 group-hover:text-blue-300"
                             }`}>
                             {isCompleted ? (
@@ -228,10 +228,10 @@ export default function CourseLessonPage() {
                             </div>
                             <div className="mt-0.5 flex items-center gap-1.5 text-[10px] text-zinc-500">
                               {lesson.isPreview && (
-                                <span className="text-teal-300/80 font-bold uppercase tracking-wider">· Preview</span>
+                                <span className="text-[#00C2FF]/80 font-bold uppercase tracking-wider">· Preview</span>
                               )}
                               {isCompleted && (
-                                <span className="text-teal-400 font-bold uppercase tracking-wider">· Đã xong</span>
+                                <span className="text-[#00C2FF] font-bold uppercase tracking-wider">· Đã xong</span>
                               )}
                             </div>
                           </div>

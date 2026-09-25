@@ -1,542 +1,170 @@
 import { Header } from "../../../components/layout/Header";
 import { Footer } from "../../../components/layout/Footer";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { 
+  Star, 
+  Zap, 
+  DollarSign, 
+  ArrowRight,
+  Award,
+  Building,
+  BadgeCheck,
+  CreditCard
+} from "lucide-react";
 
-// Dynamic database of broker review metrics
-const brokerReviewsDb: Record<string, any> = {
-  "ec-markets": {
-    name: "EC Markets",
-    slug: "ec-markets",
-    logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4T0306DMGXZC7W44WKZ4PV.webp",
-    rating: "4.5",
-    stars: 4.5,
-    trustStatus: "Trust trung bình",
-    trustLevel: "3/5",
-    trustBarCount: 3,
-    licensesCount: 1,
-    verifiedDate: "02/2026",
-    foundedYear: "2012",
-    yearsActive: "14 năm",
-    maxLeverage: "1:1000",
-    withdrawalTime: "1–2 business days",
-    region: "Global",
-    executionModel: "STP",
-    minDeposit: "$50",
-    hasRebate: true,
-    hasSwapFree: false,
-    pros: [
-      "High leverage up to 1:1000",
-      "STP execution",
-      "Low minimum deposit ($50)",
-      "Crypto trading supported",
-      "Raw/ECN account available"
-    ],
-    cons: [
-      "Offshore regulation only (FSC)",
-      "Limited brand recognition",
-      "No swap-free option"
-    ],
-    platforms: ["MT4", "MT5"],
-    accounts: ["Standard", "Raw / ECN"],
-    products: ["Forex", "Gold & Metals", "Crypto"],
-    licenses: [
-      {
-        shortCode: "FSC",
-        name: "Ủy ban Dịch vụ Tài chính Mauritius",
-        regulatorLogo: "https://hieunthub.co/uploads/regulators/01KJ6QTNP8KSR86JARXZDW33V6.webp",
-        regulatorSite: "https://www.fscmauritius.org",
-        status: "Đang giám sát",
-        code: "GB21200130",
-        entity: "EC Markets Limited",
-        country: "Global"
-      }
-    ],
-    mechanisms: [
-      { name: "Premium Level 1", tier: "PRO" },
-      { name: "Premium Level 2", tier: "PRO" },
-      { name: "Premium Level 3", tier: "PRO" },
-      { name: "VIP Partner", tier: "VIP" }
-    ],
-    faqs: [
-      { q: "Đòn bẩy tối đa tại EC Markets là bao nhiêu?", a: "Đòn bẩy tối đa tại EC Markets là 1:1000." },
-      { q: "Nạp tối thiểu tại EC Markets là bao nhiêu?", a: "Mức nạp tối thiểu tại EC Markets là $50." },
-      { q: "EC Markets có được cấp phép không?", a: "Có. Giấy phép: FSC." },
-      { q: "EC Markets hỗ trợ những nền tảng giao dịch nào?", a: "Các nền tảng: MT4, MT5." },
-      { q: "Thời gian xử lý rút tiền tại EC Markets là bao lâu?", a: "Thời gian rút tiền tại EC Markets: 1–2 ngày làm việc." }
-    ],
-    similar: [
-      { name: "Markets4you", slug: "markets4you", rating: "3.9/5", logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4SCZ8E8R3DN38KJ2858JV7.webp" },
-      { name: "STARTRADER", slug: "startrader", rating: "4.1/5", logo: "https://hieunthub.co/uploads/brokers/logos/01KJ4TBG5PYYCGC5M9ZS0RSNYC.webp" }
-    ]
-  }
-};
+export const dynamic = 'force-dynamic';
 
-export default async function BrokerDetailPage({ params }: { params: any }) {
-  const resolvedParams = await params;
-  const rawSlug = resolvedParams?.slug || "";
-  const slug = rawSlug.startsWith("danh-gia-") ? rawSlug.substring(9) : rawSlug;
-
-  const broker = brokerReviewsDb[slug] || brokerReviewsDb["ec-markets"]; // Fallback to EC Markets if not found
-
-  if (!broker) {
-    notFound();
-  }
-
+export default function BrokerDetailPage() {
   return (
-    <>
+    <div className="min-h-screen bg-[#020712] text-slate-100 font-sans flex flex-col selection:bg-[#00C2FF]/30 selection:text-[#00C2FF]">
       <Header />
-      <main id="main-content" className="flex-grow">
+      <main id="main-content" className="flex-grow py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-xs text-slate-400 mb-6">
+          <Link href="/" className="hover:text-[#00C2FF]">Trang chủ</Link>
+          <span>/</span>
+          <Link href="/brokers" className="hover:text-[#00C2FF]">Sàn đối tác</Link>
+          <span>/</span>
+          <span className="text-[#00C2FF] font-bold">VT Markets (WikiFX: 8.68/10)</span>
+        </div>
 
-        {/* Detail Hero Section */}
-        <section className="relative overflow-hidden border-b border-white/5">
-          <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-40 right-0 w-[600px] h-[400px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+        {/* Broker Header Card */}
+        <div className="rounded-3xl border border-[#00C2FF]/30 bg-[#050D1A] p-6 sm:p-8 shadow-2xl mb-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[250px] bg-[#00C2FF]/10 blur-[120px] pointer-events-none" />
 
-          <div className="relative max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-10 lg:pb-14">
-            {/* Breadcrumbs */}
-            <nav className="text-xs text-zinc-500 mb-5 flex items-center gap-2 flex-wrap">
-              <Link href="/" className="hover:text-blue-300 transition">Trang chủ</Link>
-              <span>›</span>
-              <Link href="/brokers" className="hover:text-blue-300 transition">Sàn giao dịch</Link>
-              <span>›</span>
-              <span className="text-zinc-300 truncate">{broker.name}</span>
-            </nav>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            {/* Left Info */}
+            <div className="lg:col-span-8 space-y-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-gradient-to-r from-[#00C2FF] to-[#0052FF] px-3 py-1 text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5 shadow">
+                  <Award className="h-3.5 w-3.5 text-white" />
+                  <span>Đối Tác Chiến Lược Số 1 VT Markets</span>
+                </span>
+                <span className="rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/40 px-3 py-1 text-xs font-bold text-[#00C2FF] flex items-center gap-1">
+                  <BadgeCheck className="h-3.5 w-3.5 text-[#00C2FF]" />
+                  <span>Điểm WikiFX: 8.68 / 10 (Sàn Uy Tín Hàng Đầu)</span>
+                </span>
+              </div>
 
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-
-              {/* Left Column info */}
-              <div className="lg:col-span-7">
-                <div className="flex items-start gap-5 mb-5">
-                  <img src={broker.logo} alt={broker.name} className="h-20 w-20 rounded object-cover shrink-0 shadow-xl" />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap mb-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 px-2.5 py-0.5 text-xs font-semibold">
-                        <span>⚠️</span>
-                        {broker.trustStatus}
-                      </span>
-                    </div>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">{broker.name}</h1>
-                    <div className="mt-3 flex items-center gap-4 text-sm flex-wrap text-zinc-400">
-                      <div className="flex items-center gap-1.5" aria-label={`${broker.rating} / 5`}>
-                        <span className="inline-flex items-center gap-0.5">
-                          {Array.from({ length: 5 }).map((_, idx) => (
-                            <svg key={idx} className="h-4 w-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                              <path d="M10 1.5l2.7 5.46 6.03.88-4.36 4.25 1.03 6L10 15.27 4.6 18.09l1.03-6L1.27 7.84l6.03-.88L10 1.5z" />
-                            </svg>
-                          ))}
-                        </span>
-                        <span className="font-extrabold text-white text-base">{broker.rating}</span>
-                        <span className="text-zinc-500 text-xs">/ 5</span>
-                      </div>
-                      <span className="text-zinc-700">·</span>
-                      <span><strong className="text-white">{broker.licensesCount}</strong> giấy phép</span>
-                      <span className="text-zinc-700">·</span>
-                      <span className="text-zinc-500">Verified <strong className="text-teal-300">{broker.verifiedDate}</strong></span>
-                    </div>
-                  </div>
+              <div className="flex items-center gap-4">
+                <div className="flex h-16 w-32 items-center justify-center rounded-2xl bg-[#020712] border border-slate-700 p-2 shadow-inner">
+                  <img src="/images/brokers/vt-markets.svg" alt="VT Markets" className="max-h-10 w-auto" />
                 </div>
-
-                {/* Regulator badges */}
-                <div className="mb-5 flex flex-wrap gap-2">
-                  {broker.licenses.map((lic: any, idx: number) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold transition hover:scale-105 cursor-pointer border-white/15 bg-white/[0.06] text-zinc-200 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-200"
-                    >
-                      <img src={lic.regulatorLogo} alt={lic.shortCode} className="h-3.5 w-3.5 object-contain shrink-0" loading="lazy" />
-                      <span>{lic.shortCode}</span>
-                      <span className="text-[10px] opacity-60">· {lic.country}</span>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Quick Info Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-base">📅</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Năm thành lập</span>
+                <div>
+                  <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">VT Markets</h1>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="flex text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      ))}
                     </div>
-                    <div className="font-extrabold text-blue-300 text-base truncate">{broker.foundedYear}</div>
-                    {broker.yearsActive && <div className="text-[10px] text-zinc-500 mt-0.5">{broker.yearsActive}</div>}
+                    <span className="text-sm font-bold text-slate-200">Hoạt động từ 2015 &bull; 10+ Năm Toàn Cầu</span>
                   </div>
-                  <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-base">⚡</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Max leverage</span>
-                    </div>
-                    <div className="font-extrabold text-cyan-300 text-base truncate">{broker.maxLeverage}</div>
-                  </div>
-                  <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-base">⏱️</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Rút tiền</span>
-                    </div>
-                    <div className="font-extrabold text-indigo-300 text-base truncate">{broker.withdrawalTime}</div>
-                  </div>
-                  <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-base">🌍</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Khu vực</span>
-                    </div>
-                    <div className="font-extrabold text-indigo-300 text-base truncate">{broker.region}</div>
-                  </div>
-                  <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-base">⚖️</span>
-                      <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">Khớp lệnh</span>
-                    </div>
-                    <div className="font-extrabold text-cyan-300 text-base truncate">{broker.executionModel}</div>
-                  </div>
-                </div>
-
-                {/* Card footer options */}
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <button type="button" className="inline-flex items-center gap-2 rounded border border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 px-4 py-2 text-sm font-semibold text-zinc-300 transition">So sánh</button>
-                  <Link href="/brokers/so-sanh" className="text-sm text-zinc-400 hover:text-blue-300 transition">
-                    Xem trang so sánh →
-                  </Link>
                 </div>
               </div>
 
-              {/* Right Column Sticky CTA Card */}
-              <div className="lg:col-span-5">
-                <div className="sticky top-24 rounded border border-blue-400/30 bg-gradient-to-b from-blue-500/15 via-cyan-500/5 to-transparent p-5 md:p-6 shadow-2xl shadow-blue-500/10">
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="min-w-0">
-                      <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-400/15 border border-blue-400/30 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em] text-blue-300 font-bold">
-                        <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-                        MỞ TÀI KHOẢN
-                      </div>
-                      <h3 className="mt-2 text-lg md:text-xl font-extrabold text-white truncate">Đăng ký {broker.name}</h3>
-                    </div>
-                    <img src={broker.logo} alt="" className="h-12 w-12 rounded object-cover shrink-0" />
-                  </div>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl">
+                VT Markets là nhà môi giới tài chính toàn cầu được cấp phép và giám sát bởi <strong>FSCA (No. 50865)</strong> và <strong>FSC Mauritius (No. GB23202269)</strong>. Cung cấp nền tảng MetaTrader 5 (MT5), MetaTrader 4 (MT4), tốc độ khớp lệnh ECN/STP mili-giây, đòn bẩy đến 1:1000 và bảo chứng nạp rút tự động qua ngân hàng Việt Nam 24/7.
+              </p>
 
-                  {broker.hasRebate && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-500/10 border border-teal-400/25 px-2 py-1 text-[11px] text-teal-200 font-semibold">
-                        <span className="text-teal-400">✓</span>
-                        <span>Rebate</span>
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-3 gap-1.5 mb-4 rounded border border-white/10 bg-white/[0.03] p-1.5">
-                    <div className="rounded px-2.5 py-2 text-center">
-                      <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-semibold">Min</div>
-                      <div className="font-extrabold text-white text-sm tabular-nums truncate">{broker.minDeposit}</div>
-                    </div>
-                    <div className="rounded px-2.5 py-2 text-center border-x border-white/5">
-                      <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-semibold">Đòn bẩy</div>
-                      <div className="font-extrabold text-white text-sm tabular-nums truncate">{broker.maxLeverage}</div>
-                    </div>
-                    <div className="rounded px-2.5 py-2 text-center">
-                      <div className="text-[9px] text-zinc-500 uppercase tracking-wider font-semibold">XAU</div>
-                      <div className="font-extrabold text-white text-sm tabular-nums truncate">—</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-[9px] uppercase tracking-[0.12em] text-blue-300/80 font-bold">Link khách lẻ</span>
-                        <div className="h-px flex-1 bg-gradient-to-r from-blue-400/30 to-transparent"></div>
-                      </div>
-                      <div className="space-y-2">
-                        <a href="https://www.ecmarkets.com/" target="_blank" rel="nofollow noopener" className="flex items-center justify-between gap-3 rounded px-4 py-3 transition group bg-gradient-to-r from-blue-400 to-cyan-600 text-zinc-950 font-extrabold shadow-lg shadow-blue-500/25 hover:from-blue-300 hover:to-cyan-500">
-                          <span className="text-sm truncate">Primary Register Link</span>
-                          <svg className="h-4 w-4 shrink-0 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                        </a>
-                        <a href="https://www.ecmarkets.com/" target="_blank" rel="nofollow noopener" className="flex items-center justify-between gap-3 rounded px-4 py-3 transition group bg-white/[0.04] border border-white/10 text-zinc-100 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-200 font-semibold">
-                          <span className="text-sm truncate">Standard Link 2</span>
-                          <svg className="h-4 w-4 shrink-0 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-[11px] text-zinc-500">
-                    <div className="flex items-center gap-1.5">
-                      <svg className="h-3.5 w-3.5 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
-                      <span>HH verified</span>
-                    </div>
-                    <span className="text-zinc-700">·</span>
-                    <div className="flex items-center gap-1.5">
-                      <svg className="h-3.5 w-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" /></svg>
-                      <span>Hỗ trợ 24/7</span>
-                    </div>
-                    <span className="text-zinc-700">·</span>
-                    <div className="flex items-center gap-1.5">
-                      <svg className="h-3.5 w-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 8a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" /></svg>
-                      <span>Free</span>
-                    </div>
-                  </div>
-
-                  <p className="mt-3 text-[10px] text-zinc-500 leading-relaxed flex items-start gap-1.5">
-                    <svg className="h-3 w-3 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" /></svg>
-                    <span>Trading có rủi ro. Tự nghiên cứu trước khi nạp tiền. Không khuyến nghị đầu tư.</span>
-                  </p>
+              {/* Quick Spec Tags */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div className="bg-[#020712] border border-slate-800 rounded-xl p-2.5 text-center">
+                  <span className="text-[10px] text-slate-400 block">Đòn Bẩy Tối Đa</span>
+                  <span className="font-mono font-bold text-[#00C2FF] text-sm">1:1000</span>
+                </div>
+                <div className="bg-[#020712] border border-slate-800 rounded-xl p-2.5 text-center">
+                  <span className="text-[10px] text-slate-400 block">Spread Thấp Nhất</span>
+                  <span className="font-mono font-bold text-white text-sm">Từ 0.0 Pip</span>
+                </div>
+                <div className="bg-[#020712] border border-slate-800 rounded-xl p-2.5 text-center">
+                  <span className="text-[10px] text-slate-400 block">Nạp Tối Thiểu</span>
+                  <span className="font-mono font-bold text-white text-sm">$50 USD</span>
+                </div>
+                <div className="bg-[#020712] border border-slate-800 rounded-xl p-2.5 text-center">
+                  <span className="text-[10px] text-slate-400 block">Nạp Rút VN</span>
+                  <span className="font-mono font-bold text-[#00C2FF] text-sm">VietQR 24/7 (0 Phí)</span>
                 </div>
               </div>
+            </div>
+
+            {/* Right: Registration & Rebate Activation Card */}
+            <div className="lg:col-span-4 rounded-2xl border border-[#00C2FF]/40 bg-[#08152B] p-6 text-center shadow-2xl">
+              <div className="text-[11px] font-bold text-[#00C2FF] uppercase tracking-wider mb-1">
+                Kích Hoạt Tài Khoản & Nhận Hoàn Phí
+              </div>
+              <div className="text-2xl font-black text-white mb-4">
+                Hoàn Đến <span className="text-[#00C2FF]">$15 / Lot Vàng</span>
+              </div>
+
+              <div className="space-y-2.5 mb-5 text-left text-xs text-slate-300">
+                <div className="flex justify-between border-b border-slate-800 pb-1.5">
+                  <span className="text-slate-400">Giấy phép cơ quan:</span>
+                  <strong className="text-white font-mono">FSCA, FSC</strong>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1.5">
+                  <span className="text-slate-400">Nền tảng giao dịch:</span>
+                  <strong className="text-[#00C2FF] font-bold">MT5 / MT4 / App</strong>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1.5">
+                  <span className="text-slate-400">Bảo hiểm tài khoản:</span>
+                  <strong className="text-white">Segregated Tier-1</strong>
+                </div>
+                <div className="flex justify-between text-[#00C2FF] font-bold">
+                  <span>Cơ chế Backcom:</span>
+                  <span>Tự Động Trả Trực Tiếp Hàng Ngày</span>
+                </div>
+              </div>
+
+              <a
+                href="https://www.vtmarkets.com/get-trading/?affid=8421818926"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#0052FF] py-3.5 text-xs sm:text-sm font-black text-white hover:brightness-110 shadow-lg shadow-[#00C2FF]/25 transition-all uppercase tracking-wide mb-2"
+              >
+                <DollarSign className="h-4 w-4 text-white" />
+                <span>Mở Tài Khoản Nhận Hoàn Phí</span>
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <p className="text-[10.5px] text-slate-500">Mở tài khoản trực tiếp dưới hệ sinh thái VT Rewards Hub</p>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* Pros & Cons Section */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">⚖️ ĐÁNH GIÁ NHANH</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Ưu &amp; nhược điểm</h2>
+        {/* Regulatory & Safety Details from WikiFX */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="rounded-2xl border border-slate-800 bg-[#050D1A] p-5 space-y-2">
+            <div className="flex items-center gap-2 text-[#00C2FF] font-bold text-sm">
+              <Building className="h-4 w-4 text-[#00C2FF]" />
+              <span>Pháp Lý & Quản Lý Giám Sát</span>
             </div>
-            <div className="grid md:grid-cols-2 gap-5">
-              <div className="rounded border border-teal-400/20 bg-gradient-to-b from-teal-500/10 to-teal-500/[0.02] p-6">
-                <h3 className="text-base font-extrabold text-teal-300 mb-4 flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center h-8 w-8 rounded bg-teal-500/20 border border-teal-400/30">
-                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
-                  </span>
-                  Ưu điểm
-                </h3>
-                <ul className="space-y-2.5 text-sm text-zinc-200">
-                  {broker.pros.map((pro: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="text-teal-400 mt-0.5 shrink-0 font-bold">+</span>
-                      <span>{pro}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded border border-indigo-400/20 bg-gradient-to-b from-indigo-500/10 to-indigo-500/[0.02] p-6">
-                <h3 className="text-base font-extrabold text-indigo-300 mb-4 flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center h-8 w-8 rounded bg-indigo-500/20 border border-indigo-400/30">
-                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" /></svg>
-                  </span>
-                  Nhược điểm
-                </h3>
-                <ul className="space-y-2.5 text-sm text-zinc-200">
-                  {broker.cons.map((con: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="text-indigo-400 mt-0.5 shrink-0 font-bold">−</span>
-                      <span>{con}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              VT Markets tuân thủ các quy định khắt khe của Cơ quan Quản lý Tài chính Nam Phi (FSCA License No. 50865) và FSC (No. GB23202269), kiểm toán tài chính độc lập hàng năm.
+            </p>
           </div>
-        </section>
 
-        {/* Trading Conditions Section */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">📊 GIAO DỊCH</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Điều kiện giao dịch</h2>
+          <div className="rounded-2xl border border-slate-800 bg-[#050D1A] p-5 space-y-2">
+            <div className="flex items-center gap-2 text-[#00C2FF] font-bold text-sm">
+              <CreditCard className="h-4 w-4 text-[#00C2FF]" />
+              <span>Bảo Vệ Tiền Gửi (Segregated Fund)</span>
             </div>
-
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
-                <div className="text-[10px] uppercase tracking-wider text-blue-300 font-bold mb-3 flex items-center gap-1.5">📱 Nền tảng</div>
-                <div className="flex flex-wrap gap-2">
-                  {broker.platforms.map((plat: string, idx: number) => (
-                    <span key={idx} className="rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-200 px-3 py-1 text-xs font-semibold">{plat}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
-                <div className="text-[10px] uppercase tracking-wider text-indigo-300 font-bold mb-3 flex items-center gap-1.5">👤 Loại tài khoản</div>
-                <div className="flex flex-wrap gap-2">
-                  {broker.accounts.map((acc: string, idx: number) => (
-                    <span key={idx} className="rounded-full border border-indigo-400/30 bg-indigo-500/10 text-indigo-200 px-3 py-1 text-xs font-semibold">{acc}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
-                <div className="text-[10px] uppercase tracking-wider text-cyan-300 font-bold mb-3 flex items-center gap-1.5">💎 Sản phẩm</div>
-                <div className="flex flex-wrap gap-2">
-                  {broker.products.map((prod: string, idx: number) => (
-                    <span key={idx} className="rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-200 px-3 py-1 text-xs font-semibold">{prod}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
-                <div className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold mb-2">Mô hình khớp lệnh</div>
-                <div className="text-2xl md:text-3xl font-extrabold text-teal-300">{broker.executionModel}</div>
-              </div>
-            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Toàn bộ tiền gửi của khách hàng được giữ tại tài khoản tách biệt tại các ngân hàng xếp hạng Tier-1 (Commonwealth Bank of Australia), hoàn toàn không sử dụng cho hoạt động công ty.
+            </p>
           </div>
-        </section>
 
-        {/* Commission Tiers Section */}
-        <section id="commission-tiers" className="border-b border-white/5 scroll-mt-20">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">📄 CƠ CHẾ CÔNG KHAI</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Cơ chế hoa hồng {broker.name}</h2>
-              <p className="text-sm text-zinc-400 mt-1">Xem chi tiết spread, rebate, điều kiện duy trì từng tier.</p>
+          <div className="rounded-2xl border border-slate-800 bg-[#050D1A] p-5 space-y-2">
+            <div className="flex items-center gap-2 text-[#00C2FF] font-bold text-sm">
+              <Zap className="h-4 w-4 text-[#00C2FF]" />
+              <span>Khớp Lệnh Siêu Tốc Cho Giao Dịch Thuật Toán</span>
             </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {broker.mechanisms.map((mech: any, idx: number) => (
-                <div key={idx} className="group text-left rounded border border-cyan-400/30 bg-gradient-to-br from-cyan-500/10 to-cyan-500/[0.02] hover:border-cyan-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition p-6 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      <div className="inline-flex items-center justify-center h-12 w-12 rounded bg-cyan-500/15 border border-cyan-400/30 text-cyan-300">
-                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                      </div>
-                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${mech.tier === "VIP" ? "bg-blue-500 text-zinc-950" : "bg-cyan-500/20 border border-cyan-400/40 text-cyan-300"
-                        }`}>{mech.tier}</span>
-                    </div>
-                    <div className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold mb-1">Tier</div>
-                    <h3 className="text-lg font-extrabold text-white group-hover:text-blue-300 transition mb-3">{mech.name}</h3>
-                  </div>
-                  <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs mt-4">
-                    <span className="text-zinc-400">Xem bản đầy đủ</span>
-                    <span className="inline-flex items-center gap-1 text-blue-300 font-bold group-hover:translate-x-0.5 transition">
-                      Xem file PDF
-                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
-              <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" /></svg>
-              Cơ chế cao hơn các tier mặc định?
-              <Link href="/contact" className="text-blue-300 hover:text-blue-200 font-semibold">
-                Yêu cầu cơ chế riêng →
-              </Link>
-            </div>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Máy chủ đặt tại trung tâm dữ liệu Equinix NY4 và LD4, độ trễ chỉ dưới 5ms, tối ưu hóa tuyệt đối cho các chiến lược Scalping Vàng và giao dịch định lượng.
+            </p>
           </div>
-        </section>
-
-        {/* Safety & Trust Section */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">🛡️ AN TOÀN</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Giấy phép &amp; độ tin cậy</h2>
-            </div>
-
-            <div className="grid gap-5 lg:grid-cols-3">
-              <div className="rounded border border-cyan-400/20 bg-gradient-to-b from-cyan-500/10 to-cyan-500/[0.02] p-6">
-                <div className="text-[10px] uppercase tracking-wider text-cyan-300 font-bold mb-2">Độ tin cậy HH</div>
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="text-3xl font-extrabold text-cyan-200">{broker.trustLevel}</div>
-                  <span className="text-2xl">⚠️</span>
-                </div>
-                <div className="flex gap-1 mb-3">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <div
-                      key={idx}
-                      className={`h-2 flex-1 rounded-full ${idx < broker.trustBarCount ? "bg-cyan-400" : "bg-white/10"
-                        }`}
-                    />
-                  ))}
-                </div>
-                <div className="text-xs text-zinc-400 leading-relaxed mb-3">
-                  Trust trung bình — Đánh giá dựa trên giấy phép Tier-1, lịch sử thanh khoản, audit độc lập của team HH.
-                </div>
-                <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/5 text-xs">
-                  <div>
-                    <div className="text-[10px] text-zinc-500 uppercase font-bold">Tier-1</div>
-                    <div className="font-extrabold text-teal-300 text-lg">0</div>
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-zinc-500 uppercase font-bold">Total</div>
-                    <div className="font-extrabold text-white text-lg">{broker.licensesCount}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-2 space-y-3">
-                <div className="text-[10px] uppercase tracking-wider text-teal-300 font-bold mb-2">Giấy phép ({broker.licensesCount})</div>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {broker.licenses.map((lic: any, idx: number) => (
-                    <div key={idx} className="rounded border transition p-4 border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/40">
-                      <div className="flex items-start gap-3">
-                        <div className="h-12 w-12 rounded shrink-0 flex items-center justify-center bg-white/[0.04] backdrop-blur-sm p-1.5 overflow-hidden ring-1 ring-white/15">
-                          <img src={lic.regulatorLogo} alt={lic.shortCode} className="h-full w-full object-contain" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="font-extrabold text-white text-sm">{lic.shortCode}</span>
-                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider">{lic.status}</span>
-                          </div>
-                          <div className="text-xs text-zinc-400 truncate mt-1">{lic.name}</div>
-                          <div className="mt-2 flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-zinc-500">
-                            <span className="inline-flex items-center gap-1">📍 {lic.country}</span>
-                            <span className="font-mono text-teal-300/80">#{lic.code}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQs Section */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">❓ FAQ</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Câu hỏi thường gặp</h2>
-            </div>
-
-            <div className="grid gap-3 lg:grid-cols-2">
-              {broker.faqs.map((faq: any, idx: number) => (
-                <details key={idx} className="group rounded border border-white/10 bg-white/[0.03] hover:border-blue-400/30 transition overflow-hidden h-fit">
-                  <summary className="cursor-pointer list-none flex items-start justify-between gap-4 px-5 py-4 font-semibold text-white hover:bg-white/[0.02] transition select-none">
-                    <span className="leading-relaxed">{faq.q}</span>
-                    <svg className="h-5 w-5 text-zinc-400 transition group-open:rotate-180 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                  </summary>
-                  <div className="px-5 pb-5 text-zinc-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                    {faq.a}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Similar Brokers Section */}
-        <section className="border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-2">🔗 CÓ THỂ BẠN QUAN TÂM</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Broker tương tự</h2>
-            </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {broker.similar.map((sim: any, idx: number) => (
-                <Link key={idx} href={`/brokers/danh-gia-${sim.slug}`} className="group rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10 transition p-5 flex flex-col justify-between">
-                  <div className="flex items-center gap-4">
-                    <img src={sim.logo} alt={sim.name} className="h-14 w-14 rounded object-cover shrink-0 shadow-sm" />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-extrabold text-white text-base group-hover:text-blue-300 transition truncate">{sim.name}</h3>
-                      <div className="text-xs text-cyan-400 mt-0.5">★ {sim.rating}</div>
-                    </div>
-                    <svg className="h-4 w-4 text-zinc-500 group-hover:text-blue-300 group-hover:translate-x-0.5 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
+        </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

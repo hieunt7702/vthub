@@ -133,7 +133,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
                       <span className="text-zinc-700">·</span>
                       <span><strong className="text-white">{broker.licensesCount}</strong> giấy phép</span>
                       <span className="text-zinc-700">·</span>
-                      <span className="text-zinc-500">Verified <strong className="text-teal-300">{broker.verifiedDate}</strong></span>
+                      <span className="text-zinc-500">Verified <strong className="text-[#00C2FF]">{broker.verifiedDate}</strong></span>
                     </div>
                   </div>
                 </div>
@@ -218,8 +218,8 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
 
                   {broker.hasRebate && (
                     <div className="flex flex-wrap gap-1.5 mb-4">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-teal-500/10 border border-teal-400/25 px-2 py-1 text-[11px] text-teal-200 font-semibold">
-                        <span className="text-teal-400">✓</span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/25 px-2 py-1 text-[11px] text-[#00C2FF] font-semibold">
+                        <span className="text-[#00C2FF]">✓</span>
                         <span>Rebate</span>
                       </span>
                     </div>
@@ -261,7 +261,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
 
                   <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-[11px] text-zinc-500">
                     <div className="flex items-center gap-1.5">
-                      <svg className="h-3.5 w-3.5 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
+                      <svg className="h-3.5 w-3.5 text-[#00C2FF]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
                       <span>HH verified</span>
                     </div>
                     <span className="text-zinc-700">·</span>
@@ -294,9 +294,9 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
               <h2 className="text-2xl md:text-3xl font-bold text-white">Ưu &amp; nhược điểm</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-              <div className="rounded border border-teal-400/20 bg-gradient-to-b from-teal-500/10 to-teal-500/[0.02] p-6">
-                <h3 className="text-base font-extrabold text-teal-300 mb-4 flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center h-8 w-8 rounded bg-teal-500/20 border border-teal-400/30">
+              <div className="rounded border border-[#00C2FF]/20 bg-gradient-to-b from-[#00C2FF]/10 to-[#00C2FF]/[0.02] p-6">
+                <h3 className="text-base font-extrabold text-[#00C2FF] mb-4 flex items-center gap-2">
+                  <span className="inline-flex items-center justify-center h-8 w-8 rounded bg-[#00C2FF]/20 border border-[#00C2FF]/30">
                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" /></svg>
                   </span>
                   Ưu điểm
@@ -304,7 +304,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
                 <ul className="space-y-2.5 text-sm text-zinc-200">
                   {broker.pros.map((pro: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="text-teal-400 mt-0.5 shrink-0 font-bold">+</span>
+                      <span className="text-[#00C2FF] mt-0.5 shrink-0 font-bold">+</span>
                       <span>{pro}</span>
                     </li>
                   ))}
@@ -369,7 +369,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
 
               <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-6">
                 <div className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold mb-2">Mô hình khớp lệnh</div>
-                <div className="text-2xl md:text-3xl font-extrabold text-teal-300">{broker.executionModel}</div>
+                <div className="text-2xl md:text-3xl font-extrabold text-[#00C2FF]">{broker.executionModel}</div>
               </div>
             </div>
           </div>
@@ -449,7 +449,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
                 <div className="grid grid-cols-2 gap-2 pt-3 border-t border-white/5 text-xs">
                   <div>
                     <div className="text-[10px] text-zinc-500 uppercase font-bold">Tier-1</div>
-                    <div className="font-extrabold text-teal-300 text-lg">0</div>
+                    <div className="font-extrabold text-[#00C2FF] text-lg">0</div>
                   </div>
                   <div>
                     <div className="text-[10px] text-zinc-500 uppercase font-bold">Total</div>
@@ -459,7 +459,7 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
               </div>
 
               <div className="lg:col-span-2 space-y-3">
-                <div className="text-[10px] uppercase tracking-wider text-teal-300 font-bold mb-2">Giấy phép ({broker.licensesCount})</div>
+                <div className="text-[10px] uppercase tracking-wider text-[#00C2FF] font-bold mb-2">Giấy phép ({broker.licensesCount})</div>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {broker.licenses.map((lic: any, idx: number) => (
                     <div key={idx} className="rounded border transition p-4 border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/40">
@@ -470,12 +470,12 @@ export default async function BrokerDetailPage({ params }: { params: any }) {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-extrabold text-white text-sm">{lic.shortCode}</span>
-                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">{lic.status}</span>
+                            <span className="rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">{lic.status}</span>
                           </div>
                           <div className="text-xs text-zinc-400 truncate mt-1">{lic.name}</div>
                           <div className="mt-2 flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-zinc-500">
                             <span className="inline-flex items-center gap-1">📍 {lic.country}</span>
-                            <span className="font-mono text-teal-300/80">#{lic.code}</span>
+                            <span className="font-mono text-[#00C2FF]/80">#{lic.code}</span>
                           </div>
                         </div>
                       </div>

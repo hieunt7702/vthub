@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["el-mixins/migrating"],{"./node_modules/element-ui/lib/mixins/migrating.js":function(e,i,n){"use strict";i.__esModule=!0;n("./node_modules/element-ui/lib/utils/util.js");i.default={mounted:function(){},methods:{getMigratingConfig:function(){return{props:{},events:{}}}}}}}]);

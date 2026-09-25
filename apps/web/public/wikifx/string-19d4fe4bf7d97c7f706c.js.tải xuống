@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["van-utils/format/string"],{"./node_modules/vant/lib/utils/format/string.js":function(n,e,t){"use strict";e.__esModule=!0,e.camelize=function(n){return n.replace(o,function(n,e){return e.toUpperCase()})},e.padZero=function(n,e){void 0===e&&(e=2);var t=n+"";for(;t.length<e;)t="0"+t;return t};var o=/-(\w)/g}}]);

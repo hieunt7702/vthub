@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["van-utils/dom/node"],{"./node_modules/vant/lib/utils/dom/node.js":function(o,e,n){"use strict";e.__esModule=!0,e.removeNode=function(o){var e=o.parentNode;e&&e.removeChild(o)}}}]);

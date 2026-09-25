@@ -1,520 +1,335 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface Passview {
-  id: string;
-  title: string;
-  brokerName: string;
-  serverName: string;
-  accountId: string;
-  password: string;
-  status: string; // ACTIVE, INACTIVE
-  authorId: string;
-  createdAt: string;
-}
-
-const DEFAULT_PASSVIEWS: Passview[] = [
-  {
-    id: '1',
-    title: 'Tài khoản trade quỹ Exness thực chiến',
-    brokerName: 'Exness',
-    serverName: 'Exness-MT5Trial6',
-    accountId: '88392109',
-    password: 'InvestorPassword123',
-    status: 'ACTIVE',
-    authorId: 'admin_1',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    title: 'Tài khoản Copytrade Vantage FX',
-    brokerName: 'Vantage',
-    serverName: 'VantageFX-Live4',
-    accountId: '5540912',
-    password: 'ReadOnlyPass99',
-    status: 'ACTIVE',
-    authorId: 'admin_1',
-    createdAt: new Date(Date.now() - 86400000).toISOString()
-  },
-  {
-    id: '3',
-    title: 'Thử nghiệm robot Gold Hunter',
-    brokerName: 'XM',
-    serverName: 'XM-MT5-Real10',
-    accountId: '1240954',
-    password: 'GoldWatcherPass',
-    status: 'INACTIVE',
-    authorId: 'admin_1',
-    createdAt: new Date(Date.now() - 172800000).toISOString()
-  }
-];
+import { useState } from 'react';
+import { 
+  Plus, Search, Edit2, Trash2, CheckCircle2, 
+  Sparkles, ShieldCheck, Key, RefreshCw, Lock, Eye, ExternalLink
+} from 'lucide-react';
+import { 
+  VTPassview, 
+  STORAGE_KEYS, 
+  INITIAL_PASSVIEWS, 
+  useVTDataStore 
+} from '../../../lib/dataStore';
 
 export default function AdminPassviewsPage() {
-  const [passviews, setPassviews] = useState<Passview[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [editPassview, setEditPassview] = useState<Passview | null>(null);
+  const [passviews, setPassviews] = useVTDataStore<VTPassview>(
+    STORAGE_KEYS.PASSVIEWS,
+    INITIAL_PASSVIEWS
+  );
 
-  // Search & Filter & Sort & Pagination
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
-  const [sortField, setSortField] = useState<keyof Passview>('createdAt');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [showModal, setShowModal] = useState(false);
+  const [editPassview, setEditPassview] = useState<VTPassview | null>(null);
+  const [toastMsg, setToastMsg] = useState('');
 
-  // Form inputs
-  const [formData, setFormData] = useState({
-    title: '',
-    brokerName: 'Exness',
-    serverName: '',
-    accountId: '',
-    password: '',
-    status: 'ACTIVE',
-    authorId: 'admin_1'
+  const [formData, setFormData] = useState<Partial<VTPassview>>({
+    brokerName: 'VT Markets',
+    brokerId: 'vt-markets',
+    brokerLogo: '/logo_white.webp',
+    rating: '4.9',
+    accountType: 'RAW ECN VIP',
+    platform: 'MT5',
+    status: 'Ổn định',
+    server: 'VTMarkets-Live',
+    login: '',
+    passwordInvestor: '',
+    reviewUrl: '/brokers/vt-markets'
   });
 
-  const loadData = () => {
-    setLoading(true);
-    const stored = localStorage.getItem('bh_passview');
-    if (stored) {
-      setPassviews(JSON.parse(stored));
-    } else {
-      setPassviews(DEFAULT_PASSVIEWS);
-      localStorage.setItem('bh_passview', JSON.stringify(DEFAULT_PASSVIEWS));
-    }
-    setLoading(false);
+  const showNotification = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3000);
   };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const handleOpenAdd = () => {
     setEditPassview(null);
     setFormData({
-      title: '',
-      brokerName: 'Exness',
-      serverName: '',
-      accountId: '',
-      password: '',
-      status: 'ACTIVE',
-      authorId: 'admin_1'
+      brokerName: 'VT Markets',
+      brokerId: 'vt-markets',
+      brokerLogo: '/logo_white.webp',
+      rating: '4.9',
+      accountType: 'RAW ECN VIP',
+      platform: 'MT5',
+      status: 'Ổn định',
+      server: 'VTMarkets-Live',
+      login: '',
+      passwordInvestor: '',
+      reviewUrl: '/brokers/vt-markets'
     });
     setShowModal(true);
   };
 
-  const handleOpenEdit = (pv: Passview) => {
+  const handleOpenEdit = (pv: VTPassview) => {
     setEditPassview(pv);
-    setFormData({
-      title: pv.title || '',
-      brokerName: pv.brokerName,
-      serverName: pv.serverName || '',
-      accountId: pv.accountId || '',
-      password: pv.password || '',
-      status: pv.status || 'ACTIVE',
-      authorId: pv.authorId || 'admin_1'
-    });
+    setFormData(pv);
     setShowModal(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...formData };
-
-    const currentList = [...passviews];
-    if (editPassview) {
-      const idx = currentList.findIndex((p) => p.id === editPassview.id);
-      if (idx !== -1) {
-        currentList[idx] = {
-          ...editPassview,
-          ...payload
-        };
-      }
-    } else {
-      const newPv: Passview = {
-        ...payload,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString()
-      };
-      currentList.unshift(newPv);
+    if (!formData.login?.trim() || !formData.passwordInvestor?.trim()) {
+      alert('Vui lòng nhập đầy đủ Số tài khoản (Login) và Mật khẩu Investor!');
+      return;
     }
 
-    setPassviews(currentList);
-    localStorage.setItem('bh_passview', JSON.stringify(currentList));
+    const payload: VTPassview = {
+      id: editPassview?.id || `pv-${Date.now()}`,
+      brokerName: formData.brokerName || 'VT Markets',
+      brokerId: formData.brokerId || 'vt-markets',
+      brokerLogo: formData.brokerLogo || '/logo_white.webp',
+      rating: formData.rating || '4.9',
+      accountType: formData.accountType || 'RAW ECN VIP',
+      platform: (formData.platform as 'MT4' | 'MT5') || 'MT5',
+      status: formData.status || 'Ổn định',
+      server: formData.server || 'VTMarkets-Live',
+      login: formData.login || '',
+      passwordInvestor: formData.passwordInvestor || '',
+      registerLinks: editPassview?.registerLinks || [
+        { label: 'Mở Tài Khoản Nhận Backcom', href: 'https://www.vtmarkets.com/get-trading/?affid=8421818926', group: 'Link khách lẻ' },
+        { label: 'Đăng Ký Đối Tác IB', href: '/ib-commission-overview', group: 'Link IB' }
+      ],
+      reviewUrl: formData.reviewUrl || '/brokers/vt-markets',
+      createdAt: editPassview?.createdAt || new Date().toISOString()
+    };
+
+    if (editPassview) {
+      setPassviews(passviews.map(p => p.id === editPassview.id ? payload : p));
+      showNotification('Đã cập nhật tài khoản Passview thành công!');
+    } else {
+      setPassviews([payload, ...passviews]);
+      showNotification('Đã thêm tài khoản Passview mới thành công!');
+    }
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (!confirm('Bạn có chắc muốn xóa passview này không?')) return;
-    const filtered = passviews.filter((p) => p.id !== id);
-    setPassviews(filtered);
-    localStorage.setItem('bh_passview', JSON.stringify(filtered));
-  };
-
-  const handleSort = (field: keyof Passview) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortOrder('asc');
+  const handleDelete = (id: string, login: string) => {
+    if (confirm(`Bạn có chắc muốn xóa tài khoản Passview ${login} không?`)) {
+      setPassviews(passviews.filter(p => p.id !== id));
+      showNotification('Đã xóa tài khoản Passview thành công!');
     }
-    setCurrentPage(1);
   };
 
-  // Filter & Search
-  const filteredPassviews = passviews
-    .filter((p) => {
-      const matchesSearch =
-        (p.title || '').toLowerCase().includes(search.toLowerCase()) ||
-        p.brokerName.toLowerCase().includes(search.toLowerCase()) ||
-        p.accountId.toLowerCase().includes(search.toLowerCase());
-      const matchesStatus = !statusFilter || p.status === statusFilter;
-      return matchesSearch && matchesStatus;
-    })
-    .sort((a, b) => {
-      let valA = a[sortField];
-      let valB = b[sortField];
-
-      if (typeof valA === 'string') {
-        valA = (valA as string).toLowerCase();
-        valB = (valB as string).toLowerCase();
-      }
-
-      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
-      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-
-  // Pagination
-  const totalPages = Math.ceil(filteredPassviews.length / rowsPerPage);
-  const paginatedPassviews = filteredPassviews.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  const filteredPassviews = passviews.filter(p => {
+    const q = search.toLowerCase();
+    return p.brokerName.toLowerCase().includes(q) || p.server.toLowerCase().includes(q) || p.login.includes(q) || p.accountType.toLowerCase().includes(q);
+  });
 
   return (
-    <div className="flex flex-col h-full space-y-6">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
-        <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Quản lý Tài Khoản Passview</h1>
-          <p className="text-zinc-400 text-sm">Đăng tải thông tin tài khoản xem trực tiếp (Read-only investor password) để người dùng theo dõi tín hiệu.</p>
+    <div className="space-y-6">
+      {/* Toast */}
+      {toastMsg && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 bg-[#00C2FF] text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,194,255,0.4)] animate-bounce">
+          <CheckCircle2 className="w-5 h-5" />
+          <span>{toastMsg}</span>
         </div>
+      )}
+
+      {/* Header Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#050D1A] border border-slate-800 p-6 rounded-3xl">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+            <Key className="w-8 h-8 text-[#00C2FF]" />
+            <span>Quản Lý Tài Khoản Passview</span>
+          </h1>
+          <p className="text-slate-400 text-xs sm:text-sm mt-1">
+            Dữ liệu đồng bộ trực tiếp thời gian thực lên trang công khai <strong className="text-[#00C2FF]">/passview</strong>.
+          </p>
+        </div>
+
         <button
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-bold text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(0,194,255,0.3)] hover:brightness-110 transition cursor-pointer shrink-0"
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
-          Thêm Passview Mới
+          <Plus className="w-4 h-4" />
+          <span>Thêm Tài Khoản Passview</span>
         </button>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="bg-zinc-900 border border-zinc-800 p-5 rounded space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input
-            type="text"
-            placeholder="Tìm theo tiêu đề, tên sàn, tài khoản ID..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
-          />
-
-          <div>
-            <details className="relative group w-full" data-hh-nav-dropdown="">
-              <summary className="list-none cursor-pointer w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 flex items-center justify-between hover:border-zinc-700 transition">
-                <span>
-                  {statusFilter === '' ? 'Tất cả trạng thái' : 
-                   statusFilter === 'ACTIVE' ? 'Đang hoạt động (ACTIVE)' : 'Ngừng hoạt động (INACTIVE)'}
-                </span>
-                <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-              </summary>
-              <div className="absolute left-0 top-full mt-2 w-full z-50">
-                <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                  <button
-                    onClick={(e) => { e.preventDefault(); setStatusFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Tất cả trạng thái
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setStatusFilter('ACTIVE'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'ACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Đang hoạt động (ACTIVE)
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setStatusFilter('INACTIVE'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'INACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Ngừng hoạt động (INACTIVE)
-                  </button>
-                </div>
-              </div>
-            </details>
-          </div>
-        </div>
+      {/* Search Filter */}
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Tìm kiếm tài khoản theo số login, server, sàn..."
+          className="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#050D1A] border border-slate-800 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#00C2FF]"
+        />
       </div>
 
-      {/* Main Table */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded flex flex-col flex-1 overflow-hidden shadow-xl min-h-0">
-        <div className="overflow-x-auto overflow-y-auto flex-1 min-h-[300px]">
-          <table className="w-full text-left text-sm text-zinc-300">
-            <thead className="bg-zinc-950 border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wider">
-              <tr>
-                <th
-                  onClick={() => handleSort('title')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Tên Tài Khoản {sortField === 'title' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('brokerName')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Sàn {sortField === 'brokerName' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold">Máy Chủ (Server)</th>
-                <th className="px-6 py-4 font-bold">Số ID / Investor Pass</th>
-                <th
-                  onClick={() => handleSort('status')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Trạng Thái {sortField === 'status' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('createdAt')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Ngày Tạo {sortField === 'createdAt' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold text-right">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-zinc-500">Đang tải...</td>
-                </tr>
-              ) : paginatedPassviews.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-zinc-500">Không có dữ liệu.</td>
-                </tr>
-              ) : (
-                paginatedPassviews.map((pv) => (
-                  <tr key={pv.id} className="border-b border-zinc-800/60 hover:bg-zinc-800/20 transition-colors">
-                    <td className="px-6 py-4 font-bold text-white">{pv.title || 'Chưa đặt tiêu đề'}</td>
-                    <td className="px-6 py-4 text-zinc-300 font-semibold">{pv.brokerName}</td>
-                    <td className="px-6 py-4 text-xs font-mono text-zinc-400">{pv.serverName}</td>
-                    <td className="px-6 py-4 text-xs">
-                      <div>ID: <strong className="text-white font-mono">{pv.accountId}</strong></div>
-                      <div className="text-[10px] text-zinc-500">Pass: <strong className="font-mono text-zinc-400">{pv.password}</strong></div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
-                        pv.status === 'ACTIVE'
-                          ? 'bg-teal-500/10 border-teal-500/25 text-teal-400'
-                          : 'bg-zinc-800 border-zinc-700 text-zinc-500'
-                      }`}>
-                        {pv.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-xs text-zinc-500">{new Date(pv.createdAt).toLocaleDateString('vi-VN')}</td>
-                    <td className="px-6 py-4 text-right">
-                      <details className="relative group text-left inline-block" data-hh-nav-dropdown="">
-                        <summary className="list-none cursor-pointer p-1.5 hover:bg-zinc-800 rounded transition text-zinc-400 hover:text-white">
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-                        </summary>
-                        <div className="absolute right-0 top-full mt-1 z-50 min-w-[120px] shadow-xl">
-                          <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 flex flex-col gap-1">
-                            <button
-                              onClick={() => handleOpenEdit(pv)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                              Sửa
-                            </button>
-                            <button
-                              onClick={() => handleDelete(pv.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                              Xóa
-                            </button>
-                          </div>
-                        </div>
-                      </details>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+      {/* Passview List */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {filteredPassviews.map((pv) => (
+          <div
+            key={pv.id}
+            className="bg-[#050D1A] border border-slate-800 p-6 rounded-3xl flex flex-col justify-between hover:border-[#00C2FF]/50 transition shadow-lg"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="px-2.5 py-0.5 rounded-lg border border-[#00C2FF]/30 bg-[#00C2FF]/10 text-[#00C2FF] text-[10px] font-black uppercase">
+                  {pv.platform} &bull; {pv.accountType}
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
+                  {pv.status}
+                </span>
+              </div>
 
-        {/* Pagination */}
-        {filteredPassviews.length > 0 && (
-          <div className="bg-zinc-950 border-t border-zinc-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs select-none mt-auto shrink-0 z-10 sticky bottom-0">
-            <div className="text-zinc-500">
-              Hiển thị từ <strong className="text-white">{(currentPage - 1) * rowsPerPage + 1}</strong> đến{' '}
-              <strong className="text-white">
-                {Math.min(currentPage * rowsPerPage, filteredPassviews.length)}
-              </strong>{' '}
-              trong tổng số <strong className="text-white">{filteredPassviews.length}</strong> tài khoản.
+              <div className="flex items-center gap-2 mb-4">
+                <h3 className="text-xl font-black text-white">{pv.brokerName}</h3>
+                <span className="text-xs text-amber-400 font-bold">★ {pv.rating}</span>
+              </div>
+
+              <div className="space-y-2 bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800/80 font-mono text-xs">
+                <div className="flex items-center justify-between text-slate-400">
+                  <span>Server:</span>
+                  <span className="font-bold text-white">{pv.server}</span>
+                </div>
+                <div className="flex items-center justify-between text-slate-400">
+                  <span>Login (ID):</span>
+                  <span className="font-bold text-[#00C2FF]">{pv.login}</span>
+                </div>
+                <div className="flex items-center justify-between text-slate-400">
+                  <span>Password Investor:</span>
+                  <span className="font-bold text-amber-300">{pv.passwordInvestor}</span>
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-end gap-2 pt-4 mt-4 border-t border-slate-800/80">
               <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
+                onClick={() => handleOpenEdit(pv)}
+                className="p-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-[#00C2FF] transition"
+                title="Chỉnh sửa"
               >
-                Trước
+                <Edit2 className="w-3.5 h-3.5" />
               </button>
-              <span className="px-3 text-zinc-400">Trang {currentPage} / {totalPages}</span>
               <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(currentPage + 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
+                onClick={() => handleDelete(pv.id, pv.login)}
+                className="p-2 rounded-xl bg-rose-950/40 border border-rose-800/60 text-rose-300 hover:bg-rose-900/60 transition"
+                title="Xóa tài khoản"
               >
-                Sau
+                <Trash2 className="w-3.5 h-3.5" />
               </button>
             </div>
+          </div>
+        ))}
+
+        {filteredPassviews.length === 0 && (
+          <div className="col-span-2 text-center py-12 bg-[#050D1A] border border-slate-800 rounded-3xl text-slate-400 text-sm">
+            Không tìm thấy tài khoản Passview nào phù hợp.
           </div>
         )}
       </div>
 
-      {/* Modal Drawer */}
+      {/* Modal Add / Edit */}
       {showModal && (
-        <div 
-          className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-fadeIn"
-          onClick={() => setShowModal(false)}
-        >
-          <div 
-            className="w-full max-w-lg h-full bg-zinc-950 border-l border-zinc-850 flex flex-col shadow-2xl animate-slideLeft"
-            onClick={(e) => e.stopPropagation()}
-          >
-            
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 shrink-0">
-              <h2 className="text-xl font-bold text-white">
-                {editPassview ? 'Chỉnh Sửa Passview' : 'Thêm Passview Mới'}
-              </h2>
-              <button onClick={() => setShowModal(false)} className="p-1.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
-            </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="bg-[#050D1A] border border-[#00C2FF]/40 rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-5">
+            <h2 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#00C2FF]" />
+              <span>{editPassview ? 'Chỉnh Sửa Passview' : 'Thêm Passview Mới'}</span>
+            </h2>
 
-            <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
-              <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-4">
-              <div>
-                <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Tiêu đề tài khoản</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
-                  placeholder="VD: Robot Gold Hunter Thực Chiến"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleSave} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Sàn giao dịch</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Tên Sàn *</label>
                   <input
                     type="text"
                     required
                     value={formData.brokerName}
                     onChange={(e) => setFormData({ ...formData, brokerName: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none"
-                    placeholder="VD: Exness"
+                    placeholder="VD: VT Markets"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Máy chủ (Server)</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.serverName}
-                    onChange={(e) => setFormData({ ...formData, serverName: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none"
-                    placeholder="VD: Exness-MT5Real5"
-                  />
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Nền Tảng</label>
+                  <select
+                    value={formData.platform}
+                    onChange={(e) => setFormData({ ...formData, platform: e.target.value as 'MT4' | 'MT5' })}
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  >
+                    <option value="MT5">MetaTrader 5 (MT5)</option>
+                    <option value="MT4">MetaTrader 4 (MT4)</option>
+                  </select>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Số ID tài khoản</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Loại Tài Khoản</label>
                   <input
                     type="text"
-                    required
-                    value={formData.accountId}
-                    onChange={(e) => setFormData({ ...formData, accountId: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none"
-                    placeholder="VD: 883941"
+                    value={formData.accountType}
+                    onChange={(e) => setFormData({ ...formData, accountType: e.target.value })}
+                    placeholder="VD: RAW ECN VIP / STANDARD"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Mật khẩu Investor (Read-only)</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Trạng Thái</label>
                   <input
                     type="text"
-                    required
-                    value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none"
-                    placeholder="VD: PassWatcher1"
+                    value={formData.status}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    placeholder="VD: Ổn định / Live Trading"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Trạng thái hoạt động</label>
-                  <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-cyan-500/50">
-                      <span>{formData.status === 'ACTIVE' ? 'Hoạt động (ACTIVE)' : 'Ngừng hoạt động (INACTIVE)'}</span>
-                      <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                    </summary>
-                    <div className="absolute left-0 top-full mt-2 w-full z-50">
-                      <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, status: 'ACTIVE' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'ACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          Hoạt động (ACTIVE)
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, status: 'INACTIVE' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.status === 'INACTIVE' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          Ngừng hoạt động (INACTIVE)
-                        </button>
-                      </div>
-                    </div>
-                  </details>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Server Đăng Nhập *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.server}
+                  onChange={(e) => setFormData({ ...formData, server: e.target.value })}
+                  placeholder="VD: VTMarkets-Live / VTMarkets-Live2"
+                  className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                />
               </div>
 
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Số Login (Tài Khoản) *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.login}
+                    onChange={(e) => setFormData({ ...formData, login: e.target.value })}
+                    placeholder="VD: 8820491"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-[#00C2FF]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Mật Khẩu Investor (Read-only) *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.passwordInvestor}
+                    onChange={(e) => setFormData({ ...formData, passwordInvestor: e.target.value })}
+                    placeholder="VD: VTRewards@2026"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-amber-300 focus:outline-none focus:border-[#00C2FF]"
+                  />
+                </div>
               </div>
-              <div className="p-6 border-t border-zinc-800 flex justify-end gap-3 shrink-0 bg-zinc-950">
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-5 py-2.5 rounded border border-zinc-800 text-zinc-400 hover:text-white text-sm font-semibold"
+                  className="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white text-xs font-bold transition cursor-pointer"
                 >
-                  Hủy
+                  Hủy Bỏ
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white text-xs font-bold hover:brightness-110 transition cursor-pointer"
                 >
-                  Lưu
+                  Lưu & Đồng Bộ Ngay
                 </button>
               </div>
             </form>

@@ -1,264 +1,310 @@
-import { Header } from "../../components/layout/Header";
-import { Footer } from "../../components/layout/Footer";
-import Link from "next/link";
+'use client';
 
-const indicators = [
-  {
-    name: "Moving Average Cross Pro",
-    slug: "moving-average-cross-pro",
-    badge: "Tham khảo",
-    platform: "MetaTrader 5",
-    category: "Xu hướng",
-    platformColor: "bg-blue-500/15 text-blue-300",
-    desc: "Chỉ báo cắt nhau giữa SMA 20 và EMA 50, tín hiệu vào lệnh tự động kèm cảnh báo âm thanh.",
-    rating: "4.6",
-    reviews: "1,245",
-    author: "MetaQuotes"
-  },
-  {
-    name: "RSI Divergence Hunter",
-    slug: "rsi-divergence-hunter",
-    badge: "Tham khảo",
-    platform: "MetaTrader 5",
-    category: "Dao động",
-    platformColor: "bg-blue-500/15 text-blue-300",
-    desc: "Phát hiện phân kỳ RSI tự động trên đa khung thời gian, báo điểm vào lệnh ngược xu hướng.",
-    rating: "4.9",
-    reviews: "847",
-    author: "Mladen R."
-  },
-  {
-    name: "Volume Profile Pro",
-    slug: "volume-profile-pro",
-    badge: "Tham khảo",
-    platform: "MetaTrader 4",
-    category: "Khối lượng",
-    platformColor: "bg-cyan-500/15 text-cyan-300",
-    desc: "Hiển thị volume theo giá thay vì theo thời gian, xác định vùng hỗ trợ kháng cự thật.",
-    rating: "4.3",
-    reviews: "2,104",
-    author: "FXmillion"
-  },
-  {
-    name: "SuperTrend Multi-TF",
-    slug: "supertrend-multi-tf",
-    badge: "Tham khảo",
-    platform: "TradingView",
-    category: "Xu hướng",
-    platformColor: "bg-indigo-500/15 text-indigo-300",
-    desc: "SuperTrend chuẩn ATR + multi-timeframe overlay, alert qua webhook tới Telegram.",
-    rating: "4.8",
-    reviews: "3,412",
-    author: "LuxAlgo"
-  },
-  {
-    name: "ATR Trailing Stop",
-    slug: "atr-trailing-stop",
-    badge: "Tham khảo",
-    platform: "MetaTrader 5",
-    category: "Xu hướng",
-    platformColor: "bg-blue-500/15 text-blue-300",
-    desc: "Trailing stop theo Average True Range, bảo vệ lợi nhuận động theo biến động thật.",
-    rating: "4.5",
-    reviews: "920",
-    author: "EarnForex"
-  }
-];
+import { useState } from 'react';
+import Link from 'next/link';
+import { Header } from '../../components/layout/Header';
+import { Footer } from '../../components/layout/Footer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { 
+  Download, Search, Sparkles, Filter, CheckCircle2, 
+  ArrowRight, ShieldCheck, Activity, Layers, Bot, Clock, HelpCircle, FileCode, X
+} from 'lucide-react';
+import { 
+  VTIndicator, 
+  STORAGE_KEYS, 
+  INITIAL_INDICATORS, 
+  useVTDataStore 
+} from '../../lib/dataStore';
 
-interface SearchParams {
-  category?: string;
-  platform?: string;
-}
+export default function IndicatorsPage() {
+  const { language } = useLanguage();
+  const [indicators] = useVTDataStore<VTIndicator>(
+    STORAGE_KEYS.INDICATORS,
+    INITIAL_INDICATORS
+  );
 
-export default async function IndicatorsPage({ searchParams }: { searchParams?: Promise<SearchParams> }) {
-  const resolvedSearchParams = searchParams ? await searchParams : {};
-  const currentCategory = resolvedSearchParams?.category || "";
-  const currentPlatform = resolvedSearchParams?.platform || "";
+  const [activeTab, setActiveTab] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedEA, setSelectedEA] = useState<VTIndicator | null>(null);
+  const [showGuide, setShowGuide] = useState<boolean>(false);
 
-  let currentPlatformLabel = "Tất cả nền tảng";
-  if (currentPlatform === "mt4") currentPlatformLabel = "MetaTrader 4";
-  else if (currentPlatform === "mt5") currentPlatformLabel = "MetaTrader 5";
-  else if (currentPlatform === "tradingview") currentPlatformLabel = "TradingView";
-  else if (currentPlatform === "ctrader") currentPlatformLabel = "cTrader";
+  const filtered = indicators.filter((ind) => {
+    const matchTab = activeTab === 'all' || ind.category === activeTab;
+    const matchSearch =
+      ind.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ind.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ind.category.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchTab && matchSearch;
+  });
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-[#020712] text-slate-100 selection:bg-[#00C2FF]/30 selection:text-[#00C2FF]">
       <Header />
-      <main id="main-content" className="flex-grow">
 
+      <main id="main-content" className="flex-grow pt-8 pb-20">
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-white/5">
-          <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent"></div>
-          <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-blue-500/15 rounded-full blur-[120px] pointer-events-none"></div>
-          <div className="relative max-w-7xl mx-auto px-4 lg:px-8 py-12 lg:py-16 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-300 mb-4">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-              📊 5 chỉ báo được HH tuyển chọn
+        <section className="relative overflow-hidden border-b border-slate-800 bg-[#050D1A] py-14">
+          <div className="relative max-w-7xl mx-auto px-4 lg:px-8 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-4 py-1.5 text-xs font-bold text-[#00C2FF] mb-5 shadow-[0_0_20px_rgba(0,194,255,0.15)]">
+              <Bot className="w-4 h-4 text-[#00C2FF]" />
+              <span>Hệ Thống 9 Expert Advisor (EA VTM) MetaTrader 5 Độc Quyền</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-              Chỉ báo{" "}
-              <span className="bg-gradient-to-r from-blue-300 to-cyan-500 bg-clip-text text-transparent">MT4 / MT5 / TradingView</span>
+
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase">
+              Kho Bot EA & Chỉ Báo{' '}
+              <span className="text-[#00C2FF]">
+                VT Markets
+              </span>
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-zinc-400 text-lg">
-              Tổng hợp chỉ báo phổ biến nhất từ MetaTrader Market — kèm review của HieuNTHUB. Trader tự lựa chọn, tự kiểm thử, tự chịu trách nhiệm.
+
+            <p className="mt-4 max-w-3xl mx-auto text-slate-300 text-sm md:text-base leading-relaxed">
+              Tổng hợp 9 dòng Expert Advisor tối ưu hóa cấu trúc và bảo mật, vận hành chuyên sâu trên các tài khoản <strong>XAUUSD-STD, XAUUSD-STDc, XAUUSD-VIP</strong> tại sàn VT Markets.
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => setShowGuide(true)}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#0052FF] hover:bg-[#0045DC] text-white font-black text-xs shadow-lg hover:scale-105 transition-all uppercase tracking-wider cursor-pointer"
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span>Hướng Dẫn Cài Đặt MT5</span>
+              </button>
+              <Link
+                href="/builder"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#08152B] hover:bg-[#0b1d3a] border border-slate-700 text-slate-200 font-bold text-xs transition-all"
+              >
+                <span>Tự Tạo EA Bằng Visual Flow</span>
+                <ArrowRight className="w-4 h-4 text-[#00C2FF]" />
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Content Wrapper */}
-        <div className="mx-auto max-w-7xl px-4 lg:px-8 text-zinc-100 mt-8">
-
-          {/* Filters & Custom Premium Dropdown */}
-          <section className="mt-6 flex flex-wrap items-center gap-3">
+        {/* Filters & Content */}
+        <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-10">
+          {/* Search & Tabs */}
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            {/* Category Tabs */}
             <div className="flex flex-wrap gap-2">
-              <Link
-                href="/indicators"
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${!currentCategory
-                    ? "bg-blue-500 text-zinc-950"
-                    : "border border-white/10 bg-white/5 text-zinc-300 hover:border-white/20"
+              {[
+                { id: 'all', label: 'Tất cả 9 Bot' },
+                { id: 'Smart Money Concept (SMC)', label: 'Smart Money (SMC)' },
+                { id: 'Giao dịch Lưới (Grid)', label: 'Lưới (Grid)' },
+                { id: 'Chiến lược DCA', label: 'Chiến lược DCA' },
+                { id: 'Theo Xu Hướng', label: 'Theo Xu Hướng' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    activeTab === tab.id
+                      ? 'bg-[#00C2FF] text-slate-950 font-black shadow-md'
+                      : 'bg-[#050D1A] text-slate-300 hover:text-white border border-slate-800'
                   }`}
-              >
-                Tất cả
-              </Link>
-              <Link
-                href="/indicators?category=trend"
-                className={`rounded-full px-4 py-1.5 text-sm transition ${currentCategory === "trend"
-                    ? "bg-blue-500 text-zinc-950 font-semibold"
-                    : "border border-white/10 bg-white/5 text-zinc-300 hover:border-white/20"
-                  }`}
-              >
-                Xu hướng
-                <span className="ml-1 text-xs opacity-70">3</span>
-              </Link>
-              <Link
-                href="/indicators?category=oscillator"
-                className={`rounded-full px-4 py-1.5 text-sm transition ${currentCategory === "oscillator"
-                    ? "bg-blue-500 text-zinc-950 font-semibold"
-                    : "border border-white/10 bg-white/5 text-zinc-300 hover:border-white/20"
-                  }`}
-              >
-                Dao động
-                <span className="ml-1 text-xs opacity-70">1</span>
-              </Link>
-              <Link
-                href="/indicators?category=volume"
-                className={`rounded-full px-4 py-1.5 text-sm transition ${currentCategory === "volume"
-                    ? "bg-blue-500 text-zinc-950 font-semibold"
-                    : "border border-white/10 bg-white/5 text-zinc-300 hover:border-white/20"
-                  }`}
-              >
-                Khối lượng
-                <span className="ml-1 text-xs opacity-70">1</span>
-              </Link>
-            </div>
-
-            {/* Custom Platform Dropdown */}
-            <div className="ml-auto relative">
-              <details className="relative group text-left" data-hh-nav-dropdown="">
-                <summary className="list-none cursor-pointer inline-flex items-center justify-between gap-2 rounded border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 outline-none hover:border-blue-500/30 hover:bg-white/[0.08] transition-all min-w-[180px] select-none shadow-lg shadow-black/10">
-                  <span className="font-semibold text-zinc-100">{currentPlatformLabel}</span>
-                  <svg className="h-4 w-4 text-zinc-400 transition group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg>
-                </summary>
-                <div className="absolute right-0 top-full pt-2 z-50 min-w-[180px]">
-                  <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md shadow-2xl p-1.5 flex flex-col gap-1">
-                    <Link href="/indicators" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${!currentPlatform ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      Tất cả nền tảng
-                    </Link>
-                    <Link href="/indicators?platform=mt4" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentPlatform === 'mt4' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      MetaTrader 4
-                    </Link>
-                    <Link href="/indicators?platform=mt5" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentPlatform === 'mt5' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      MetaTrader 5
-                    </Link>
-                    <Link href="/indicators?platform=tradingview" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentPlatform === 'tradingview' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      TradingView
-                    </Link>
-                    <Link href="/indicators?platform=ctrader" className={`rounded px-3.5 py-2.5 text-xs font-semibold transition text-left ${currentPlatform === 'ctrader' ? 'bg-blue-500/20 text-blue-300 font-bold' : 'text-zinc-400 hover:bg-white/5 hover:text-white'}`}>
-                      cTrader
-                    </Link>
-                  </div>
-                </div>
-              </details>
-            </div>
-          </section>
-
-          {/* Indicators Grid */}
-          <section className="mt-8">
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {indicators.map((ind, index) => (
-                <Link
-                  key={index}
-                  href={`/indicators/${ind.slug}`}
-                  className="group relative overflow-hidden rounded border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-5 transition hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10 flex flex-col justify-between"
                 >
-                  <div>
-                    {/* Badge */}
-                    <div className="absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide bg-teal-500/20 text-teal-300">
-                      {ind.badge}
-                    </div>
-
-                    {/* Graphic Box */}
-                    <div className="mb-4 flex h-32 items-center justify-center rounded bg-gradient-to-br from-blue-500/15 via-indigo-500/10 to-zinc-900 border border-white/5 overflow-hidden">
-                      <svg className="h-16 w-16 text-blue-400/60 transition group-hover:scale-105 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 13l4-4 4 4 4-7 6 11" />
-                      </svg>
-                    </div>
-
-                    {/* Metadata */}
-                    <div className="flex items-center gap-2 text-xs text-zinc-500 mb-2">
-                      <span className={`rounded px-1.5 py-0.5 font-mono text-[10px] ${ind.platformColor}`}>
-                        {ind.platform}
-                      </span>
-                      <span>•</span>
-                      <span>{ind.category}</span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-bold text-white group-hover:text-blue-300 transition line-clamp-2">
-                      {ind.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="mt-1 line-clamp-2 text-sm text-zinc-400">
-                      {ind.desc}
-                    </p>
-                  </div>
-
-                  {/* Rating / Author */}
-                  <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      <span className="text-cyan-400">★</span>
-                      <span className="text-zinc-300 font-semibold">{ind.rating}</span>
-                      <span className="text-zinc-500">({ind.reviews})</span>
-                    </div>
-                    <span className="text-zinc-500 truncate max-w-[140px]">by {ind.author}</span>
-                  </div>
-                </Link>
+                  {tab.label}
+                </button>
               ))}
             </div>
 
-            <div className="mt-10"></div>
-          </section>
+            {/* Search Box */}
+            <div className="relative min-w-[260px]">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Tìm kiếm EA VTM..."
+                className="w-full pl-10 pr-4 py-2 bg-[#050D1A] border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+          </div>
 
-          {/* Incoming section */}
-          <section className="mt-12 mb-16 rounded border border-blue-400/30 bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-transparent p-8 md:p-10">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300 mb-3">
-                  🚀 SẮP RA MẮT
+          {/* Bot Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {filtered.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-3xl border border-slate-800 bg-[#050D1A] p-6 hover:border-[#00C2FF]/40 transition-all flex flex-col justify-between shadow-xl group"
+              >
+                <div>
+                  {/* Top Badges */}
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#00C2FF]/10 text-[#00C2FF] font-bold text-[10px] border border-[#00C2FF]/20 uppercase">
+                      {item.category}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-bold bg-[#020712] px-2 py-0.5 rounded border border-slate-800">
+                      v{item.version}
+                    </span>
+                  </div>
+
+                  {/* Title & Desc */}
+                  <h3 className="text-lg font-black text-white group-hover:text-[#00C2FF] transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  {/* Technical Specs */}
+                  <div className="mt-4 p-3 bg-[#020712] border border-slate-800/80 rounded-2xl space-y-2 text-[11px]">
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-500 flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-[#00C2FF]" /> Timeframe:
+                      </span>
+                      <strong className="text-slate-200 font-mono">{item.recommendedTimeframe || 'M5'}</strong>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-500 flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#00C2FF]" /> Server Target:
+                      </span>
+                      <strong className="text-[#00C2FF] text-[10px]">VT-Markets XAUUSD</strong>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold">Chỉ báo độc quyền HieuNTHUB</h3>
-                <p className="mt-2 max-w-xl text-zinc-400">
-                  HieuNTHUB đang phát triển bộ chỉ báo riêng tối ưu cho thị trường FX Việt Nam — cung cấp license + hỗ trợ 1-1.
-                </p>
+
+                {/* Bottom Actions */}
+                <div className="mt-6 pt-4 border-t border-slate-800 flex items-center gap-2">
+                  <a
+                    href={item.downloadUrl}
+                    download
+                    className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-xs text-center shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Tải File .EX5</span>
+                  </a>
+                  <button
+                    onClick={() => setSelectedEA(item)}
+                    className="px-3.5 py-2.5 rounded-xl bg-[#020712] hover:bg-slate-900 border border-slate-700 text-slate-300 hover:text-white text-xs font-bold transition-all cursor-pointer"
+                  >
+                    Chi tiết
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Risk Disclaimer Box */}
+          <div className="mt-12 rounded-2xl border border-amber-500/30 bg-amber-950/20 p-5 sm:p-6 flex items-start gap-4">
+            <ShieldCheck className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
+            <div className="space-y-1.5">
+              <h4 className="text-sm font-black uppercase text-amber-300 tracking-wider">
+                Khuyến Cáo Quản Trị Rủi Ro & Miễn Trừ Trách Nhiệm (Disclaimer)
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Bộ 9 Expert Advisor và công cụ phân tích MT5 tại VT Rewards Hub được phát triển và chia sẻ miễn phí 100% nhằm mục đích hỗ trợ nghiên cứu chiến lược thuật toán cho cộng đồng trader VT Markets. Thị trường tài chính ngoại hối và phái sinh CFD luôn có độ biến động cao và tiềm ẩn rủi ro sụt giảm vốn. VT Rewards Hub không cung cấp lời khuyên đầu tư tài chính hay cam kết lợi nhuận cố định. Quý nhà đầu tư cần kiểm soát khối lượng giao dịch, cài đặt Stop Loss phù hợp và tự chịu trách nhiệm với các quyết định giao dịch của mình.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* EA Detail Modal */}
+        {selectedEA && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+            <div className="bg-[#050D1A] border border-[#00C2FF]/50 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+              <button
+                onClick={() => setSelectedEA(null)}
+                className="absolute right-4 top-4 p-2 rounded-full bg-[#020712] text-slate-400 hover:text-white border border-slate-800"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-2 mb-2">
+                <span className="px-2.5 py-0.5 rounded bg-[#00C2FF]/20 text-[#00C2FF] font-bold text-xs">
+                  {selectedEA.category}
+                </span>
+                <span className="text-xs text-slate-400">Version {selectedEA.version}</span>
+              </div>
+
+              <h2 className="text-2xl font-black text-white">{selectedEA.name}</h2>
+              <p className="text-slate-300 text-sm mt-3 leading-relaxed">{selectedEA.description}</p>
+
+              <div className="my-6 p-4 rounded-2xl bg-[#020712] border border-slate-800 space-y-2.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Khung thời gian khuyên dùng:</span>
+                  <strong className="text-white font-mono">{selectedEA.recommendedTimeframe}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Cặp tiền tệ (Symbol) hỗ trợ:</span>
+                  <strong className="text-[#00C2FF] font-mono">{selectedEA.supportedSymbols}</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Bảo mật sàn giao dịch:</span>
+                  <strong className="text-[#00C2FF]">VT-Markets Server Lock (IsSecurityValid)</strong>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href={selectedEA.downloadUrl}
+                  download
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white font-black text-xs text-center uppercase tracking-wider shadow-lg hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Tải File .EX5 Cài Đặt MT5</span>
+                </a>
+                <button
+                  onClick={() => { setSelectedEA(null); setShowGuide(true); }}
+                  className="px-4 py-3 rounded-xl bg-[#020712] border border-slate-700 text-slate-200 text-xs font-bold hover:bg-slate-900"
+                >
+                  Xem hướng dẫn cài
+                </button>
               </div>
             </div>
-          </section>
+          </div>
+        )}
 
-        </div>
+        {/* Installation Guide Modal */}
+        {showGuide && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+            <div className="bg-[#050D1A] border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+              <button
+                onClick={() => setShowGuide(false)}
+                className="absolute right-4 top-4 p-2 rounded-full bg-[#020712] text-slate-400 hover:text-white border border-slate-800"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-2 mb-2 text-xs font-bold text-[#00C2FF] uppercase">
+                <HelpCircle className="w-4 h-4" />
+                <span>Quy Trình Cài Đặt MetaTrader 5</span>
+              </div>
+              <h2 className="text-2xl font-black text-white mb-4">Hướng Dẫn Cài Đặt Bot EA VTM</h2>
+
+              <div className="space-y-4 text-xs sm:text-sm text-slate-300">
+                <div className="p-4 rounded-2xl bg-[#020712] border border-slate-800">
+                  <strong className="text-white block mb-1">1. Sao chép file bot .ex5:</strong>
+                  Mở MT5 &rarr; Chọn <code>File</code> &rarr; <code>Open Data Folder</code> &rarr; Vào thư mục <code>MQL5/Experts</code> và dán file bot vào.
+                </div>
+
+                <div className="p-4 rounded-2xl bg-[#020712] border border-slate-800">
+                  <strong className="text-white block mb-1">2. Cài đặt WebRequest (Cho bot Apex Oracle SMC gọi AI):</strong>
+                  Trên MT5 chọn <code>Tools</code> &rarr; <code>Options</code> &rarr; Chuyển qua tab <code>Expert Advisors</code>. Tích chọn <strong>&quot;Allow WebRequest for listed URL&quot;</strong> và thêm đường dẫn <code>https://api.openai.com</code>.
+                </div>
+
+                <div className="p-4 rounded-2xl bg-[#020712] border border-slate-800">
+                  <strong className="text-white block mb-1">3. Bật Algo Trading:</strong>
+                  Tích chọn <strong>&quot;Allow Algo Trading&quot;</strong> tại tab Expert Advisors và nhấn nút <strong>Algo Trading</strong> trên thanh công cụ MT5 (chuyển sang màu xanh lá).
+                </div>
+
+                <div className="p-4 rounded-2xl bg-[#020712] border border-slate-800">
+                  <strong className="text-white block mb-1">4. Kéo Bot vào Chart Vàng VT Markets:</strong>
+                  Nhấn <code>Ctrl + N</code> (Navigator) &rarr; Chuột phải vào Experts chọn <code>Refresh</code> &rarr; Kéo bot vào biểu đồ <code>XAUUSD-STD</code> hoặc <code>XAUUSD-STDc</code>.
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowGuide(false)}
+                className="mt-6 w-full py-3 rounded-xl bg-[#0052FF] hover:bg-[#0045DC] text-white font-black text-xs uppercase tracking-wider shadow"
+              >
+                Đã hiểu, đóng hướng dẫn
+              </button>
+            </div>
+          </div>
+        )}
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 }

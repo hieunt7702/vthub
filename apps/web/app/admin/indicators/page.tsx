@@ -1,96 +1,47 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface Indicator {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  thumbnail: string;
-  downloadUrl: string;
-  platform: string; // MT4, MT5, TradingView
-  price: number; // 0 = Free
-  createdAt: string;
-}
-
-const DEFAULT_INDICATORS: Indicator[] = [
-  {
-    id: '1',
-    name: 'Moving Average Cross Pro',
-    slug: 'moving-average-cross-pro',
-    description: 'Chỉ báo cắt nhau giữa SMA 20 và EMA 50, tín hiệu vào lệnh tự động kèm cảnh báo âm thanh.',
-    thumbnail: '',
-    downloadUrl: 'https://hieunthub.co/downloads/ma-cross.ex4',
-    platform: 'MT5',
-    price: 0,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    name: 'RSI Divergence Hunter',
-    slug: 'rsi-divergence-hunter',
-    description: 'Phát hiện phân kỳ RSI tự động trên đa khung thời gian, báo điểm vào lệnh ngược xu hướng.',
-    thumbnail: '',
-    downloadUrl: 'https://hieunthub.co/downloads/rsi-divergence.ex5',
-    platform: 'MT5',
-    price: 49,
-    createdAt: new Date(Date.now() - 86400000).toISOString()
-  },
-  {
-    id: '3',
-    name: 'Volume Profile Pro',
-    slug: 'volume-profile-pro',
-    description: 'Hiển thị volume theo giá thay vì theo thời gian, xác định vùng hỗ trợ kháng cự thật.',
-    thumbnail: '',
-    downloadUrl: 'https://hieunthub.co/downloads/volume-profile.ex4',
-    platform: 'MT4',
-    price: 0,
-    createdAt: new Date(Date.now() - 172800000).toISOString()
-  }
-];
+import { useState } from 'react';
+import { 
+  Plus, Search, Edit2, Trash2, Download, CheckCircle2, 
+  Sparkles, Filter, RefreshCw 
+} from 'lucide-react';
+import { 
+  VTIndicator, 
+  STORAGE_KEYS, 
+  INITIAL_INDICATORS, 
+  useVTDataStore 
+} from '../../../lib/dataStore';
 
 export default function AdminIndicatorsPage() {
-  const [indicators, setIndicators] = useState<Indicator[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [editIndicator, setEditIndicator] = useState<Indicator | null>(null);
+  const [indicators, setIndicators] = useVTDataStore<VTIndicator>(
+    STORAGE_KEYS.INDICATORS,
+    INITIAL_INDICATORS
+  );
 
-  // Filter & Search & Pagination & Sort
   const [search, setSearch] = useState('');
-  const [platformFilter, setPlatformFilter] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
-  const [sortField, setSortField] = useState<keyof Indicator>('createdAt');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [editIndicator, setEditIndicator] = useState<VTIndicator | null>(null);
+  const [toastMsg, setToastMsg] = useState('');
 
-  // Form states
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Partial<VTIndicator>>({
     name: '',
     slug: '',
     description: '',
     downloadUrl: '',
     platform: 'MT5',
+    category: 'SMC Algorithm',
     price: 0,
-    thumbnail: ''
+    author: 'VT Markets Quant Lab',
+    rating: '5.0',
+    version: '1.0.0',
+    isFeatured: true
   });
 
-  const loadData = () => {
-    setLoading(true);
-    const stored = localStorage.getItem('bh_indicators');
-    if (stored) {
-      setIndicators(JSON.parse(stored));
-    } else {
-      setIndicators(DEFAULT_INDICATORS);
-      localStorage.setItem('bh_indicators', JSON.stringify(DEFAULT_INDICATORS));
-    }
-    setLoading(false);
+  const showNotification = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3000);
   };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const handleOpenAdd = () => {
     setEditIndicator(null);
@@ -98,306 +49,225 @@ export default function AdminIndicatorsPage() {
       name: '',
       slug: '',
       description: '',
-      downloadUrl: '',
+      downloadUrl: '/downloads/ea-vtm/Apex_Oracle_SMC.ex5',
       platform: 'MT5',
+      category: 'SMC Algorithm',
       price: 0,
-      thumbnail: ''
+      author: 'VT Markets Quant Lab',
+      rating: '5.0',
+      version: '1.0.0',
+      isFeatured: true
     });
     setShowModal(true);
   };
 
-  const handleOpenEdit = (ind: Indicator) => {
+  const handleOpenEdit = (ind: VTIndicator) => {
     setEditIndicator(ind);
-    setFormData({
-      name: ind.name,
-      slug: ind.slug,
-      description: ind.description || '',
-      downloadUrl: ind.downloadUrl || '',
-      platform: ind.platform,
-      price: ind.price || 0,
-      thumbnail: ind.thumbnail || ''
-    });
+    setFormData({ ...ind });
     setShowModal(true);
+  };
+
+  const handleDelete = (id: string) => {
+    if (confirm('Bạn có chắc chắn muốn xóa Bot EA này? Dữ liệu trên trang web sẽ được cập nhật ngay lập tức.')) {
+      setIndicators((prev) => prev.filter((item) => item.id !== id));
+      showNotification('Đã xóa Bot EA thành công!');
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = {
-      ...formData,
-      price: Number(formData.price),
-      slug: formData.slug || formData.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-    };
+    const slug = formData.slug || formData.name?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '') || 'indicator';
 
-    const currentList = [...indicators];
     if (editIndicator) {
-      const idx = currentList.findIndex((i) => i.id === editIndicator.id);
-      if (idx !== -1) {
-        currentList[idx] = {
-          ...editIndicator,
-          ...payload
-        };
-      }
+      setIndicators((prev) =>
+        prev.map((item) =>
+          item.id === editIndicator.id
+            ? ({ ...item, ...formData, slug, price: Number(formData.price || 0) } as VTIndicator)
+            : item
+        )
+      );
+      showNotification('Đã cập nhật Bot EA thành công!');
     } else {
-      const newInd: Indicator = {
-        ...payload,
-        id: Date.now().toString(),
+      const newInd: VTIndicator = {
+        id: 'ea-' + Date.now(),
+        name: formData.name || 'Bot EA Mới',
+        slug,
+        description: formData.description || '',
+        downloadUrl: formData.downloadUrl || '/downloads/ea-vtm/Apex_Oracle_SMC.ex5',
+        platform: formData.platform || 'MT5',
+        category: formData.category || 'SMC Algorithm',
+        price: Number(formData.price || 0),
+        author: formData.author || 'VT Markets Quant Lab',
+        rating: formData.rating || '5.0',
+        downloadsCount: Math.floor(Math.random() * 500) + 100,
+        version: formData.version || '1.0.0',
+        isFeatured: Boolean(formData.isFeatured),
         createdAt: new Date().toISOString()
       };
-      currentList.unshift(newInd);
+      setIndicators((prev) => [newInd, ...prev]);
+      showNotification('Đã thêm mới Bot EA thành công!');
     }
-
-    setIndicators(currentList);
-    localStorage.setItem('bh_indicators', JSON.stringify(currentList));
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (!confirm('Bạn có chắc muốn xóa chỉ báo này không?')) return;
-    const filtered = indicators.filter((i) => i.id !== id);
-    setIndicators(filtered);
-    localStorage.setItem('bh_indicators', JSON.stringify(filtered));
-  };
-
-  const handleSort = (field: keyof Indicator) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortOrder('asc');
+  const handleResetDefaults = () => {
+    if (confirm('Khôi phục danh sách 9 Bot EA MT5 gốc của VT Rewards Hub?')) {
+      setIndicators(INITIAL_INDICATORS);
+      showNotification('Đã khôi phục dữ liệu gốc!');
     }
-    setCurrentPage(1);
   };
 
-  // Filtering
-  const filteredIndicators = indicators
-    .filter((i) => {
-      const matchesSearch =
-        i.name.toLowerCase().includes(search.toLowerCase()) ||
-        i.description.toLowerCase().includes(search.toLowerCase());
-      const matchesPlat = !platformFilter || i.platform === platformFilter;
-      const matchesPrice =
-        !priceFilter ||
-        (priceFilter === 'free' ? i.price === 0 : i.price > 0);
-      return matchesSearch && matchesPlat && matchesPrice;
-    })
-    .sort((a, b) => {
-      let valA = a[sortField];
-      let valB = b[sortField];
-
-      if (typeof valA === 'string') {
-        valA = (valA as string).toLowerCase();
-        valB = (valB as string).toLowerCase();
-      }
-
-      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
-      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-
-  // Pagination
-  const totalPages = Math.ceil(filteredIndicators.length / rowsPerPage);
-  const paginatedIndicators = filteredIndicators.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  const filtered = indicators.filter((ind) => {
+    const matchSearch = ind.name.toLowerCase().includes(search.toLowerCase()) || ind.description.toLowerCase().includes(search.toLowerCase());
+    const matchCat = categoryFilter ? ind.category === categoryFilter : true;
+    return matchSearch && matchCat;
+  });
 
   return (
-    <div className="flex flex-col h-full space-y-6">
-      {/* Head */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
-        <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Quản lý Chỉ Báo Kỹ Thuật</h1>
-          <p className="text-zinc-400 text-sm">Quản lý kho tàng chỉ báo MT4, MT5 và TradingView cung cấp cho trader.</p>
+    <div className="space-y-6">
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed top-6 right-6 z-50 bg-[#00C2FF] text-slate-950 px-4 py-3 rounded-2xl font-bold shadow-2xl flex items-center gap-2 animate-in fade-in">
+          <CheckCircle2 className="w-5 h-5" />
+          <span>{toastMsg}</span>
         </div>
-        <button
-          onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
-          Thêm Chỉ Báo Mới
-        </button>
+      )}
+
+      {/* Header Banner */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#050D1A] border border-[#00C2FF]/20 p-6 rounded-3xl shadow-xl">
+        <div>
+          <div className="flex items-center gap-2 text-[#00C2FF] text-xs font-bold uppercase tracking-wider mb-1">
+            <Sparkles className="w-4 h-4" />
+            <span>Bộ 9 Expert Advisor VT Markets Độc Quyền</span>
+          </div>
+          <h1 className="text-2xl font-black text-white tracking-tight">Quản Lý Bộ 9 Bot EA MT5 & Thuật Toán</h1>
+          <p className="text-slate-400 text-xs mt-1">
+            Mọi thao tác thêm/sửa/xóa tại đây sẽ được <strong>đồng bộ tức thì</strong> lên trang chủ và trang /indicators.
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleResetDefaults}
+            className="flex items-center gap-2 px-3.5 py-2.5 bg-slate-900 border border-slate-700 hover:border-[#00C2FF]/40 text-slate-300 rounded-xl text-xs font-semibold transition-all cursor-pointer"
+            title="Khôi phục mặc định"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>Khôi phục</span>
+          </button>
+          <button
+            onClick={handleOpenAdd}
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] hover:brightness-110 text-white font-black rounded-xl text-xs shadow-lg shadow-[#00C2FF]/20 transition-all cursor-pointer uppercase tracking-wider"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Thêm Bot EA Mới</span>
+          </button>
+        </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-zinc-900 border border-zinc-800 p-5 rounded space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Filter Bar */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#050D1A] p-4 border border-slate-800 rounded-2xl">
+        <div className="relative w-full sm:w-80">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Tìm theo tên chỉ báo, mô tả..."
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Tìm theo tên Bot EA..."
+            className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#00C2FF]"
           />
-
-          <div>
-            <details className="relative group w-full" data-hh-nav-dropdown="">
-              <summary className="list-none cursor-pointer w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 flex items-center justify-between hover:border-zinc-700 transition">
-                <span>
-                  {platformFilter === '' ? 'Tất cả nền tảng' : 
-                   platformFilter === 'MT4' ? 'MetaTrader 4 (MT4)' : 
-                   platformFilter === 'MT5' ? 'MetaTrader 5 (MT5)' : 'TradingView'}
-                </span>
-                <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-              </summary>
-              <div className="absolute left-0 top-full mt-2 w-full z-50">
-                <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPlatformFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Tất cả nền tảng
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPlatformFilter('MT4'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT4' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    MetaTrader 4 (MT4)
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPlatformFilter('MT5'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'MT5' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    MetaTrader 5 (MT5)
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPlatformFilter('TradingView'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${platformFilter === 'TradingView' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    TradingView
-                  </button>
-                </div>
-              </div>
-            </details>
-          </div>
-
-          <div>
-            <details className="relative group w-full" data-hh-nav-dropdown="">
-              <summary className="list-none cursor-pointer w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 flex items-center justify-between hover:border-zinc-700 transition">
-                <span>
-                  {priceFilter === '' ? 'Tất cả mức giá' : 
-                   priceFilter === 'free' ? 'Miễn phí (Free)' : 'Có phí (Paid)'}
-                </span>
-                <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-              </summary>
-              <div className="absolute left-0 top-full mt-2 w-full z-50">
-                <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPriceFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Tất cả mức giá
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPriceFilter('free'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'free' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Miễn phí (Free)
-                  </button>
-                  <button
-                    onClick={(e) => { e.preventDefault(); setPriceFilter('paid'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                    className={`w-full text-left rounded px-3 py-2 text-sm transition ${priceFilter === 'paid' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                  >
-                    Có phí (Paid)
-                  </button>
-                </div>
-              </div>
-            </details>
-          </div>
+        </div>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Filter className="w-4 h-4 text-[#00C2FF] shrink-0" />
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#00C2FF]"
+          >
+            <option value="">Tất cả thuật toán</option>
+            <option value="SMC Algorithm">SMC Algorithm</option>
+            <option value="DCA / Grid">DCA / Grid</option>
+            <option value="Price Action">Price Action</option>
+            <option value="Multi-Strategy">Multi-Strategy</option>
+          </select>
         </div>
       </div>
 
-      {/* Table */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded flex flex-col flex-1 overflow-hidden shadow-xl min-h-0">
-        <div className="overflow-x-auto overflow-y-auto flex-1 min-h-[300px]">
-          <table className="w-full text-left text-sm text-zinc-300">
-            <thead className="bg-zinc-950 border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wider">
-              <tr>
-                <th
-                  onClick={() => handleSort('name')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 transition-colors select-none"
-                >
-                  Tên Chỉ Báo {sortField === 'name' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('platform')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 transition-colors select-none"
-                >
-                  Nền Tảng {sortField === 'platform' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('price')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 transition-colors select-none"
-                >
-                  Giá Bán {sortField === 'price' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold">Đường Dẫn Tải Về</th>
-                <th
-                  onClick={() => handleSort('createdAt')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 transition-colors select-none"
-                >
-                  Ngày Tạo {sortField === 'createdAt' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold text-right">Thao tác</th>
+      {/* Indicators Table */}
+      <div className="bg-[#050D1A] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800/80 bg-slate-950/60 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                <th className="py-3.5 px-5">Tên Bot EA</th>
+                <th className="py-3.5 px-4">Nền Tảng</th>
+                <th className="py-3.5 px-4">Thuật Toán</th>
+                <th className="py-3.5 px-4">Chi Phí</th>
+                <th className="py-3.5 px-4">Lượt Tải</th>
+                <th className="py-3.5 px-4">File .ex5</th>
+                <th className="py-3.5 px-5 text-right">Thao Tác</th>
               </tr>
             </thead>
-            <tbody>
-              {loading ? (
+            <tbody className="divide-y divide-slate-800/60 text-xs">
+              {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-zinc-500">Đang tải...</td>
-                </tr>
-              ) : paginatedIndicators.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-zinc-500 font-medium">Chưa có chỉ báo nào.</td>
+                  <td colSpan={7} className="py-8 text-center text-slate-400">
+                    Không tìm thấy Bot EA nào phù hợp.
+                  </td>
                 </tr>
               ) : (
-                paginatedIndicators.map((ind) => (
-                  <tr key={ind.id} className="border-b border-zinc-800/60 hover:bg-zinc-800/20 transition-colors">
-                    <td className="px-6 py-4 font-bold text-white">{ind.name}</td>
-                    <td className="px-6 py-4">
-                      <span className="px-2 py-0.5 rounded bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs font-bold">
+                filtered.map((ind) => (
+                  <tr key={ind.id} className="hover:bg-[#08152B] transition-colors group">
+                    <td className="py-4 px-5">
+                      <div className="font-bold text-white group-hover:text-[#00C2FF] transition-colors">
+                        {ind.name}
+                      </div>
+                      <div className="text-[11px] text-slate-400 line-clamp-1 max-w-sm mt-0.5">
+                        {ind.description}
+                      </div>
+                    </td>
+                    <td className="py-4 px-4">
+                      <span className="px-2.5 py-1 bg-[#00C2FF]/10 border border-[#00C2FF]/30 text-[#00C2FF] font-bold rounded-lg text-[10px]">
                         {ind.platform}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      {ind.price === 0 ? (
-                        <span className="px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-bold">
-                          Miễn phí
-                        </span>
-                      ) : (
-                        <span className="text-xs font-extrabold text-cyan-300 tabular-nums">
-                          ${ind.price}
-                        </span>
-                      )}
+                    <td className="py-4 px-4">
+                      <span className="text-slate-300">{ind.category}</span>
                     </td>
-                    <td className="px-6 py-4 text-xs font-mono text-zinc-400 max-w-[200px] truncate">{ind.downloadUrl || 'Chưa cung cấp'}</td>
-                    <td className="px-6 py-4 text-xs text-zinc-500">{new Date(ind.createdAt).toLocaleDateString('vi-VN')}</td>
-                    <td className="px-6 py-4 text-right">
-                      <details className="relative group text-left inline-block" data-hh-nav-dropdown="">
-                        <summary className="list-none cursor-pointer p-1.5 hover:bg-zinc-800 rounded transition text-zinc-400 hover:text-white">
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-                        </summary>
-                        <div className="absolute right-0 top-full mt-1 z-50 min-w-[120px] shadow-xl">
-                          <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 flex flex-col gap-1">
-                            <button
-                              onClick={() => handleOpenEdit(ind)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                              Sửa
-                            </button>
-                            <button
-                              onClick={() => handleDelete(ind.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                              Xóa
-                            </button>
-                          </div>
-                        </div>
-                      </details>
+                    <td className="py-4 px-4">
+                      <span className="px-2.5 py-1 bg-[#00C2FF]/10 border border-[#00C2FF]/30 text-[#00C2FF] font-bold rounded-lg text-[10px]">
+                        Miễn phí 100%
+                      </span>
+                    </td>
+                    <td className="py-4 px-4 text-slate-300 font-medium">
+                      {ind.downloadsCount?.toLocaleString()}
+                    </td>
+                    <td className="py-4 px-4">
+                      <a
+                        href={ind.downloadUrl}
+                        download
+                        className="inline-flex items-center gap-1 text-[11px] text-[#00C2FF] hover:underline font-mono"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span className="truncate max-w-[130px]">{ind.downloadUrl}</span>
+                      </a>
+                    </td>
+                    <td className="py-4 px-5 text-right">
+                      <div className="inline-flex items-center gap-2">
+                        <button
+                          onClick={() => handleOpenEdit(ind)}
+                          className="p-1.5 bg-slate-800 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-300 rounded-lg transition-colors cursor-pointer"
+                          title="Chỉnh sửa"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(ind.id)}
+                          className="p-1.5 bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 rounded-lg transition-colors cursor-pointer"
+                          title="Xóa"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -405,155 +275,112 @@ export default function AdminIndicatorsPage() {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
-        {filteredIndicators.length > 0 && (
-          <div className="bg-zinc-950 border-t border-zinc-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs select-none mt-auto shrink-0 z-10 sticky bottom-0">
-            <div className="text-zinc-500">
-              Hiển thị từ <strong className="text-white">{(currentPage - 1) * rowsPerPage + 1}</strong> đến{' '}
-              <strong className="text-white">
-                {Math.min(currentPage * rowsPerPage, filteredIndicators.length)}
-              </strong>{' '}
-              trong tổng số <strong className="text-white">{filteredIndicators.length}</strong> chỉ báo.
-            </div>
-
-            <div className="flex items-center gap-1">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
-              >
-                Trước
-              </button>
-              <span className="px-3 text-zinc-400">Trang {currentPage} / {totalPages}</span>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(currentPage + 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
-              >
-                Sau
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Drawer Form Modal */}
+      {/* Modal Add / Edit */}
       {showModal && (
-        <div 
-          className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-fadeIn"
-          onClick={() => setShowModal(false)}
-        >
-          <div 
-            className="w-full max-w-lg h-full bg-zinc-950 border-l border-zinc-850 flex flex-col shadow-2xl animate-slideLeft"
-            onClick={(e) => e.stopPropagation()}
-          >
-            
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 shrink-0">
-              <h2 className="text-xl font-bold text-white">
-                {editIndicator ? 'Chỉnh Sửa Chỉ Báo' : 'Thêm Chỉ Báo Mới'}
-              </h2>
-              <button onClick={() => setShowModal(false)} className="p-1.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
-              <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-4">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#050D1A] border border-[#00C2FF]/30 rounded-3xl w-full max-w-xl p-6 shadow-2xl text-slate-100 max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-black text-white mb-4">
+              {editIndicator ? 'Chỉnh Sửa Bot EA MT5' : 'Thêm Mới Bot EA MT5'}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Tên chỉ báo kỹ thuật</label>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Tên Bot EA *</label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50"
-                  placeholder="VD: RSI Divergence Hunter"
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  placeholder="Ví dụ: Apex Oracle SMC v1.0"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Mô tả ngắn</label>
-                <textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50 min-h-[80px]"
-                  placeholder="Giải thích cơ chế hoạt động..."
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Nền tảng hỗ trợ</label>
-                  <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none">
-                      <span>{formData.platform === 'MT4' ? 'MetaTrader 4 (MT4)' : formData.platform === 'MT5' ? 'MetaTrader 5 (MT5)' : 'TradingView'}</span>
-                      <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                    </summary>
-                    <div className="absolute left-0 top-full mt-2 w-full z-50">
-                      <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'MT4' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT4' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          MetaTrader 4 (MT4)
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'MT5' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'MT5' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          MetaTrader 5 (MT5)
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, platform: 'TradingView' }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.platform === 'TradingView' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          TradingView
-                        </button>
-                      </div>
-                    </div>
-                  </details>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Nền Tảng *</label>
+                  <select
+                    value={formData.platform}
+                    onChange={(e) => setFormData({ ...formData, platform: e.target.value as any })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  >
+                    <option value="MT5">MetaTrader 5 (MT5)</option>
+                    <option value="TradingView">TradingView</option>
+                    <option value="cTrader">cTrader</option>
+                  </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Giá bán ($) (0 = Miễn phí)</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Thuật Toán *</label>
                   <input
-                    type="number"
-                    required
-                    value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none"
+                    type="text"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                    placeholder="SMC Algorithm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Đường dẫn file download</label>
-                <input
-                  type="text"
-                  value={formData.downloadUrl}
-                  onChange={(e) => setFormData({ ...formData, downloadUrl: e.target.value })}
-                  className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-teal-500/50"
-                  placeholder="https://hieunthub.co/downloads/your-indicator.ex4"
+                <label className="block text-xs font-bold text-slate-300 mb-1">Mô Tả Thuật Toán *</label>
+                <textarea
+                  rows={3}
+                  required
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  placeholder="Mô tả cơ chế hoạt động, khung thời gian khuyên dùng..."
                 />
               </div>
 
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Đường Dẫn File (.ex5) *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.downloadUrl}
+                  onChange={(e) => setFormData({ ...formData, downloadUrl: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono focus:outline-none focus:border-[#00C2FF]"
+                  placeholder="/downloads/ea-vtm/Apex_Oracle_SMC.ex5"
+                />
               </div>
-              <div className="p-6 border-t border-zinc-800 flex justify-end gap-3 shrink-0 bg-zinc-950">
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Cặp Tiền Hỗ Trợ</label>
+                  <input
+                    type="text"
+                    value={formData.supportedSymbols || 'XAUUSD-STD, XAUUSD-STDc'}
+                    onChange={(e) => setFormData({ ...formData, supportedSymbols: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Phiên Bản (Version)</label>
+                  <input
+                    type="text"
+                    value={formData.version}
+                    onChange={(e) => setFormData({ ...formData, version: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                    placeholder="1.0.0"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-5 py-2.5 rounded border border-zinc-800 text-zinc-400 hover:text-white text-sm font-semibold"
+                  className="w-1/2 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer"
                 >
-                  Hủy
+                  Hủy Bỏ
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
+                  className="w-1/2 py-2.5 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white text-xs font-black rounded-xl shadow-lg shadow-[#00C2FF]/20 hover:brightness-110 transition-all uppercase tracking-wider cursor-pointer"
                 >
-                  Lưu
+                  {editIndicator ? 'Lưu Thay Đổi' : 'Tạo Bot EA Mới'}
                 </button>
               </div>
             </form>

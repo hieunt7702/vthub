@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["van-mixins/slots"],{"./node_modules/vant/lib/mixins/slots.js":function(s,o,i){"use strict";o.__esModule=!0,o.SlotsMixin=void 0;o.SlotsMixin={methods:{slots:function(s,o){void 0===s&&(s="default");var i=this.$slots,t=this.$scopedSlots[s];return t?t(o):i[s]}}}}}]);

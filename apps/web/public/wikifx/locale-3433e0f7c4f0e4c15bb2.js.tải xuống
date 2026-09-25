@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["el-mixins/locale"],{"./node_modules/element-ui/lib/mixins/locale.js":function(e,l,n){"use strict";l.__esModule=!0;var o=n("./node_modules/element-ui/lib/locale/index.js");l.default={methods:{t:function(){for(var e=arguments.length,l=Array(e),n=0;n<e;n++)l[n]=arguments[n];return o.t.apply(this,l)}}}}}]);

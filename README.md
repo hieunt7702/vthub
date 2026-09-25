@@ -1,159 +1,133 @@
-# Turborepo starter
+# 🌐 VT Markets Rewards Hub & MT5 Algo-Trading Ecosystem
 
-This Turborepo starter is maintained by the Turborepo core team.
+> **Lead Architect & Developer:** **Hau Tran**  
+> **Platform & Tech Stack:** Next.js 16 (Turbopack) • React 19 • TypeScript • Tailwind CSS • React Flow (`@xyflow/react`) • MQL5 Engine • Lucide Icons
 
-## Using this example
+---
 
-Run the following command:
+## 📖 Giới Thiệu Tổng Quan (Project Overview)
 
-```sh
-npx create-turbo@latest
+**VT Rewards Hub** là hệ sinh thái Web App tài chính và công cụ Algo-Trading toàn diện được thiết kế chuẩn nhận diện thương hiệu **VT Markets (Dark Mode Luxury & Glassmorphism)**. 
+
+Dự án bao gồm nền tảng tính toán hoàn phí hoa hồng Backcom, lộ trình đổi thưởng khối lượng $200k, thư viện 9 Bot EA MT5 độc quyền, bảng giá vàng trực tuyến Realtime và đặc biệt là **No-Code MT5 EA Builder** — trình thiết kế bot giao dịch kéo thả tự động sinh mã nguồn `.mq5` chuẩn 0 lỗi.
+
+---
+
+## 👨‍💻 Tác Giả & Phân Hệ Đóng Góp (Authored Modules by Hau Tran)
+
+### 1. 🤖 No-Code MT5 EA Builder Engine (`/builder` & `/api/builder/gemini`)
+* **Visual Graph Canvas:** Hệ thống Node kéo thả trực quan với `@xyflow/react`, hỗ trợ kết nối đa luồng dữ liệu (Price Source ➔ Indicator ➔ Condition ➔ Risk ➔ Order Action).
+* **Pure MQL5 Code Generator (100% Offline / Local Engine):** Thuật toán tự động sinh toàn bộ mã nguồn MQL5 (`OnInit`, `OnTick`, `OnDeinit`, `CopyBuffer`, Order Send, Trailing Stop) chạy độc lập không cần API Key bên ngoài.
+* **Tích hợp 15 Chỉ báo Kỹ thuật (15 Indicator Nodes):**
+  * *Dao động:* RSI, Stochastic, MACD, CCI, WPR (Williams %R), MFI (Money Flow Index).
+  * *Xu hướng:* EMA, SMA, SuperTrend (ATR Multiplier), ADX, Parabolic SAR, Ichimoku Kinko Hyo.
+  * *Dải & Kênh:* Bollinger Bands, Envelopes (MA Envelopes), ATR.
+* **Smart Money Concept (SMC) Analysis Engine:** Khối nhận diện cấu trúc tự động Order Block (OB), Fair Value Gap (FVG), Break of Structure (BOS / CHoCH), Liquidity Sweep.
+* **Smart Risk & Lot Sizing Manager:** Tự động tính khối lượng vào lệnh theo Lot cố định, % Balance rủi ro, hoặc biến động ATR, tích hợp Trailing Stop, Break-Even, Max Spread Filter và bộ lọc phiên Á/Âu/Mỹ.
+
+### 2. 💎 VT Rewards & Công Cụ Tính Hoàn Phí Backcom (`/rewards` & `/ib-commission-overview`)
+* **Interactive Rebate Calculator:** Công cụ tính số tiền hoàn phí Backcom tích lũy theo số Lot và loại tài khoản (Standard STP / Raw ECN).
+* **Lộ Trình Tích Lũy Volume $200,000 USD:** 11 cột mốc thưởng minh bạch theo thời gian thực.
+* **Bảng Tra Cứu Hoa Hồng IB Đa Cấp:** So sánh mức chi trả hoa hồng và đặc quyền đối tác.
+
+### 3. 📈 Realtime Market & Bảng Giá Vàng Trực Tuyến (`/gia-vang-hom-nay`)
+* Bảng giá vàng SJC, DOJI, PNJ, Bảo Tín Minh Châu cập nhật liên tục.
+* Tích hợp biểu đồ kỹ thuật TradingView Pro XAU/USD Realtime.
+* Dải ticker báo giá thị trường Live chạy mượt mà (Marquee Live Ticker).
+
+### 4. 📚 Học Viện MQL5 & Thư Viện 9 Bot EA MT5 (`/indicators` & `/courses`)
+* Kho 9 Bot EA MT5 chuyên sâu: *Apex Oracle SMC (AI), Imbalance Striker (ICT FVG), Matrix Grid Pro, Dual Vortex DCA, Shadow Dragon Scalper, v.v.*
+* Hệ thống bài giảng lập trình thuật toán MQL5 và hướng dẫn tối ưu Strategy Tester.
+
+### 5. ⚙️ Admin Control Panel & Realtime Data Store (`/admin` & `lib/dataStore.ts`)
+* Hệ thống quản trị toàn diện: Indicators/Bots, Tin tức SEO, Khóa học Academy, Ưu đãi Bonus, Tài khoản Passview live.
+* Cơ chế **Real-time Cross-tab Sync & Broadcast:** Mọi thao tác thêm/sửa/xóa trong Admin tự động đồng bộ tức thì lên web chính mà không cần tải lại trang.
+* **Mật khẩu Quản trị & Passview Investor:** `VT8386@`
+
+---
+
+## 📂 Cấu Trúc Thư Mục (Project Architecture)
+
+```
+vthub web/
+├── apps/
+│   └── web/                               # Next.js 16 Web Application (App Router)
+│       ├── app/
+│       │   ├── page.tsx                   # Trang chủ (Hero Video, 3D Coin Array, Ticker)
+│       │   ├── builder/page.tsx           # No-Code MT5 EA Builder Canvas
+│       │   ├── indicators/page.tsx        # Thư viện Bot EA & Chỉ báo MT5
+│       │   ├── rewards/page.tsx           # Lộ trình thưởng $200k & Backcom
+│       │   ├── offers-bonus/page.tsx      # Ưu đãi & Hoàn phí
+│       │   ├── passview/page.tsx          # Tài khoản Passview thực tế
+│       │   ├── gia-vang-hom-nay/page.tsx  # Bảng giá Vàng SJC & Thế giới
+│       │   ├── tin-tuc/page.tsx           # Tin tức & Chiến lược MQL5
+│       │   ├── courses/page.tsx           # Học viện MQL5 Academy
+│       │   ├── admin/                     # Dashboard Quản Trị Hệ Thống
+│       │   │   ├── indicators/            # Quản lý Indicators & Bots
+│       │   │   ├── posts/                 # Quản lý Bài viết SEO
+│       │   │   ├── courses/               # Quản lý Khóa học
+│       │   │   ├── offers/                # Quản lý Ưu đãi
+│       │   │   └── passview/              # Quản lý Passview
+│       │   └── api/
+│       │       └── builder/gemini/route.ts# MQL5 Code Generator (Pure Engine + AI)
+│       ├── components/
+│       │   ├── builder/                   # Custom Node Components & Property Drawer
+│       │   │   ├── nodes/                 # Start, Indicator, SMC, Condition, Risk, Order Nodes
+│       │   │   └── NodePropertyDrawer.tsx # Drawer tùy biến tham số chỉ báo/rủi ro
+│       │   └── layout/                    # Header & Footer Navigation
+│       ├── lib/
+│       │   └── dataStore.ts               # LocalStorage Data Store & Realtime Sync Event
+│       └── types/
+│           └── builder.ts                 # TypeScript Definitions cho Builder & Indicators
+├── package.json                           # Turborepo Monorepo Config
+└── README.md                              # Tài liệu dự án
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## 🚀 Hướng Dẫn Cài Đặt & Vận Hành (Getting Started for Collaborators & AI)
 
-### Apps and Packages
+### 1. Yêu cầu môi trường
+* **Node.js:** `>= 18.18.0` (Khuyên dùng Node 20 LTS)
+* **Package Manager:** `npm` hoặc `pnpm`
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 2. Cài đặt dependencies
+```bash
+# Di chuyển vào thư mục web app
+cd apps/web
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+# Cài đặt thư viện
+npm install
 ```
 
-Without global `turbo`, use your package manager:
+### 3. Chạy môi trường phát triển (Development)
+```bash
+npm run dev
+```
+Mở trình duyệt truy cập: `http://localhost:3000`
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
+### 4. Kiểm tra biên dịch & Build Production
+```bash
+npm run build
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## 🤖 Hướng Dẫn Dành Cho AI Coding Agents (Instructions for AI Agents)
 
-```sh
-turbo build --filter=docs
-```
+Khi bất kỳ AI Assistant nào (Claude, Gemini, ChatGPT, Cursor, Copilot) tiếp nhận và phát triển tiếp dự án này, vui lòng tuân thủ các nguyên tắc sau:
 
-Without global `turbo`:
+1. **Kiến trúc MQL5 Code Generator (`apps/web/app/api/builder/gemini/route.ts`):**
+   * Hàm sinh mã MQL5 Pure Engine phải luôn duy trì tính toàn vẹn cú pháp MetaTrader 5 (biến toàn cục, `OnInit`, `OnTick`, `CopyBuffer`, mảng biến động, đóng/mở lệnh).
+   * Khi thêm indicator mới, phải đăng ký type trong `types/builder.ts`, thêm UI config trong `NodePropertyDrawer.tsx`, và handler tương ứng trong `route.ts`.
+2. **Hệ thống Quản Trị & Đồng Bộ Dữ Liệu (`lib/dataStore.ts`):**
+   * Tất cả trang Admin và Public đều kết nối qua hook `useVTDataStore(STORAGE_KEYS.<MODULE>, INITIAL_<MODULE>)`.
+   * Luôn sử dụng hàm `broadcastDataChange` hoặc `setStoreData` để kích hoạt phát sóng cập nhật realtime đa tab.
+3. **Quy chuẩn Giao diện (UI/UX Design Rules):**
+   * Giữ nguyên phong cách **VT Markets Luxury Dark Mode** (`#020712`, `#050D1A`, accent `#00C2FF` và `#0052FF`).
+   * Không tự ý thay đổi màu nền trắng hoặc phong cách phẳng làm mất tính sang trọng của thương hiệu.
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+---
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+## 📜 Bản Quyền & Giấy Phép (License & Credits)
+Dự án được xây dựng và sở hữu bản quyền phát triển bởi **Hau Tran**. Mọi quyền được bảo lưu.

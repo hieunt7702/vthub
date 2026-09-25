@@ -4,10 +4,26 @@ import enTranslations from "../messages/en.json";
 
 export type Language = "vi" | "en";
 
-const dictionaries: Record<Language, Record<string, string>> = {
+const dictionaries: Record<Language, any> = {
   vi: viTranslations,
   en: enTranslations,
 };
+
+function getNestedTranslation(obj: any, path: string): string | undefined {
+  if (!obj) return undefined;
+  if (obj[path] !== undefined && typeof obj[path] === "string") return obj[path];
+  
+  const keys = path.split(".");
+  let current = obj;
+  for (const k of keys) {
+    if (current && typeof current === "object" && k in current) {
+      current = current[k];
+    } else {
+      return undefined;
+    }
+  }
+  return typeof current === "string" ? current : undefined;
+}
 
 export async function getLanguage(): Promise<Language> {
   const cookieStore = await cookies();
@@ -17,13 +33,15 @@ export async function getLanguage(): Promise<Language> {
 
 export async function getDictionary() {
   const lang = await getLanguage();
-  const dict = dictionaries[lang];
   
-  // Return a translation function similar to client-side t()
   return {
     language: lang,
-    t: (key: string) => {
-      return dict[key] || dictionaries["vi"][key] || key;
+    t: (key: string): string => {
+      const primary = getNestedTranslation(dictionaries[lang], key);
+      if (primary) return primary;
+      const fallback = getNestedTranslation(dictionaries["vi"], key);
+      if (fallback) return fallback;
+      return key;
     }
   };
 }

@@ -4,91 +4,10 @@ import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { useState, useMemo } from "react";
 import Link from "next/link";
-
-interface PassviewAccount {
-  id: string;
-  brokerId: string;
-  brokerName: string;
-  brokerLogo: string;
-  rating: string;
-  accountType: string;
-  platform: "MT4" | "MT5";
-  status: string;
-  server: string;
-  login: string;
-  passwordInvestor: string;
-  registerLinks: {
-    label: string;
-    href: string;
-    group: "Link khách lẻ" | "Link IB";
-  }[];
-  reviewUrl: string;
-}
-
-const passviewAccountsData: PassviewAccount[] = [
-  {
-    id: "10",
-    brokerId: "27",
-    brokerName: "Decode FX",
-    brokerLogo: "https://hieunthub.co/uploads/brokers/logos/01KJRT63W817Z9E23DS8VB46F4.webp",
-    rating: "4.4",
-    accountType: "USD-STD-11X",
-    platform: "MT4",
-    status: "Ổn định",
-    server: "DecodeGlobalLtd-Live02",
-    login: "20005529",
-    passwordInvestor: "HieuNTHub@123",
-    registerLinks: [
-      { label: "Primary Register Link", href: "/brokers/danh-gia-decode-fx", group: "Link khách lẻ" },
-      { label: "Premium Level 1", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "Premium Level 2", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "Premium Level 3", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "VIP Partner", href: "/brokers/danh-gia-decode-fx", group: "Link IB" }
-    ],
-    reviewUrl: "/brokers/danh-gia-decode-fx"
-  },
-  {
-    id: "6",
-    brokerId: "27",
-    brokerName: "Decode FX",
-    brokerLogo: "https://hieunthub.co/uploads/brokers/logos/01KJRT63W817Z9E23DS8VB46F4.webp",
-    rating: "4.4",
-    accountType: "USD-PRO 4",
-    platform: "MT4",
-    status: "Ổn định",
-    server: "DecodeGlobalLtd-Live02",
-    login: "20005528",
-    passwordInvestor: "HieuNTHub@123",
-    registerLinks: [
-      { label: "Primary Register Link", href: "/brokers/danh-gia-decode-fx", group: "Link khách lẻ" },
-      { label: "Premium Level 1", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "Premium Level 2", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "Premium Level 3", href: "/brokers/danh-gia-decode-fx", group: "Link IB" },
-      { label: "VIP Partner", href: "/brokers/danh-gia-decode-fx", group: "Link IB" }
-    ],
-    reviewUrl: "/brokers/danh-gia-decode-fx"
-  },
-  {
-    id: "14",
-    brokerId: "14",
-    brokerName: "FPG",
-    brokerLogo: "https://hieunthub.co/uploads/brokers/logos/01KJ4SZ9MX514MM28ZN1QY197E.webp",
-    rating: "4.7",
-    accountType: "PRO20",
-    platform: "MT5",
-    status: "Ổn định",
-    server: "FortunePrime-Live2",
-    login: "80039172",
-    passwordInvestor: "HieuNTHub@123",
-    registerLinks: [
-      { label: "Primary Register Link", href: "/brokers/danh-gia-fortune-prime-global", group: "Link khách lẻ" },
-      { label: "Premium Level 1", href: "/brokers/danh-gia-fortune-prime-global", group: "Link IB" }
-    ],
-    reviewUrl: "/brokers/danh-gia-fortune-prime-global"
-  }
-];
+import { useVTDataStore, STORAGE_KEYS, INITIAL_PASSVIEWS, VTPassview } from "../../lib/dataStore";
 
 export default function PassviewPage() {
+  const [passviewAccounts] = useVTDataStore<VTPassview>(STORAGE_KEYS.PASSVIEWS, INITIAL_PASSVIEWS);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState<"" | "MT4" | "MT5">("");
 
@@ -129,7 +48,7 @@ export default function PassviewPage() {
   };
 
   const filteredAccounts = useMemo(() => {
-    return passviewAccountsData.filter(account => {
+    return passviewAccounts.filter(account => {
       const matchPlatform = selectedPlatform === "" || account.platform === selectedPlatform;
       const matchQuery = searchQuery === "" ||
         account.brokerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -137,7 +56,7 @@ export default function PassviewPage() {
         account.login.includes(searchQuery);
       return matchPlatform && matchQuery;
     });
-  }, [searchQuery, selectedPlatform]);
+  }, [passviewAccounts, searchQuery, selectedPlatform]);
 
   const openReport = (accountId: string, brokerId: string, platform: string, brokerName: string, accountLogin: string) => {
     setReportModal({
@@ -170,7 +89,7 @@ export default function PassviewPage() {
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 hh-hero-bg opacity-30"></div>
           <div className="absolute -top-40 right-0 w-[700px] h-[500px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none"></div>
-          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+          <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-[#00C2FF]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-12">
             {/* Breadcrumbs */}
@@ -182,10 +101,10 @@ export default function PassviewPage() {
 
             <div className="grid lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-teal-400/30 bg-teal-500/10 px-3 py-1 text-xs font-bold text-teal-300 mb-4">
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-[#00C2FF]/30 bg-[#00C2FF]/10 px-3 py-1 text-xs font-bold text-[#00C2FF] mb-4">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00C2FF] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00C2FF]"></span>
                   </span>
                   MINH BẠCH 100%
                 </div>
@@ -199,7 +118,7 @@ export default function PassviewPage() {
 
                 <div className="mt-5 flex items-center gap-3 text-xs text-zinc-400">
                   <div className="flex items-center gap-1.5">
-                    <svg className="h-4 w-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="h-4 w-4 text-[#00C2FF]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                     </svg>
                     <span>Verified bởi HieuNTHUB</span>
@@ -228,15 +147,15 @@ export default function PassviewPage() {
                     </div>
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-3xl md:text-4xl font-extrabold text-teal-300 tabular-nums">8</span>
+                        <span className="text-3xl md:text-4xl font-extrabold text-[#00C2FF] tabular-nums">8</span>
                         <span className="text-xs text-zinc-500">/ 2</span>
                       </div>
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">MT5 / MT4</div>
                     </div>
                     <div className="rounded bg-white/[0.04] border border-white/10 p-4">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-3xl md:text-4xl font-extrabold text-teal-300 tabular-nums">10</span>
-                        <span className="text-xs text-teal-400">●</span>
+                        <span className="text-3xl md:text-4xl font-extrabold text-[#00C2FF] tabular-nums">10</span>
+                        <span className="text-xs text-[#00C2FF]">●</span>
                       </div>
                       <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold mt-1">Khoẻ</div>
                     </div>
@@ -274,10 +193,10 @@ export default function PassviewPage() {
                 <h3 className="font-extrabold text-white text-base mb-1">Mở MT4/MT5 (web hoặc app)</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">Dùng app cài sẵn hoặc web terminal. Login → chọn server từ list → paste credentials.</p>
               </div>
-              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-teal-400/30 transition group">
+              <div className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-5 hover:border-[#00C2FF]/30 transition group">
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="h-12 w-12 rounded bg-teal-500/15 border border-teal-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">👁</div>
-                  <div className="text-3xl font-extrabold text-teal-300/40 tabular-nums">03</div>
+                  <div className="h-12 w-12 rounded bg-[#00C2FF]/15 border border-[#00C2FF]/30 flex items-center justify-center text-2xl group-hover:scale-110 transition">👁</div>
+                  <div className="text-3xl font-extrabold text-[#00C2FF]/40 tabular-nums">03</div>
                 </div>
                 <h3 className="font-extrabold text-white text-base mb-1">Quan sát live (read-only)</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">Xem lệnh đang chạy, history, P&L. Không thể đặt lệnh — đây là investor password an toàn.</p>
@@ -367,8 +286,12 @@ export default function PassviewPage() {
                   const pwdRevealed = revealedStates[account.id];
 
                   // Group links
-                  const retailLinks = account.registerLinks.filter(l => l.group === "Link khách lẻ");
-                  const ibLinks = account.registerLinks.filter(l => l.group === "Link IB");
+                  const linksList = account.registerLinks || [
+                    { label: "Mở Tài Khoản Nhận Backcom", href: "https://www.vtmarkets.com/get-trading/?affid=8421818926", group: "Link khách lẻ" },
+                    { label: "Đăng Ký Đối Tác IB", href: "/ib-commission-overview", group: "Link IB" }
+                  ];
+                  const retailLinks = linksList.filter(l => l.group === "Link khách lẻ");
+                  const ibLinks = linksList.filter(l => l.group === "Link IB");
 
                   return (
                     <article key={account.id} className="rounded border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] hover:border-blue-400/25 transition">
@@ -376,12 +299,12 @@ export default function PassviewPage() {
 
                         {/* Profile Info block */}
                         <div className="lg:col-span-4 p-5 lg:border-r border-white/5 flex flex-col gap-3">
-                          <Link href={account.reviewUrl} className="flex items-start gap-3 group min-w-0">
-                            <img src={account.brokerLogo} alt={account.brokerName} className="h-14 w-14 rounded object-cover shrink-0" loading="lazy" />
+                          <Link href={account.reviewUrl || '/brokers/vt-markets'} className="flex items-start gap-3 group min-w-0">
+                            <img src={account.brokerLogo || '/logo_white.webp'} alt={account.brokerName} className="h-14 w-14 rounded object-cover shrink-0" loading="lazy" />
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1.5 flex-wrap">
                                 <strong className="font-extrabold text-white text-base group-hover:text-blue-300 transition truncate">{account.brokerName}</strong>
-                                <svg className="h-4 w-4 text-teal-400 shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
+                                <svg className="h-4 w-4 text-[#00C2FF] shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-label="verified">
                                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                                 </svg>
                               </div>
@@ -394,10 +317,10 @@ export default function PassviewPage() {
                           </Link>
 
                           <div className="flex flex-wrap gap-1.5">
-                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.accountType}</span>
+                            <span className="rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.accountType}</span>
                             <span className="rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">{account.platform}</span>
-                            <span className="rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
-                              <span className="text-teal-400">●</span> {account.status}
+                            <span className="rounded-full bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
+                              <span className="text-[#00C2FF]">●</span> {account.status}
                             </span>
                           </div>
                         </div>
@@ -418,7 +341,7 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-server`, account.server)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${serverCopied
-                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    ? "border-[#00C2FF]/40 bg-[#00C2FF]/10 text-[#00C2FF]"
                                     : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={serverCopied ? "Đã sao chép" : "Sao chép"}
@@ -442,7 +365,7 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-login`, account.login)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${loginCopied
-                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    ? "border-[#00C2FF]/40 bg-[#00C2FF]/10 text-[#00C2FF]"
                                     : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={loginCopied ? "Đã sao chép" : "Sao chép"}
@@ -480,7 +403,7 @@ export default function PassviewPage() {
                                 type="button"
                                 onClick={() => handleCopy(`${account.id}-pwd`, account.passwordInvestor)}
                                 className={`h-7 w-7 rounded border flex items-center justify-center transition ${pwdCopied
-                                    ? "border-teal-400/40 bg-teal-500/10 text-teal-300"
+                                    ? "border-[#00C2FF]/40 bg-[#00C2FF]/10 text-[#00C2FF]"
                                     : "border-white/10 bg-white/5 hover:border-blue-400/40 hover:bg-blue-500/10 hover:text-blue-300 text-zinc-400"
                                   }`}
                                 title={pwdCopied ? "Đã sao chép" : "Sao chép"}
@@ -530,7 +453,7 @@ export default function PassviewPage() {
                             </div>
                           </details>
 
-                          <Link href={account.reviewUrl} className="flex items-center justify-center gap-2 rounded border border-white/10 bg-white/5 hover:border-white/25 hover:bg-white/10 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition">
+                          <Link href={account.reviewUrl || '/brokers/vt-markets'} className="flex items-center justify-center gap-2 rounded border border-white/10 bg-white/5 hover:border-white/25 hover:bg-white/10 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition">
                             👁 Xem
                           </Link>
 
@@ -609,9 +532,9 @@ export default function PassviewPage() {
 
         {/* Global Toast Success Message */}
         {toastMessage && (
-          <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded border border-teal-400/30 bg-[#0F1E19] px-4 py-3.5 shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 duration-300">
-            <span className="h-8 w-8 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400 font-bold shrink-0">✓</span>
-            <p className="text-xs font-semibold text-teal-200 leading-relaxed">{toastMessage}</p>
+          <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded border border-[#00C2FF]/30 bg-[#050D1A] px-4 py-3.5 shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 duration-300">
+            <span className="h-8 w-8 rounded-full bg-[#00C2FF]/20 flex items-center justify-center text-[#00C2FF] font-bold shrink-0">✓</span>
+            <p className="text-xs font-semibold text-cyan-200 leading-relaxed">{toastMessage}</p>
           </div>
         )}
 

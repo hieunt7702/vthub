@@ -1,326 +1,249 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface Post {
-  id: string;
-  title: string;
-  slug: string;
-  content: string;
-  thumbnail: string;
-  published: boolean;
-  authorId: string;
-  createdAt: string;
-}
-
-const DEFAULT_POSTS: Post[] = [
-  {
-    id: '1',
-    title: 'Top 5 sàn Forex uy tín nhất 2024',
-    slug: 'top-5-san-forex',
-    content: 'Nội dung bài viết đánh giá 5 sàn forex tốt nhất...',
-    thumbnail: '',
-    published: true,
-    authorId: 'admin_1',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    title: 'Hướng dẫn sử dụng MT5 cơ bản',
-    slug: 'huong-dan-mt5',
-    content: 'Cách đặt lệnh, thêm chỉ báo trên MT5...',
-    thumbnail: '',
-    published: false,
-    authorId: 'mod_1',
-    createdAt: new Date(Date.now() - 86400000).toISOString()
-  }
-];
+import { useState } from 'react';
+import { 
+  Plus, Search, Edit2, Trash2, CheckCircle2, 
+  Sparkles, Filter, RefreshCw 
+} from 'lucide-react';
+import { 
+  VTPost, 
+  STORAGE_KEYS, 
+  INITIAL_POSTS, 
+  useVTDataStore 
+} from '../../../lib/dataStore';
 
 export default function AdminPostsPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [editPost, setEditPost] = useState<Post | null>(null);
+  const [posts, setPosts] = useVTDataStore<VTPost>(
+    STORAGE_KEYS.POSTS,
+    INITIAL_POSTS
+  );
 
-  // Search & Filter & Sort & Pagination
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
-  const [sortField, setSortField] = useState<keyof Post>('createdAt');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [editPost, setEditPost] = useState<VTPost | null>(null);
+  const [toastMsg, setToastMsg] = useState('');
 
-  // Form inputs
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Partial<VTPost>>({
     title: '',
     slug: '',
+    excerpt: '',
     content: '',
+    category: 'Tin Tức Thị Trường',
+    author: 'VT Research Team',
+    readTime: '5 phút đọc',
     thumbnail: '',
-    published: true,
-    authorId: 'admin_1'
+    isFeatured: true
   });
 
-  const loadData = () => {
-    setLoading(true);
-    const stored = localStorage.getItem('bh_posts');
-    if (stored) {
-      setPosts(JSON.parse(stored));
-    } else {
-      setPosts(DEFAULT_POSTS);
-      localStorage.setItem('bh_posts', JSON.stringify(DEFAULT_POSTS));
-    }
-    setLoading(false);
+  const showNotification = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3000);
   };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const handleOpenAdd = () => {
     setEditPost(null);
     setFormData({
       title: '',
       slug: '',
+      excerpt: '',
       content: '',
-      thumbnail: '',
-      published: true,
-      authorId: 'admin_1'
+      category: 'Tin Tức Thị Trường',
+      author: 'VT Research Team',
+      readTime: '5 phút đọc',
+      thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80',
+      isFeatured: true
     });
     setShowModal(true);
   };
 
-  const handleOpenEdit = (post: Post) => {
-    setEditPost(post);
-    setFormData({
-      title: post.title || '',
-      slug: post.slug || '',
-      content: post.content || '',
-      thumbnail: post.thumbnail || '',
-      published: post.published !== undefined ? post.published : true,
-      authorId: post.authorId || 'admin_1'
-    });
+  const handleOpenEdit = (p: VTPost) => {
+    setEditPost(p);
+    setFormData({ ...p });
     setShowModal(true);
+  };
+
+  const handleDelete = (id: string) => {
+    if (confirm('Bạn có chắc muốn xóa bài viết này? Trang /tin-tuc sẽ cập nhật ngay lập tức.')) {
+      setPosts((prev) => prev.filter((p) => p.id !== id));
+      showNotification('Đã xóa bài viết và đồng bộ tức thì!');
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...formData };
+    const slug = formData.slug || formData.title?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '') || 'bai-viet';
 
-    const currentList = [...posts];
     if (editPost) {
-      const idx = currentList.findIndex((p) => p.id === editPost.id);
-      if (idx !== -1) {
-        currentList[idx] = {
-          ...editPost,
-          ...payload
-        };
-      }
+      setPosts((prev) =>
+        prev.map((p) => (p.id === editPost.id ? ({ ...p, ...formData, slug } as VTPost) : p))
+      );
+      showNotification('Đã cập nhật bài viết thành công!');
     } else {
-      const newPost: Post = {
-        ...payload,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString()
+      const newPost: VTPost = {
+        id: 'post-' + Date.now(),
+        title: formData.title || 'Bài Viết Mới',
+        slug,
+        excerpt: formData.excerpt || '',
+        content: formData.content || '',
+        category: formData.category || 'Tin Tức Thị Trường',
+        author: formData.author || 'VT Research Team',
+        readTime: formData.readTime || '5 phút đọc',
+        thumbnail: formData.thumbnail || 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80',
+        isFeatured: Boolean(formData.isFeatured),
+        views: 1,
+        publishedAt: new Date().toISOString()
       };
-      currentList.unshift(newPost);
+      setPosts((prev) => [newPost, ...prev]);
+      showNotification('Đã tạo bài viết mới và hiển thị trực tiếp trên trang tin tức!');
     }
-
-    setPosts(currentList);
-    localStorage.setItem('bh_posts', JSON.stringify(currentList));
     setShowModal(false);
   };
 
-  const handleDelete = (id: string) => {
-    if (!confirm('Bạn có chắc muốn xóa bài viết này không?')) return;
-    const filtered = posts.filter((p) => p.id !== id);
-    setPosts(filtered);
-    localStorage.setItem('bh_posts', JSON.stringify(filtered));
-  };
-
-  const handleSort = (field: keyof Post) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortOrder('asc');
+  const handleResetDefaults = () => {
+    if (confirm('Khôi phục danh sách bài viết gốc chuẩn VT Rewards Hub?')) {
+      setPosts(INITIAL_POSTS);
+      showNotification('Đã khôi phục dữ liệu bài viết gốc!');
     }
-    setCurrentPage(1);
   };
 
-  // Filter & Search
-  const filteredPosts = posts
-    .filter((p) => {
-      const matchesSearch =
-        (p.title || '').toLowerCase().includes(search.toLowerCase()) ||
-        (p.authorId || '').toLowerCase().includes(search.toLowerCase());
-      const matchesStatus = statusFilter === '' ? true : statusFilter === 'PUBLISHED' ? p.published === true : p.published === false;
-      return matchesSearch && matchesStatus;
-    })
-    .sort((a, b) => {
-      let valA = a[sortField];
-      let valB = b[sortField];
-
-      if (typeof valA === 'string') {
-        valA = (valA as string).toLowerCase();
-        valB = (valB as string).toLowerCase();
-      }
-
-      if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
-      if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-
-  // Pagination
-  const totalPages = Math.ceil(filteredPosts.length / rowsPerPage);
-  const paginatedPosts = filteredPosts.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  const filtered = posts.filter((p) => {
+    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) || p.excerpt.toLowerCase().includes(search.toLowerCase());
+    const matchCat = categoryFilter ? p.category === categoryFilter : true;
+    return matchSearch && matchCat;
+  });
 
   return (
-    <div className="flex flex-col h-full space-y-6">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shrink-0">
-        <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Quản lý Bài Viết</h1>
-          <p className="text-zinc-400 text-sm">Quản lý nội dung blog, tin tức, và kiến thức giao dịch.</p>
+    <div className="space-y-6">
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed top-6 right-6 z-50 bg-[#00C2FF] text-slate-950 px-4 py-3 rounded-2xl font-bold shadow-2xl flex items-center gap-2 animate-in fade-in">
+          <CheckCircle2 className="w-5 h-5" />
+          <span>{toastMsg}</span>
         </div>
-        <button
-          onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded transition shadow-lg shadow-blue-500/20 text-sm whitespace-nowrap self-start sm:self-center"
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
-          Thêm Bài Viết Mới
-        </button>
+      )}
+
+      {/* Header Banner */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#050D1A] border border-[#00C2FF]/20 p-6 rounded-3xl shadow-xl">
+        <div>
+          <div className="flex items-center gap-2 text-[#00C2FF] text-xs font-bold uppercase tracking-wider mb-1">
+            <Sparkles className="w-4 h-4" />
+            <span>Quản Trị Tin Tức & Kiến Thức Thị Trường</span>
+          </div>
+          <h1 className="text-2xl font-black text-white tracking-tight">Quản Lý Bài Viết & Phân Tích VT Markets</h1>
+          <p className="text-slate-400 text-xs mt-1">
+            Mọi bài viết xuất bản tại đây sẽ <strong>hiển thị ngay tức thì</strong> trên trang chủ và trang /tin-tuc.
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleResetDefaults}
+            className="flex items-center gap-2 px-3.5 py-2.5 bg-slate-900 border border-slate-700 hover:border-[#00C2FF]/40 text-slate-300 rounded-xl text-xs font-semibold transition-all cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>Khôi phục</span>
+          </button>
+          <button
+            onClick={handleOpenAdd}
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] hover:brightness-110 text-white font-black rounded-xl text-xs shadow-lg shadow-[#00C2FF]/20 transition-all cursor-pointer uppercase tracking-wider"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Viết Bài Mới</span>
+          </button>
+        </div>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="bg-zinc-900 border border-zinc-800 p-5 rounded space-y-4 shrink-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Filter Bar */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#050D1A] p-4 border border-slate-800 rounded-2xl">
+        <div className="relative w-full sm:w-80">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Tìm theo tiêu đề, tác giả..."
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Tìm theo tiêu đề bài viết..."
+            className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700/80 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#00C2FF]"
           />
-
-          <details className="relative group w-full" data-hh-nav-dropdown="">
-            <summary className="list-none cursor-pointer w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-sm text-zinc-100 flex items-center justify-between hover:border-zinc-700 transition">
-              <span>{statusFilter === '' ? 'Tất cả trạng thái' : statusFilter === 'PUBLISHED' ? 'Đã xuất bản (PUBLISHED)' : 'Bản nháp (DRAFT)'}</span>
-              <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-            </summary>
-            <div className="absolute left-0 top-full mt-2 w-full z-50">
-              <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                <button
-                  onClick={(e) => { e.preventDefault(); setStatusFilter(''); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                  className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === '' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                >
-                  Tất cả trạng thái
-                </button>
-                <button
-                  onClick={(e) => { e.preventDefault(); setStatusFilter('PUBLISHED'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                  className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'PUBLISHED' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                >
-                  Đã xuất bản (PUBLISHED)
-                </button>
-                <button
-                  onClick={(e) => { e.preventDefault(); setStatusFilter('DRAFT'); setCurrentPage(1); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                  className={`w-full text-left rounded px-3 py-2 text-sm transition ${statusFilter === 'DRAFT' ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                >
-                  Bản nháp (DRAFT)
-                </button>
-              </div>
-            </div>
-          </details>
+        </div>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Filter className="w-4 h-4 text-[#00C2FF] shrink-0" />
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-[#00C2FF]"
+          >
+            <option value="">Tất cả chuyên mục</option>
+            <option value="Tin Tức Thị Trường">Tin Tức Thị Trường</option>
+            <option value="Chiến Lược MQL5">Chiến Lược MQL5</option>
+            <option value="Hướng Dẫn VT Markets">Hướng Dẫn VT Markets</option>
+            <option value="Phân Tích Kỹ Thuật">Phân Tích Kỹ Thuật</option>
+          </select>
         </div>
       </div>
 
-      {/* Main Table */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded flex flex-col flex-1 overflow-hidden shadow-xl min-h-0">
-        <div className="overflow-x-auto overflow-y-auto flex-1 min-h-[300px]">
-          <table className="w-full text-left text-sm text-zinc-300">
-            <thead className="bg-zinc-950 border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wider">
-              <tr>
-                <th
-                  onClick={() => handleSort('title')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Tiêu Đề {sortField === 'title' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('slug')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Đường dẫn (Slug) {sortField === 'slug' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold">Mô tả</th>
-                <th
-                  onClick={() => handleSort('published')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Trạng Thái {sortField === 'published' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th
-                  onClick={() => handleSort('createdAt')}
-                  className="px-6 py-4 font-bold cursor-pointer hover:bg-zinc-900 select-none"
-                >
-                  Ngày Tạo {sortField === 'createdAt' && (sortOrder === 'asc' ? '▲' : '▼')}
-                </th>
-                <th className="px-6 py-4 font-bold text-right">Thao tác</th>
+      {/* Posts Table */}
+      <div className="bg-[#050D1A] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800/80 bg-slate-950/60 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                <th className="py-3.5 px-5">Tiêu Đề Bài Viết</th>
+                <th className="py-3.5 px-4">Chuyên Mục</th>
+                <th className="py-3.5 px-4">Tác Giả</th>
+                <th className="py-3.5 px-4">Thời Gian Đọc</th>
+                <th className="py-3.5 px-4">Lượt Xem</th>
+                <th className="py-3.5 px-5 text-right">Thao Tác</th>
               </tr>
             </thead>
-            <tbody>
-              {loading ? (
+            <tbody className="divide-y divide-slate-800/60 text-xs">
+              {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-zinc-500">Đang tải...</td>
-                </tr>
-              ) : paginatedPosts.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-zinc-500">Không có dữ liệu.</td>
+                  <td colSpan={6} className="py-8 text-center text-slate-400">
+                    Không tìm thấy bài viết nào phù hợp.
+                  </td>
                 </tr>
               ) : (
-                paginatedPosts.map((p) => (
-                  <tr key={p.id} className="border-b border-zinc-800/60 hover:bg-zinc-800/20 transition-colors">
-                    <td className="px-6 py-4 font-bold text-white max-w-[300px] truncate">{p.title || 'Chưa đặt tiêu đề'}</td>
-                    <td className="px-6 py-4 text-zinc-300 font-semibold">{p.slug}</td>
-                    <td className="px-6 py-4 text-xs font-mono text-zinc-400 max-w-[200px] truncate">{p.content}</td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
-                        p.published
-                          ? 'bg-teal-500/10 border-teal-500/25 text-teal-400'
-                          : 'bg-zinc-800 border-zinc-700 text-zinc-500'
-                      }`}>
-                        {p.published ? 'PUBLISHED' : 'DRAFT'}
+                filtered.map((post) => (
+                  <tr key={post.id} className="hover:bg-[#08152B] transition-colors group">
+                    <td className="py-4 px-5">
+                      <div className="font-bold text-white group-hover:text-[#00C2FF] transition-colors line-clamp-1 max-w-md">
+                        {post.title}
+                      </div>
+                      <div className="text-[11px] text-slate-400 line-clamp-1 max-w-md mt-0.5">
+                        {post.excerpt}
+                      </div>
+                    </td>
+                    <td className="py-4 px-4">
+                      <span className="px-2.5 py-1 bg-[#00C2FF]/10 border border-[#00C2FF]/30 text-[#00C2FF] font-bold rounded-lg text-[10px]">
+                        {post.category}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-xs text-zinc-500">{new Date(p.createdAt).toLocaleDateString('vi-VN')}</td>
-                    <td className="px-6 py-4 text-right">
-                      <details className="relative group text-left inline-block" data-hh-nav-dropdown="">
-                        <summary className="list-none cursor-pointer p-1.5 hover:bg-zinc-800 rounded transition text-zinc-400 hover:text-white">
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-                        </summary>
-                        <div className="absolute right-0 top-full mt-1 z-50 min-w-[120px] shadow-xl">
-                          <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 flex flex-col gap-1">
-                            <button
-                              onClick={() => handleOpenEdit(p)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                              Sửa
-                            </button>
-                            <button
-                              onClick={() => handleDelete(p.id)}
-                              className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2"
-                            >
-                              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                              Xóa
-                            </button>
-                          </div>
-                        </div>
-                      </details>
+                    <td className="py-4 px-4 text-slate-300 font-medium">
+                      {post.author}
+                    </td>
+                    <td className="py-4 px-4 text-slate-400">
+                      {post.readTime}
+                    </td>
+                    <td className="py-4 px-4 text-slate-300">
+                      {post.views?.toLocaleString()}
+                    </td>
+                    <td className="py-4 px-5 text-right">
+                      <div className="inline-flex items-center gap-2">
+                        <button
+                          onClick={() => handleOpenEdit(post)}
+                          className="p-1.5 bg-slate-800 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-300 rounded-lg transition-colors cursor-pointer"
+                          title="Chỉnh sửa"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(post.id)}
+                          className="p-1.5 bg-slate-800 hover:bg-rose-500/20 hover:text-rose-400 text-slate-300 rounded-lg transition-colors cursor-pointer"
+                          title="Xóa"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -328,147 +251,114 @@ export default function AdminPostsPage() {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
-        {filteredPosts.length > 0 && (
-          <div className="bg-zinc-950 border-t border-zinc-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs select-none mt-auto shrink-0 z-10 sticky bottom-0">
-            <div className="text-zinc-500">
-              Hiển thị từ <strong className="text-white">{(currentPage - 1) * rowsPerPage + 1}</strong> đến{' '}
-              <strong className="text-white">
-                {Math.min(currentPage * rowsPerPage, filteredPosts.length)}
-              </strong>{' '}
-              trong tổng số <strong className="text-white">{filteredPosts.length}</strong> bài viết.
-            </div>
-
-            <div className="flex items-center gap-1">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
-              >
-                Trước
-              </button>
-              <span className="px-3 text-zinc-400">Trang {currentPage} / {totalPages}</span>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(currentPage + 1)}
-                className="px-2.5 py-1.5 bg-zinc-900 border border-zinc-800 text-white font-bold rounded disabled:opacity-40 transition"
-              >
-                Sau
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* Modal Drawer */}
+      {/* Modal Add / Edit */}
       {showModal && (
-        <div 
-          className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-fadeIn"
-          onClick={() => setShowModal(false)}
-        >
-          <div 
-            className="w-full max-w-3xl h-full bg-zinc-950 border-l border-zinc-850 flex flex-col shadow-2xl animate-slideLeft"
-            onClick={(e) => e.stopPropagation()}
-          >
-            
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 shrink-0">
-              <h2 className="text-xl font-bold text-white">
-                {editPost ? 'Chỉnh Sửa Bài Viết' : 'Thêm Bài Viết Mới'}
-              </h2>
-              <button onClick={() => setShowModal(false)} className="p-1.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
-            </div>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#050D1A] border border-[#00C2FF]/30 rounded-3xl w-full max-w-2xl p-6 shadow-2xl text-slate-100 max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-black text-white mb-4">
+              {editPost ? 'Chỉnh Sửa Bài Viết' : 'Tạo Bài Viết Tin Tức / Phân Tích Mới'}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Tiêu Đề Bài Viết *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.title}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  placeholder="Tiêu đề hấp dẫn, chuẩn SEO..."
+                />
+              </div>
 
-            <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
-              <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Tiêu đề bài viết</label>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Chuyên Mục *</label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  >
+                    <option value="Tin Tức Thị Trường">Tin Tức Thị Trường</option>
+                    <option value="Chiến Lược MQL5">Chiến Lược MQL5</option>
+                    <option value="Hướng Dẫn VT Markets">Hướng Dẫn VT Markets</option>
+                    <option value="Phân Tích Kỹ Thuật">Phân Tích Kỹ Thuật</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Tác Giả</label>
                   <input
                     type="text"
-                    required
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
+                    value={formData.author}
+                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                    placeholder="VT Research Team"
                   />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Đường dẫn tĩnh (Slug)</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.slug}
-                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
-                      placeholder="VD: huong-dan-mt5"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Ảnh bìa (Thumbnail URL)</label>
-                    <input
-                      type="text"
-                      value={formData.thumbnail}
-                      onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
-                      className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Nội dung (Content)</label>
-                  <textarea
-                    required
-                    value={formData.content}
-                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    className="w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white focus:outline-none focus:border-blue-500/50 min-h-[120px]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-zinc-400 mb-1 uppercase tracking-wide">Trạng thái xuất bản</label>
-                  <details className="relative group w-full" data-hh-nav-dropdown="">
-                    <summary className="list-none cursor-pointer w-full px-4 py-2 bg-zinc-900 border border-zinc-800 rounded text-sm text-white flex items-center justify-between focus:outline-none focus:border-blue-500/50">
-                      <span>{formData.published ? 'Đã xuất bản (PUBLISHED)' : 'Bản nháp (DRAFT)'}</span>
-                      <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                    </summary>
-                    <div className="absolute left-0 top-full mt-2 w-full z-50">
-                      <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, published: true }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${formData.published ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          Đã xuất bản (PUBLISHED)
-                        </button>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.preventDefault(); setFormData({ ...formData, published: false }); document.activeElement instanceof HTMLElement && document.activeElement.blur(); }}
-                          className={`w-full text-left rounded px-3 py-2 text-sm transition ${!formData.published ? 'bg-blue-500/10 text-blue-400' : 'text-zinc-300 hover:bg-white/5 hover:text-white'}`}
-                        >
-                          Bản nháp (DRAFT)
-                        </button>
-                      </div>
-                    </div>
-                  </details>
                 </div>
               </div>
-              
-              <div className="p-6 border-t border-zinc-800 flex justify-end gap-3 shrink-0 bg-zinc-950">
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Đoạn Tóm Tắt (Excerpt) *</label>
+                <textarea
+                  rows={2}
+                  required
+                  value={formData.excerpt}
+                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                  placeholder="Tóm tắt ngắn gọn 1-2 câu hiển thị ở trang danh sách..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Nội Dung Chi Tiết *</label>
+                <textarea
+                  rows={6}
+                  required
+                  value={formData.content}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF] font-sans leading-relaxed"
+                  placeholder="Nhập nội dung bài viết chi tiết..."
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Ảnh Bìa (Thumbnail URL)</label>
+                  <input
+                    type="text"
+                    value={formData.thumbnail}
+                    onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                    placeholder="https://..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Thời Gian Đọc</label>
+                  <input
+                    type="text"
+                    value={formData.readTime}
+                    onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-[#00C2FF]"
+                    placeholder="5 phút đọc"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-5 py-2.5 rounded border border-zinc-800 text-zinc-400 hover:text-white text-sm font-semibold"
+                  className="w-1/2 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer"
                 >
-                  Hủy
+                  Hủy Bỏ
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded bg-blue-500 hover:bg-blue-600 text-white font-bold transition shadow-lg shadow-blue-500/20 text-sm"
+                  className="w-1/2 py-2.5 bg-gradient-to-r from-[#00C2FF] to-[#0052FF] text-white text-xs font-black rounded-xl shadow-lg shadow-[#00C2FF]/20 hover:brightness-110 transition-all uppercase tracking-wider cursor-pointer"
                 >
-                  Lưu
+                  {editPost ? 'Lưu Thay Đổi' : 'Xuất Bản Bài Viết'}
                 </button>
               </div>
             </form>

@@ -77,7 +77,7 @@ export default function PredictionsPage() {
               </button>
               
               <div className="mt-6 flex items-center justify-center gap-2 text-xs text-zinc-500">
-                <svg className="w-4 h-4 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-[#00C2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 Kết nối an toàn & bảo mật
@@ -114,13 +114,13 @@ export default function PredictionsPage() {
 
               {/* Time */}
               <div className="md:col-span-3 bg-black/40 rounded border border-white/10 p-5 flex flex-col items-center justify-center text-center shadow-lg">
-                <div className="w-10 h-10 rounded bg-teal-500/20 text-teal-400 flex items-center justify-center mb-3">
+                <div className="w-10 h-10 rounded bg-[#00C2FF]/20 text-[#00C2FF] flex items-center justify-center mb-3">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-1">Khung Giờ</div>
-                <div className="text-lg font-bold text-teal-400 mb-1">Đang mở</div>
+                <div className="text-lg font-bold text-[#00C2FF] mb-1">Đang mở</div>
                 <div className="text-[10px] text-zinc-500">01:00:00 - 16:30:00 (UTC+7)</div>
               </div>
 

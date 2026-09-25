@@ -39,7 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ),
     },
     {
-      name: 'Sàn Giao Dịch',
+      name: 'Sàn Giao Dịch & WikiFX',
       href: '/admin/brokers',
       icon: (
         <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,16 +48,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ),
     },
     {
-      name: 'Khuyến Mãi & Bonus',
-      href: '/admin/offers',
+      name: 'Tạo Bot No-Code (Studio)',
+      href: '/builder',
       icon: (
-        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M6 20h12a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <svg className="h-5 w-5 shrink-0 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
     },
     {
-      name: 'Chỉ Báo Kỹ Thuật',
+      name: 'Bộ 9 Bot EA MT5',
       href: '/admin/indicators',
       icon: (
         <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ),
     },
     {
-      name: 'Quản Lý Khóa Học',
+      name: 'Ưu Đãi & Bonus Thưởng',
+      href: '/admin/offers',
+      icon: (
+        <svg className="h-5 w-5 shrink-0 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Khóa Học Academy',
       href: '/admin/courses',
       icon: (
         <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +84,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ),
     },
     {
-      name: 'Quản Lý Bài Viết',
+      name: 'Bài Viết Tin Tức',
       href: '/admin/posts',
       icon: (
         <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,19 +93,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ),
     },
     {
-      name: 'Passview Tín Hiệu',
+      name: 'Passview Trader',
       href: '/admin/passview',
       icon: (
-        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+        <svg className="h-5 w-5 shrink-0 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
         </svg>
       ),
-    },
+    }
   ];
 
   if (pathname === '/admin/login') {
     return (
-      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex font-sans">
+      <div className="min-h-screen bg-[#020712] text-slate-100 flex font-sans">
         {children}
       </div>
     );
@@ -104,8 +114,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (isAuthChecking) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <svg className="animate-spin h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24">
+      <div className="min-h-screen bg-[#020712] flex items-center justify-center">
+        <svg className="animate-spin h-8 w-8 text-[#00C2FF]" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
@@ -114,14 +124,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="h-screen bg-zinc-950 text-zinc-100 flex font-sans overflow-hidden">
+    <div className="h-screen bg-[#020712] text-slate-100 flex font-sans overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-68 bg-zinc-900 border-r border-zinc-800/80 hidden md:flex flex-col select-none">
+      <aside className="w-68 bg-[#050D1A] border-r border-slate-800 hidden md:flex flex-col select-none">
         {/* Sidebar Brand Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-zinc-800/60 bg-zinc-950/20">
-          <Link href="/admin" className="font-extrabold text-xl text-white tracking-wider flex items-center gap-1.5">
-            <span>HieuNTHUB</span>
-            <span className="text-xs bg-gradient-to-r from-blue-400 to-cyan-500 text-zinc-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
+        <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-[#08152B]/40">
+          <Link href="/admin" className="font-extrabold text-sm text-white tracking-wider flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#00C2FF]/20 text-[#00C2FF] border border-[#00C2FF]/40">
+              <span className="font-black text-xs">VT</span>
+            </div>
+            <span>VT Rewards Hub</span>
+            <span className="text-[9px] bg-[#00C2FF] text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-widest">
               Admin
             </span>
           </Link>
@@ -135,13 +148,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded transition-all duration-200 group ${
+                className={`flex items-center gap-3 px-4 py-3 text-xs font-bold rounded-xl transition-all duration-200 group ${
                   isActive
-                    ? 'bg-zinc-800 text-blue-400 shadow-md'
-                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50'
+                    ? 'bg-[#00C2FF]/15 text-[#00C2FF] border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <div className={`transition-colors duration-200 ${isActive ? 'text-blue-400' : 'text-zinc-500 group-hover:text-zinc-400'}`}>
+                <div className={`transition-colors duration-200 ${isActive ? 'text-[#00C2FF]' : 'text-slate-500 group-hover:text-slate-300'}`}>
                   {item.icon}
                 </div>
                 <span>{item.name}</span>
@@ -151,10 +164,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Sidebar Footer Back button */}
-        <div className="p-4 border-t border-zinc-800/60 bg-zinc-950/20">
+        <div className="p-4 border-t border-slate-800 bg-[#020712]/40">
           <Link
             href="/"
-            className="flex justify-center items-center gap-2 px-4 py-2.5 bg-zinc-800/60 border border-zinc-700/50 hover:bg-zinc-800 hover:border-zinc-600 text-sm font-semibold rounded text-zinc-300 hover:text-white transition w-full"
+            className="flex justify-center items-center gap-2 px-4 py-2.5 bg-slate-900 border border-slate-700/80 hover:border-[#00C2FF]/50 text-xs font-bold rounded-xl text-slate-300 hover:text-white transition w-full"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -167,57 +180,30 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content Pane */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <header className="h-16 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-6 select-none sticky top-0 z-10">
+        <header className="h-16 bg-[#050D1A] border-b border-slate-800 flex items-center justify-between px-6 select-none sticky top-0 z-10">
           <div className="md:hidden">
-            <span className="font-bold text-lg text-white">
-              HieuNTHUB
+            <span className="font-bold text-sm text-white">
+              VT Rewards Admin
             </span>
           </div>
 
           <div className="ml-auto flex items-center space-x-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
-              <div className="h-2 w-2 rounded-full bg-teal-500 animate-pulse"></div>
-              <span className="text-xs text-zinc-400 font-medium hidden sm:block">admin@gmail.com</span>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#020712] border border-slate-800">
+              <div className="h-2 w-2 rounded-full bg-[#00C2FF] animate-pulse"></div>
+              <span className="text-xs text-slate-300 font-medium hidden sm:block">admin@vtrewardshub.com</span>
             </div>
             
-            <details className="relative group" data-hh-nav-dropdown="">
-              <summary className="list-none cursor-pointer h-9 w-9 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition">
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-              </summary>
-              <div className="absolute right-0 top-full mt-2 w-56 z-50">
-                <div className="rounded border border-white/10 bg-zinc-900/95 backdrop-blur-md p-1.5 shadow-2xl flex flex-col gap-1">
-                  <div className="px-3 py-2 border-b border-zinc-800 mb-1">
-                    <p className="text-sm font-bold text-white truncate">Quản Trị Viên</p>
-                    <p className="text-xs text-zinc-500 truncate">admin@gmail.com</p>
-                  </div>
-                  
-                  <button className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2">
-                    <svg className="h-4 w-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Cài đặt tài khoản
-                  </button>
-                  <button className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2">
-                    <svg className="h-4 w-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
-                    Đa ngôn ngữ (VI)
-                  </button>
-                  <button className="w-full text-left rounded px-3 py-2 text-sm transition text-zinc-300 hover:bg-white/5 hover:text-white flex items-center gap-2">
-                    <svg className="h-4 w-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    Giao diện Dark Mode
-                  </button>
-                  
-                  <div className="h-px bg-zinc-800 my-1"></div>
-                  
-                  <button onClick={handleLogout} className="w-full text-left rounded px-3 py-2 text-sm transition text-indigo-400 hover:bg-indigo-500/10 flex items-center gap-2">
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    Đăng xuất
-                  </button>
-                </div>
-              </div>
-            </details>
+            <button
+              onClick={handleLogout}
+              className="px-3 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold hover:bg-rose-500/20 transition cursor-pointer"
+            >
+              Đăng xuất
+            </button>
           </div>
         </header>
 
         {/* Content Body */}
-        <main className="flex-1 overflow-hidden bg-zinc-950 flex flex-col min-w-0">
+        <main className="flex-1 overflow-hidden bg-[#020712] flex flex-col min-w-0">
           <div className="max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8 flex-1 overflow-y-auto flex flex-col">
             {children}
           </div>
