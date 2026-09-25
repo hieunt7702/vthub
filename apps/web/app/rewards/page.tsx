@@ -1,18 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '../../components/layout/Header';
 import { Footer } from '../../components/layout/Footer';
 import Link from 'next/link';
 import { 
   Award, Star, Sparkles, TrendingUp, DollarSign, ArrowRight, 
-  CheckCircle2, ShieldCheck, Zap, Info, ChevronRight, Gift, Layers
+  CheckCircle2, ShieldCheck, Zap, Info, ChevronRight, Gift, Layers, RefreshCw
 } from 'lucide-react';
 
 export default function RewardsPage() {
   const [calcLots, setCalcLots] = useState<number>(500);
-  const [contractSize, setContractSize] = useState<number>(100); // 100 oz Gold or standard
-  const [avgPrice, setAvgPrice] = useState<number>(2700); // XAUUSD price
+  const [contractSize, setContractSize] = useState<number>(100); // 100 oz Gold standard
+  const [avgPrice, setAvgPrice] = useState<number>(4295); // Live XAUUSD price
+  const [isLiveGold, setIsLiveGold] = useState<boolean>(true);
+
+  // Auto-fetch real live gold spot price
+  useEffect(() => {
+    let isMounted = true;
+    const fetchGold = async () => {
+      try {
+        const res = await fetch('/api/market/ticker', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.goldSpotUSD && typeof data.goldSpotUSD === 'number' && isMounted) {
+            setAvgPrice(Math.round(data.goldSpotUSD * 10) / 10);
+            setIsLiveGold(true);
+          }
+        }
+      } catch (err) {
+        console.warn('Live gold price fetch fallback:', err);
+      }
+    };
+    fetchGold();
+    const interval = setInterval(fetchGold, 10000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   // Formula: Volume = Lots * ContractSize * (OpenPrice + ClosePrice)
   // Approx Open + Close = 2 * AvgPrice
@@ -136,9 +162,15 @@ export default function RewardsPage() {
                   <span>50,000 Lots</span>
                 </div>
 
-                <div className="mt-4 flex gap-4 text-xs text-slate-400">
-                  <span>Giá Vàng (XAUUSD): <strong>${avgPrice}</strong></span>
-                  <span>Kích thước lot: <strong>100 oz</strong></span>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 pt-2 border-t border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <span>Giá Vàng (XAUUSD):</span>
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#00C2FF]/15 border border-[#00C2FF]/30 text-[#00C2FF] font-black font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00C2FF] animate-pulse"></span>
+                      ${avgPrice.toLocaleString('en-US', { minimumFractionDigits: 1 })} USD/oz
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-slate-400">Kích thước lot: <strong>100 oz</strong></span>
                 </div>
               </div>
 

@@ -20,21 +20,54 @@ import {
   VTPost 
 } from '../lib/dataStore';
 
-const LIVE_TICKERS = [
-  { symbol: 'XAUUSD', name: 'Gold Spot', ask: '2,718.50', bid: '2,718.00', change: '+1.42%', up: true },
+const INITIAL_TICKERS = [
+  { symbol: 'XAUUSD', name: 'Gold Spot', ask: '4,295.50', bid: '4,294.80', change: '+1.85%', up: true },
   { symbol: 'EURUSD', name: 'Euro / US Dollar', ask: '1.0845', bid: '1.0844', change: '+0.18%', up: true },
   { symbol: 'BTCUSD', name: 'Bitcoin', ask: '96,420.50', bid: '96,415.00', change: '+3.15%', up: true },
-  { symbol: 'US30', name: 'Wall Street 30', ask: '43,890.20', bid: '43,888.00', change: '-0.32%', up: false },
-  { symbol: 'US500', name: 'US SPX 500', ask: '5,982.40', bid: '5,982.10', change: '+0.45%', up: true },
+  { symbol: 'US30', name: 'Wall Street 30', ask: '43,920.20', bid: '43,918.00', change: '+0.42%', up: true },
+  { symbol: 'US500', name: 'US SPX 500', ask: '5,988.40', bid: '5,988.10', change: '+0.58%', up: true },
   { symbol: 'GBPUSD', name: 'British Pound', ask: '1.2960', bid: '1.2958', change: '-0.12%', up: false },
   { symbol: 'ETHUSD', name: 'Ethereum', ask: '3,480.10', bid: '3,478.50', change: '+2.80%', up: true },
-  { symbol: 'NAS100', name: 'US Tech 100', ask: '21,140.80', bid: '21,138.00', change: '+0.92%', up: true }
+  { symbol: 'USDJPY', name: 'US Dollar / Yen', ask: '154.25', bid: '154.20', change: '+0.22%', up: true }
 ];
 
 export default function Home() {
   const { language, t } = useLanguage();
   const [indicators] = useVTDataStore<VTIndicator>(STORAGE_KEYS.INDICATORS, INITIAL_INDICATORS);
   const [posts] = useVTDataStore<VTPost>(STORAGE_KEYS.POSTS, INITIAL_POSTS);
+
+  // Live real-time market tickers feed
+  const [tickers, setTickers] = useState(INITIAL_TICKERS);
+  const [isLiveActive, setIsLiveActive] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchLiveTickers = async () => {
+      try {
+        const res = await fetch('/api/market/ticker', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.tickers) && data.tickers.length > 0 && isMounted) {
+            setTickers(data.tickers);
+            setIsLiveActive(true);
+          }
+        }
+      } catch (e) {
+        console.warn('Realtime ticker fetch fallback:', e);
+      }
+    };
+
+    // Immediate initial fetch
+    fetchLiveTickers();
+
+    // Auto-polling every 6 seconds for continuous live price ticker
+    const interval = setInterval(fetchLiveTickers, 6000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   // Activate dynamic scroll reveal on view
   useScrollReveal();
@@ -294,10 +327,10 @@ export default function Home() {
             </div>
             <div className="flex-grow overflow-hidden relative">
               <div className="flex gap-8 items-center animate-marquee whitespace-nowrap">
-                {[...LIVE_TICKERS, ...LIVE_TICKERS].map((tick, idx) => (
+                {[...tickers, ...tickers].map((tick, idx) => (
                   <div key={idx} className="inline-flex items-center gap-3 bg-[#050D1A] border border-slate-800/80 px-3.5 py-1.5 rounded-xl">
                     <span className="font-bold text-white text-xs">{tick.symbol}</span>
-                    <span className="text-slate-400 text-xs">{tick.ask}</span>
+                    <span className="text-slate-400 text-xs tabular-nums">{tick.ask}</span>
                     <span className={`inline-flex items-center text-xs font-bold ${tick.up ? 'text-[#00C2FF]' : 'text-rose-400'}`}>
                       {tick.up ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                       {tick.change}

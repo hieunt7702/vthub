@@ -68,8 +68,54 @@ export default function LiveGoldAndStocksPage() {
   const [items, setItems] = useState<GoldItem[]>(initialPayload.items);
   const [selectedType, setSelectedType] = useState<string>('SJL1L10');
   const [activeTab, setActiveTab] = useState<'gold' | 'stocks'>('gold');
+  const [liveSpotGold, setLiveSpotGold] = useState<number>(4294.50);
   const tvGoldRef = useRef<HTMLDivElement>(null);
   const tvStocksRef = useRef<HTMLDivElement>(null);
+
+  // Continuously fetch real-time live Gold Spot price
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLiveGold = async () => {
+      try {
+        const res = await fetch('/api/market/ticker', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.goldSpotUSD && typeof data.goldSpotUSD === 'number' && isMounted) {
+            const p = data.goldSpotUSD;
+            setLiveSpotGold(p);
+            
+            // Recalculate and update the items array with real live XAUUSD
+            setItems((prev) =>
+              prev.map((item) => {
+                if (item.type === 'XAUUSD') {
+                  const buyVal = Math.round((p - 0.35) * 100) / 100;
+                  const sellVal = Math.round((p + 0.35) * 100) / 100;
+                  return {
+                    ...item,
+                    buy: buyVal,
+                    sell: sellVal,
+                    buy_label: `${buyVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+                    sell_label: `${sellVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`,
+                    trend_sentence: `Xu hướng tăng mạnh. Giá giao dịch thế giới: ${p.toFixed(2)} USD/oz`,
+                  };
+                }
+                return item;
+              })
+            );
+          }
+        }
+      } catch (err) {
+        console.warn('Error fetching live gold price:', err);
+      }
+    };
+
+    fetchLiveGold();
+    const interval = setInterval(fetchLiveGold, 6000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   // Initialize TradingView Widgets
   useEffect(() => {
