@@ -24,8 +24,54 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VT Rewards Hub - Quyền lợi giao dịch & cơ chế đối tác VT Markets",
-  description: "VT Rewards Hub là trung tâm tổng hợp quyền lợi dành cho khách hàng và đối tác VT Markets: chương trình thưởng giao dịch, tích lũy lot, ưu đãi khách hàng, hỗ trợ tài khoản, cơ chế IB, rebate và chính sách đối tác minh bạch.",
+  metadataBase: new URL("https://vthub-web-teal.vercel.app"),
+  title: {
+    default: "VT Rewards Hub - Trung Tâm Quyền Lợi & Bot EA MT5 Độc Quyền",
+    template: "%s | VT Rewards Hub"
+  },
+  description: "Trung tâm quyền lợi giao dịch & đối tác VT Markets: Chương trình thưởng Volume $200k, hoàn phí Backcom tự động, bộ 9 Bot EA MT5 miễn phí và Trình tạo Bot kéo thả No-Code MQL5.",
+  keywords: [
+    "VT Markets",
+    "VT Rewards Hub",
+    "Hoàn phí Backcom",
+    "Bot EA MT5",
+    "No-Code MQL5 Builder",
+    "Apex Oracle SMC",
+    "Bảng giá vàng trực tuyến",
+    "VT Markets Vietnam",
+    "Rebate Forex Gold"
+  ],
+  authors: [{ name: "Hau Tran", url: "https://github.com/hieunt7702" }],
+  creator: "Hau Tran",
+  publisher: "VT Rewards Hub",
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    url: "https://vthub-web-teal.vercel.app",
+    title: "VT Rewards Hub - Trung Tâm Quyền Lợi & Bot EA MT5 Độc Quyền",
+    description: "Nhận hoàn phí Backcom tự động 95%, lộ trình thưởng $200,000 USD, tải miễn phí bộ 9 Bot EA MT5 và tự tạo Bot không cần code.",
+    siteName: "VT Rewards Hub",
+    images: [
+      {
+        url: "/og-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "VT Markets Rewards Hub - Trung Tâm Quyền Lợi & Bot MT5"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VT Rewards Hub - Trung Tâm Quyền Lợi & Bot EA MT5 Độc Quyền",
+    description: "Nhận hoàn phí Backcom tự động 95%, lộ trình thưởng $200,000 USD, tải miễn phí bộ 9 Bot EA MT5 và tự tạo Bot không cần code.",
+    images: ["/og-banner.jpg"],
+    creator: "@HauTran"
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/logo_white.webp",
+    apple: "/logo_white.webp"
+  }
 };
 
 export default async function RootLayout({
