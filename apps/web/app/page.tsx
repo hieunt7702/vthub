@@ -224,7 +224,6 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-cover object-center"
             >
               <source src="https://d3a7kndgi8x4pg.cloudfront.net/vt/video/home_banner_video_new.mp4" type="video/mp4" />
-              <source src="/videos/hero_bg.mp4" type="video/mp4" />
             </video>
             {/* Clear Mask Layer */}
             <div className="absolute inset-0 bg-[#000a14]/50 backdrop-brightness-90"></div>
